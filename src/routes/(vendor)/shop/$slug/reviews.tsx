@@ -1,0 +1,50 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import AddReviewDialog from "#/components/containers/vendor/reviews/add-review-dialog";
+import ShopReviewsTemplate from "#/components/templates/vendor/shop-reviews-template";
+import { mockReviews } from "#/data/review";
+import type { Review, ReviewFormValues } from "#/types/review";
+
+export const Route = createFileRoute("/(vendor)/shop/$slug/reviews")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  const [reviews, setReviews] = useState<Review[]>(mockReviews);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleAddReview = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleReviewSubmit = (data: ReviewFormValues) => {
+    const newReview: Review = {
+      id: String(reviews.length + 1),
+      productName: data.productName,
+      productImage: "https://placehold.co/100?text=PR",
+      customerName: data.customerName,
+      customerAvatar: data.customerAvatar
+        ? URL.createObjectURL(data.customerAvatar[0])
+        : undefined,
+      rating: data.rating,
+      comment: data.comment,
+      date: new Date().toISOString().split("T")[0],
+      status: data.status,
+    };
+
+    setReviews([...reviews, newReview]);
+    console.log("Created review:", newReview);
+  };
+
+  return (
+    <>
+      <ShopReviewsTemplate reviews={reviews} onAddReview={handleAddReview} />
+
+      <AddReviewDialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        onSubmit={handleReviewSubmit}
+      />
+    </>
+  );
+}
