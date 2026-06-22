@@ -1,4 +1,5 @@
 import { eq, sql } from "drizzle-orm";
+import { v4 as uuidv4 } from "uuid";
 import type { CartItemResponse, CartResponse } from "@/types/cart";
 import { db } from "../db";
 import { cartItems, cartSessions } from "../db/schema/cart-schema";
@@ -109,17 +110,18 @@ export async function getOrCreateCartSession(
       where: eq(cartSessions.userId, userId),
     });
 
-    if (existingSession) return { sessionId: existingSession.id, isNew: false };
+    if (existingSession) {
+      return { sessionId: existingSession.id, isNew: false };
+    }
 
     // Create new session for user
-    const [newSession] = await db
-      .insert(cartSessions)
-      .values({
-        userId: userId,
-      })
-      .returning();
+    const newSessionId = uuidv4();
+    await db.insert(cartSessions).values({
+      id: newSessionId,
+      userId: userId,
+    });
 
-    return { sessionId: newSession.id, isNew: true };
+    return { sessionId: newSessionId, isNew: true };
   }
 
   // For guest users
@@ -128,23 +130,24 @@ export async function getOrCreateCartSession(
       where: eq(cartSessions.sessionId, guestSessionId),
     });
 
-    if (existingSession) return { sessionId: existingSession.id, isNew: false };
+    if (existingSession) {
+      return { sessionId: existingSession.id, isNew: false };
+    }
   }
 
   // Create new guest session
-  const newGuestSessionId = guestSessionId;
+  const newSessionId = uuidv4();
+  const newGuestSessionId = guestSessionId || uuidv4();
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 30); // 30 days expiry
 
-  const [newSession] = await db
-    .insert(cartSessions)
-    .values({
-      sessionId: newGuestSessionId,
-      expiresAt,
-    })
-    .returning();
+  await db.insert(cartSessions).values({
+    id: newSessionId,
+    sessionId: newGuestSessionId,
+    expiresAt,
+  });
 
-  return { sessionId: newSession.id, isNew: true };
+  return { sessionId: newSessionId, isNew: true };
 }
 
 // ============================================================================
@@ -156,6 +159,7 @@ const GUEST_SESSION_KEY = "cart-guest-session-id";
 // ============================================================================
 // Helper: Get/Set Guest Session ID
 // ============================================================================
+
 export function getGuestSessionId(): string | undefined {
   if (typeof window === "undefined") return undefined;
   return localStorage.getItem(GUEST_SESSION_KEY) || undefined;

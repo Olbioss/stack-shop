@@ -1,26 +1,38 @@
-import TaxesTable from "#/components/containers/shared/taxes/tax-table";
-import { ADMIN_TAX_PERMISSIONS } from "#/lib/config/tax-permissions";
-import type { Taxes as Tax } from "#/types/taxes";
+import type { DataTableServer } from "#/components/base/data-table/types";
+import { TaxTable } from "#/components/containers/shared/taxes/tax-table";
+import type { TaxMutationState } from "#/components/containers/shared/taxes/tax-table-columns";
+import type { TaxRateItem } from "#/types/taxes";
 import TaxHeader from "@/components/containers/shared/taxes/tax-header";
 
 interface AdminTaxesTemplateProps {
-  taxes: Tax[];
-  onAddTax: (data: Omit<Tax, "id" | "createdAt">) => void;
-  onDeleteTax: (id: string) => void;
+  server: DataTableServer<TaxRateItem>;
+  onDeleteTax?: (taxRate: TaxRateItem) => void;
+  onEditTax?: (taxRate: TaxRateItem) => void;
+  onToggleActive?: (taxRate: TaxRateItem) => void;
+  mutationState?: TaxMutationState;
+  isTaxMutating?: (id: string) => boolean;
 }
 
 export default function AdminTaxesTemplate({
-  taxes,
-  onAddTax,
+  server,
   onDeleteTax,
+  onEditTax,
+  onToggleActive,
+  mutationState,
+  isTaxMutating,
 }: AdminTaxesTemplateProps) {
   return (
     <div className="flex flex-col gap-6">
-      <TaxHeader role="admin" onAddTax={onAddTax} />
-      <TaxesTable
-        taxes={taxes}
-        permissions={ADMIN_TAX_PERMISSIONS}
-        onDeleteTax={onDeleteTax}
+      <TaxHeader role="admin" showAddButton={false} />
+
+      <TaxTable
+        server={server}
+        onDelete={onDeleteTax}
+        onEdit={onEditTax}
+        onToggleActive={onToggleActive}
+        mutationState={mutationState}
+        isMutating={isTaxMutating}
+        mode="admin"
       />
     </div>
   );

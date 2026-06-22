@@ -5,7 +5,7 @@
  * Supports both authenticated users and guest sessions.
  */
 
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { integer, pgTable, text, timestamp, unique } from "drizzle-orm/pg-core";
 import { user } from "./auth-schema";
 import { products } from "./products-schema";
@@ -19,7 +19,7 @@ import { products } from "./products-schema";
  * Manages cart sessions for both registered users and guests.
  */
 export const cartSessions = pgTable("cart_sessions", {
-  id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: text("id").primaryKey(),
   userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
   sessionId: text("session_id"),
   expiresAt: timestamp("expires_at"),
@@ -41,7 +41,7 @@ export const cartSessions = pgTable("cart_sessions", {
 export const cartItems = pgTable(
   "cart_items",
   {
-    id: text("id").primaryKey().default(sql`gen_random_uuid()`),
+    id: text("id").primaryKey(),
     cartSessionId: text("cart_session_id")
       .notNull()
       .references(() => cartSessions.id, { onDelete: "cascade" }),

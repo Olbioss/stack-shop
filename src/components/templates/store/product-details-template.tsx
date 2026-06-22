@@ -1,18 +1,18 @@
-import ProductBreadcrumb from "#/components/base/products/details/product-breadcrum";
-import ProductDetailsTabs from "#/components/containers/store/product-detail/details-tabs";
-import ProductMainSection from "#/components/containers/store/product-detail/main-section";
-import SimilarProductsSection from "#/components/containers/store/product-detail/similar-products-section";
-import type { StoreProduct } from "#/types/store-types";
+import ProductBreadcrumb from "@/components/base/products/details/product-breadcrum";
+import ProductDetailsTabs from "@/components/containers/store/product-details/details-tabs";
+import ProductMainSection from "@/components/containers/store/product-details/main-section";
+import SimilarProductsSection from "@/components/containers/store/product-details/similar-products-section";
+import type { StoreProduct } from "@/types/store-types";
 
-type Props = {
+interface ProductDetailsTemplateProps {
   product: StoreProduct;
   similarProducts?: StoreProduct[];
-};
+}
 
 export default function ProductDetailsTemplate({
   product,
-  similarProducts,
-}: Props) {
+  similarProducts = [],
+}: ProductDetailsTemplateProps) {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Store", href: "/store" },
@@ -22,6 +22,7 @@ export default function ProductDetailsTemplate({
     },
     { label: product.name, href: `/store/product/${product.slug}` },
   ];
+
   return (
     <div className="@container container mx-auto @4xl:px-6 px-4 @5xl:py-12 py-8">
       <ProductBreadcrumb items={breadcrumbs} />
@@ -31,7 +32,7 @@ export default function ProductDetailsTemplate({
 
         <ProductDetailsTabs product={product} />
 
-        {similarProducts && similarProducts.length > 0 && (
+        {similarProducts.length > 0 && (
           <SimilarProductsSection products={similarProducts} />
         )}
       </div>

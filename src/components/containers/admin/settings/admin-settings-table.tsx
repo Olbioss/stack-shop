@@ -1,15 +1,6 @@
-import {
-  type ColumnDef,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { DataTable } from "#/components/base/data-table/data-table-core";
-import { DataTablePagination } from "#/components/base/data-table/data-table-pagination";
-import { DataTableToolbar } from "#/components/base/data-table/data-table-toolbar";
+import DataTable from "@/components/base/data-table/data-table";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -133,25 +124,10 @@ const columns: ColumnDef<Setting>[] = [
   },
 ];
 
-type Props = {
+interface AdminSettingsTableProps {
   data: Setting[];
-};
+}
 
-export function AdminSettingsTable({ data }: Props) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    globalFilterFn: "includesString",
-  });
-  return (
-    <>
-      <DataTableToolbar table={table} />
-      <DataTable columns={columns} table={table} />
-      <DataTablePagination table={table} />
-    </>
-  );
+export function AdminSettingsTable({ data }: AdminSettingsTableProps) {
+  return <DataTable columns={columns} data={data} />;
 }

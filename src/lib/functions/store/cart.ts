@@ -1,11 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { and, eq, sql } from "drizzle-orm";
+import { v4 as uuidv4 } from "uuid";
 import { db } from "@/lib/db";
-import {
-  type CartSession,
-  cartItems,
-  cartSessions,
-} from "@/lib/db/schema/cart-schema";
+import { cartItems, cartSessions } from "@/lib/db/schema/cart-schema";
 import { products } from "@/lib/db/schema/products-schema";
 import {
   fetchCartWithDetails,
@@ -85,11 +82,14 @@ export const addToCart = createServerFn({ method: "POST" })
       where: and(eq(products.id, productId), eq(products.isActive, true)),
     });
 
-    if (!product) throw new Error("Product not found or is not available");
+    if (!product) {
+      throw new Error("Product not found or is not available");
+    }
 
     // Check stock
-    if (product.stock !== null && product.stock < quantity)
+    if (product.stock !== null && product.stock < quantity) {
       throw new Error("Not enough stock available");
+    }
 
     // Get or create cart session
     const { sessionId: cartSessionId } = await getOrCreateCartSession(
@@ -116,10 +116,11 @@ export const addToCart = createServerFn({ method: "POST" })
       const newQuantity = existingItem.quantity + quantity;
 
       // Check stock for new quantity
-      if (product.stock !== null && product.stock < newQuantity)
+      if (product.stock !== null && product.stock < newQuantity) {
         throw new Error(
           "Not enough stock available for the requested quantity"
         );
+      }
 
       await db
         .update(cartItems)
@@ -128,6 +129,7 @@ export const addToCart = createServerFn({ method: "POST" })
     } else {
       // Add new item
       await db.insert(cartItems).values({
+        id: uuidv4(),
         cartSessionId,
         productId,
         quantity,
@@ -159,17 +161,24 @@ export const updateCartItem = createServerFn({ method: "POST" })
     // Find the cart item
     const item = await db.query.cartItems.findFirst({
       where: eq(cartItems.id, itemId),
-      with: { cartSession: true },
+      with: {
+        cartSession: true,
+      },
     });
 
-    if (!item) throw new Error("Cart item not found");
+    if (!item) {
+      throw new Error("Cart item not found");
+    }
 
     // Verify ownership
     if (userId) {
-      if (item.cartSession.userId !== userId) throw new Error("Unauthorized");
-    } else if (guestSessionId) {
-      if (item.cartSession.sessionId !== guestSessionId)
+      if (item.cartSession.userId !== userId) {
         throw new Error("Unauthorized");
+      }
+    } else if (guestSessionId) {
+      if (item.cartSession.sessionId !== guestSessionId) {
+        throw new Error("Unauthorized");
+      }
     } else {
       throw new Error("Unauthorized");
     }
@@ -183,8 +192,9 @@ export const updateCartItem = createServerFn({ method: "POST" })
       product?.stock !== null &&
       product?.stock !== undefined &&
       product.stock < quantity
-    )
+    ) {
       throw new Error("Not enough stock available");
+    }
 
     // Update quantity
     await db
@@ -221,14 +231,19 @@ export const removeFromCart = createServerFn({ method: "POST" })
       },
     });
 
-    if (!item) throw new Error("Cart item not found");
+    if (!item) {
+      throw new Error("Cart item not found");
+    }
 
     // Verify ownership
     if (userId) {
-      if (item.cartSession.userId !== userId) throw new Error("Unauthorized");
-    } else if (guestSessionId) {
-      if (item.cartSession.sessionId !== guestSessionId)
+      if (item.cartSession.userId !== userId) {
         throw new Error("Unauthorized");
+      }
+    } else if (guestSessionId) {
+      if (item.cartSession.sessionId !== guestSessionId) {
+        throw new Error("Unauthorized");
+      }
     } else {
       throw new Error("Unauthorized");
     }
@@ -254,7 +269,7 @@ export const clearCart = createServerFn({ method: "POST" })
     const guestSessionId = data.sessionId;
 
     // Find the session
-    let session: CartSession | undefined;
+    let session: typeof cartSessions.$inferSelect | undefined;
 
     if (userId) {
       session = await db.query.cartSessions.findFirst({
@@ -266,7 +281,7 @@ export const clearCart = createServerFn({ method: "POST" })
       });
     }
 
-    if (!session)
+    if (!session) {
       return {
         success: true,
         message: "Cart already empty",
@@ -277,6 +292,7 @@ export const clearCart = createServerFn({ method: "POST" })
           sessionId: guestSessionId || null,
         },
       };
+    }
 
     // Delete all items in the cart
     await db.delete(cartItems).where(eq(cartItems.cartSessionId, session.id));
@@ -299,7 +315,9 @@ export const mergeCarts = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const userId = context.session?.user?.id;
 
-    if (!userId) throw new Error("Must be logged in to merge carts");
+    if (!userId) {
+      throw new Error("Must be logged in to merge carts");
+    }
 
     const { guestSessionId } = data;
 

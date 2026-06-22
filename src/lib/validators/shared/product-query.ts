@@ -4,7 +4,6 @@
  * Composable z schemas for product queries.
  * Uses base-query for common schemas to ensure DRY compliance.
  */
-
 import { z } from "zod";
 import {
   ADMIN_DEFAULT_LIMIT,
@@ -80,6 +79,13 @@ export const stockFilterFields = {
 };
 
 /**
+ * Rating filter fields
+ */
+export const ratingFilterFields = {
+  minRating: z.coerce.number().min(1).max(5).optional(),
+};
+
+/**
  * Status filter fields
  */
 export const statusFilterFields = {
@@ -106,9 +112,9 @@ const sortFields = {
 
 const storeSortFields = {
   sortBy: z
-    .enum(["name", "price", "createdAt", "updatedAt"])
+    .enum(["name", "price", "createdAt", "updatedAt", "averageRating"])
     .optional()
-    .default("createdAt"), // No stock sort for public
+    .default("createdAt"),
   sortDirection: sortDirectionEnum.optional().default("desc"),
 };
 
@@ -138,6 +144,7 @@ export const storeProductsQuerySchema = z.object({
   ...productBaseFilterFields,
   isFeatured: statusFilterFields.isFeatured,
   inStock: stockFilterFields.inStock,
+  ...ratingFilterFields,
   ...shopSlugFields,
   ...optionalShopIdField,
 });
@@ -153,7 +160,10 @@ export const adminProductsQuerySchema = z.object({
   limit: paginationFields.limit.default(ADMIN_DEFAULT_LIMIT),
   ...sortFields,
   ...searchFields,
-  ...productFilterFields,
+  ...productBaseFilterFields,
+  ...stockFilterFields,
+  ...statusFilterFields,
+  ...attributeFilterFields,
   ...optionalShopIdField,
   ...optionalVendorIdField,
 });
@@ -521,6 +531,16 @@ export const createProductSchema = z.object({
   ...productFlagFieldsCreate,
   ...productSeoFieldsCreate,
   ...productRelationArraysCreate,
+});
+
+export const updateProductStatusSchema = z.object({
+  id: z.string().min(1, "Product ID is required"),
+  status: productStatusEnum,
+});
+
+export const toggleProductFeaturedSchema = z.object({
+  id: z.string().min(1, "Product ID is required"),
+  isFeatured: z.boolean(),
 });
 
 /**

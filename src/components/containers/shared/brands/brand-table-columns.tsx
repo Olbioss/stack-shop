@@ -1,6 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { ExternalLink, Loader2, MoreHorizontal } from "lucide-react";
-import type { BrandMutationState } from "#/hooks/vendor/use-brands";
 import type { FilterableColumn } from "@/components/base/data-table/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +19,13 @@ export interface BrandTableActions {
   onEdit?: (brand: BrandItem) => void;
   onDelete?: (brand: BrandItem) => void;
   onToggleActive?: (brand: BrandItem) => void;
+}
+
+export interface BrandMutationState {
+  deletingId?: string | null;
+  togglingId?: string | null;
+  updatingId?: string | null;
+  creatingId?: string | null;
 }
 
 export interface BrandColumnConfig {

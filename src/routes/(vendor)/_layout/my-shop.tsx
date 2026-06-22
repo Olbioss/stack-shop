@@ -1,10 +1,13 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { MyShopsPageSkeleton } from "#/components/base/vendor/skeleton/shop-card-skeleton";
 import { AddShopDialog } from "#/components/containers/shared/shops/add-shop-dialog";
 import MyShopsTemplate from "#/components/templates/vendor/my-shops-template";
 import { useEntityCRUD } from "#/hooks/common/use-entity-crud";
-import { useShops, vendorShopsQueryOptions } from "#/hooks/vendor/use-shops";
+import {
+  useShops,
+  useTransformedShops,
+  vendorShopsQueryOptions,
+} from "#/hooks/vendor/use-shops";
 import type { ShopFormValues } from "#/types/shop";
 
 export const Route = createFileRoute("/(vendor)/_layout/my-shop")({
@@ -18,20 +21,16 @@ export const Route = createFileRoute("/(vendor)/_layout/my-shop")({
 
 function RouteComponent() {
   const { createShop, isCreating } = useShops();
-  const { data } = useSuspenseQuery(
-    vendorShopsQueryOptions({ filterByVendor: true })
-  );
-  const { shops: transformedShops, vendorId } = data;
+  const { shops, vendorId: currentVendorId } = useTransformedShops();
 
   const {
     isDialogOpen,
     setIsDialogOpen,
     handleAdd: handleAddShop,
     handleDialogClose,
-  } = useEntityCRUD({
-    onDelete: async (id) => {
-      // Implement delete logic here, e.g., call a mutation to delete the shop
-      console.log("Delete shop with ID:", id);
+  } = useEntityCRUD<any>({
+    onDelete: async (_id) => {
+      // Delete logic if needed
     },
   });
 
@@ -41,24 +40,25 @@ function RouteComponent() {
         name: data.name,
         slug: data.slug,
         description: data.description,
-        logo: typeof data.logo === "string" ? data.logo : undefined,
-        banner: typeof data.banner === "string" ? data.banner : undefined,
+        logo: data.logo || undefined,
+        banner: data.banner || undefined,
         address: data.address,
         phone: data.phone,
         email: data.email,
         enableNotifications: data.enableNotification,
       });
       handleDialogClose();
-    } catch (err) {
-      console.error("Failed to create shop:", err);
+    } catch (error) {
+      // Error is handled by the mutation's onError callback
+      console.error("Failed to create shop:", error);
     }
   };
   return (
     <>
       <MyShopsTemplate
-        shops={transformedShops}
+        shops={shops}
         onCreateShop={handleAddShop}
-        currentVendorId={vendorId}
+        currentVendorId={currentVendorId}
       />
 
       <AddShopDialog

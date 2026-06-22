@@ -1,11 +1,11 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "../db";
 import { user } from "../db/schema/auth-schema";
-import type { shops, vendors } from "../db/schema/shop-schema";
+import { shops, vendors } from "../db/schema/shop-schema";
 
 export const getVendorForUser = async (userId: string) => {
   const vendor = await db.query.vendors.findFirst({
-    where: (vendors, { eq }) => eq(vendors.userId, userId),
+    where: eq(vendors.userId, userId),
   });
   return vendor;
 };
@@ -15,7 +15,6 @@ export const isUserAdmin = async (userId: string): Promise<boolean> => {
     .select({ role: user.role })
     .from(user)
     .where(eq(user.id, userId));
-
   return userData?.role === "admin";
 };
 
@@ -28,8 +27,7 @@ export interface ShopAccessResult {
 
 export const verifyShopOwnership = async (shopId: string, vendorId: string) => {
   const shop = await db.query.shops.findFirst({
-    where: (shops, { eq, and }) =>
-      and(eq(shops.id, shopId), eq(shops.vendorId, vendorId)),
+    where: and(eq(shops.id, shopId), eq(shops.vendorId, vendorId)),
   });
   return shop;
 };
@@ -44,7 +42,7 @@ export const verifyShopAccess = async (
   if (isAdmin) {
     // Admin can access any shop
     const shop = await db.query.shops.findFirst({
-      where: (shops, { eq }) => eq(shops.id, shopId),
+      where: eq(shops.id, shopId),
     });
 
     return {

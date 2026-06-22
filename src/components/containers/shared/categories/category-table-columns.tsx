@@ -180,7 +180,7 @@ export const createCategoryColumns = ({
     // 5. Products Count Column
     {
       accessorKey: "productCount",
-      header: () => <div className="text-center">Products</div>,
+      header: "Products",
       cell: ({ row }) => (
         <div className="text-center">
           {(row.getValue("productCount") as number) ?? 0}

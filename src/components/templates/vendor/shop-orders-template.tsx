@@ -2,9 +2,9 @@ import { CheckCircle2, Clock, Package, Truck } from "lucide-react";
 import { formatCurrency } from "#/components/base/data-table/column-helpers";
 import type { DataTableServer } from "#/components/base/data-table/types";
 import OrderHeader from "#/components/containers/shared/orders/order-header";
+import VendorOrderTable from "#/components/containers/shared/orders/vendor-order-table";
 import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
 import type { VendorOrderResponse } from "#/types/orders";
-import VendorOrderTable from "@/components/containers/shared/orders/order-table";
 
 type VendorOrderStats = {
   totalOrders: number;

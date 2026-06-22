@@ -5,7 +5,6 @@
  * Reduces code duplication across entity management pages.
  * Supports loading state for async delete operations.
  */
-
 import { Loader2 } from "lucide-react";
 import {
   AlertDialog,
@@ -56,7 +55,6 @@ export function ConfirmDeleteDialog({
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            variant="destructive"
             onClick={onConfirm}
             disabled={isDeleting}
             className="bg-destructive hover:bg-destructive/90 disabled:opacity-50"

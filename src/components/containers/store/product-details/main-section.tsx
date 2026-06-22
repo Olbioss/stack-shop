@@ -1,37 +1,51 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import ProductActions from "#/components/base/products/details/product-actions";
-import ProductHeader from "#/components/base/products/details/product-header";
-import ProductImageGallery from "#/components/base/products/details/product-image-gallery";
-import ProductPrice from "#/components/base/products/details/product-price";
-import { QuantitySelector } from "#/components/base/products/details/quantity-selector";
-import ShippingInfoSection from "#/components/base/products/details/shipping-info-section";
-import StoreInfoCard from "#/components/base/products/details/store-info-card";
-import { useCart } from "#/hooks/store/use-cart";
+import { toast } from "sonner";
+import ProductActions from "@/components/base/products/details/product-actions";
+import ProductHeader from "@/components/base/products/details/product-header";
+import ProductImageGallery from "@/components/base/products/details/product-image-gallery";
+import ProductPrice from "@/components/base/products/details/product-price";
+import { QuantitySelector } from "@/components/base/products/details/quantity-selector";
+import ShippingInfoSection from "@/components/base/products/details/shipping-info-section";
+import StoreInfoCard from "@/components/base/products/details/store-info-card";
+import { useCart } from "@/hooks/store/use-cart";
 import {
   useWishlistMutations,
   wishlistStatusQueryOptions,
-} from "#/hooks/store/use-wishlist";
-import { useCartStore } from "#/lib/store/cart-store";
-import type { StoreProduct } from "#/types/store-types";
+} from "@/hooks/store/use-wishlist";
+import { useCartStore } from "@/lib/store/cart-store";
+import type { StoreProduct } from "@/types/store-types";
 
-type Props = {
+interface ProductMainSectionProps {
   product: StoreProduct;
-};
-
-export default function ProductMainSection({ product }: Props) {
+}
+export default function ProductMainSection({
+  product,
+}: ProductMainSectionProps) {
   const [quantity, setQuantity] = useState(1);
   const [isCompareListed, setIsCompareListed] = useState(false);
 
   const { addItem } = useCart();
   const { setIsOpen } = useCartStore();
-
   const { toggleWishlist, isToggling } = useWishlistMutations();
   const { data: wishlistStatus } = useQuery(
     wishlistStatusQueryOptions(product.id)
   );
-
   const isWishlisted = wishlistStatus?.isInWishlist ?? false;
+
+  const handleAddToCart = async () => {
+    try {
+      await addItem({
+        productId: product.id,
+        quantity,
+      });
+      setIsOpen(true); // Open cart sheet after successful addition
+      toast.success("Added to cart");
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+      toast.error("Failed to add to cart");
+    }
+  };
 
   const handleBuyNow = () => {
     console.log("Buy now:", product.id, quantity);
@@ -77,35 +91,24 @@ export default function ProductMainSection({ product }: Props) {
     alt: img.alt || product.name,
   }));
 
-  const handleAddToCart = async () => {
-    try {
-      await addItem({
-        productId: product.id,
-        quantity,
-      });
-      setIsOpen(true);
-    } catch (err) {
-      console.error("Error adding to cart:", err);
-    }
-  };
-
   return (
     <div className="grid @5xl:grid-cols-12 grid-cols-1 @5xl:gap-12 gap-8">
-      {/* LEFT SIDE - IMAGE GALLERY */}
+      {/* Left Column - Image Gallery */}
       <div className="@5xl:col-span-7">
         <ProductImageGallery images={images} />
       </div>
 
-      {/* RIGHT SIDE - PRODUCT DETAILS */}
+      {/* Right Column - Product Details */}
       <div className="@5xl:col-span-5 flex flex-col gap-8">
         <div className="space-y-6">
           <ProductHeader
             title={product.name}
             category={category}
-            rating={parseFloat(product.averageRating)}
+            rating={parseFloat(product.averageRating) || 0}
             reviewCount={product.reviewCount || 0}
             isOnSale={regularPrice > sellingPrice}
           />
+
           <ProductPrice
             currentPrice={sellingPrice}
             originalPrice={regularPrice}
@@ -113,6 +116,7 @@ export default function ProductMainSection({ product }: Props) {
             discountPercentage={discountPercentage}
             inStock={product.stock > 0}
           />
+
           <div className="space-y-4 border-t pt-6">
             <div className="flex items-center gap-4">
               <QuantitySelector
@@ -122,6 +126,7 @@ export default function ProductMainSection({ product }: Props) {
                 disabled={product.stock <= 0}
               />
             </div>
+
             <ProductActions
               onAddToCart={handleAddToCart}
               onBuyNow={handleBuyNow}
@@ -134,7 +139,9 @@ export default function ProductMainSection({ product }: Props) {
             />
           </div>
         </div>
+
         <StoreInfoCard store={store} />
+
         <ShippingInfoSection shipping={shipping} />
       </div>
     </div>

@@ -504,17 +504,13 @@ export const createAdminOrderColumns = ({
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem asChild>
-                  <p className="">
-                    <Eye className="mr-2 h-4 w-4" />
-                    View Details
-                  </p>
-                  {/* <Link
+                  <Link
                     to="/admin/orders/$orderId"
                     params={{ orderId: order.id }}
                   >
                     <Eye className="mr-2 h-4 w-4" />
                     View Details
-                  </Link> */}
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

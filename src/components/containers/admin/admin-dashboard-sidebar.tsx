@@ -1,6 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import { Building2 } from "lucide-react";
 import VendorNavMenu from "#/components/base/vendor/vendor-nav-menu";
 import VendorUserMenu from "#/components/base/vendor/vendor-user-menu";
+import { Button } from "#/components/ui/button";
+import { useSession } from "#/lib/auth-client";
 import { adminNavItems } from "#/lib/constants/admin.routes";
 import {
   Sidebar,
@@ -13,14 +16,10 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-const mockAdmin = {
-  name: "Super Admin",
-  email: "admin@shopstack.com",
-  avatar: "",
-  role: "Super Admin",
-};
-
 export default function AdminDashboardSidebar() {
+  const { data: session } = useSession();
+  const user = session?.user;
+
   return (
     <Sidebar collapsible="icon" variant="inset">
       <SidebarHeader>
@@ -47,7 +46,20 @@ export default function AdminDashboardSidebar() {
       </SidebarContent>
 
       <SidebarFooter>
-        <VendorUserMenu user={mockAdmin} />
+        {user ? (
+          <VendorUserMenu user={user} />
+        ) : (
+          <Link to="/sign-in">
+            <Button
+              variant="default"
+              className="w-full"
+              type="button"
+              size="lg"
+            >
+              Sign In
+            </Button>
+          </Link>
+        )}
       </SidebarFooter>
 
       <SidebarRail />

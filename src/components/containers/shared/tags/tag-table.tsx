@@ -46,11 +46,12 @@ export default function TagTable({
   const filterableColumns = useMemo(() => getSharedTagFilters(), []);
 
   if (server) {
+    const context = mode === "admin" ? "admin" : "shop";
     return (
       <DataTable
         columns={columns}
         server={server}
-        context="shop"
+        context={context}
         initialPageSize={10}
         filterableColumns={filterableColumns}
         globalFilterPlaceholder="Search tags..."

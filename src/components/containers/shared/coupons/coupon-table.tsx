@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import type { DataTableServer } from "#/components/base/data-table/types";
 import DataTable from "@/components/base/data-table/data-table";
+import type { DataTableServer } from "@/components/base/data-table/types";
 import type { CouponItem, CouponPermissions } from "@/types/coupons";
 import {
   type CouponMutationState,
@@ -29,7 +29,8 @@ const TYPE_OPTIONS = [
 // ============================================================================
 
 interface AdminCouponTableProps extends CouponTableActions {
-  coupons: CouponItem[];
+  coupons?: CouponItem[];
+  server: DataTableServer<CouponItem>;
   className?: string;
   mutationState?: CouponMutationState;
   isCouponMutating?: (id: string) => boolean;
@@ -38,6 +39,7 @@ interface AdminCouponTableProps extends CouponTableActions {
 
 export function AdminCouponTable({
   coupons,
+  server,
   className,
   onEdit,
   onDelete,
@@ -77,11 +79,24 @@ export function AdminCouponTable({
     []
   );
 
+  if (server) {
+    return (
+      <DataTable
+        columns={columns}
+        server={server}
+        context="admin"
+        initialPageSize={10}
+        filterableColumns={filterableColumns}
+        globalFilterPlaceholder="Search coupons..."
+        className={className}
+      />
+    );
+  }
+
   return (
     <DataTable
       columns={columns}
-      data={coupons}
-      context="shop"
+      data={coupons || []}
       initialPageSize={10}
       filterableColumns={filterableColumns}
       globalFilterPlaceholder="Search coupons..."
@@ -93,7 +108,6 @@ export function AdminCouponTable({
 // ============================================================================
 // Vendor Coupon Table
 // ============================================================================
-
 interface VendorCouponTableProps extends CouponTableActions {
   server: DataTableServer<CouponItem>;
   className?: string;

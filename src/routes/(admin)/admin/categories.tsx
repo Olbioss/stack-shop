@@ -1,50 +1,67 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { ConfirmDeleteDialog } from "#/components/base/common/confirm-delete-dialog";
+import { PageSkeleton } from "#/components/base/common/page-skeleton";
 import AdminCategoriesTemplate from "#/components/templates/admin/admin-categories-template";
-import { mockCategories } from "#/data/categories";
-import type { Category, CategoryFormValues } from "#/types/category-types";
+import { useAdminCategories } from "#/hooks/admin/use-admin-categories";
+import { createAdminCategoriesFetcher } from "#/hooks/admin/use-admin-entity-fetchers";
+import { useEntityCRUD } from "#/hooks/common/use-entity-crud";
+import type { NormalizedCategory } from "#/types/category-types";
 
 export const Route = createFileRoute("/(admin)/admin/categories")({
   component: RouteComponent,
+  pendingComponent: PageSkeleton,
 });
 
 function RouteComponent() {
-  const [categories, setCategories] = useState<Category[]>(mockCategories);
+  const server = createAdminCategoriesFetcher();
 
-  const handleCategoryStatusChange = (
-    categoryId: string,
-    currentStatus: boolean
-  ) => {
-    setCategories(
-      categories.map((category) =>
-        category.id === categoryId
-          ? { ...category, isActive: !currentStatus }
-          : category
-      )
-    );
+  const {
+    toggleActive,
+    toggleFeatured,
+    deleteCategory,
+    mutationState,
+    isCategoryMutating,
+  } = useAdminCategories();
+
+  const {
+    deletingItem: deletingCategory,
+    setDeletingItem: setDeletingCategory,
+    handleDelete: handleDeleteCategory,
+    confirmDelete,
+  } = useEntityCRUD<NormalizedCategory>({
+    onDelete: async (id) => {
+      await deleteCategory(id);
+    },
+  });
+
+  const handleToggleActive = async (category: NormalizedCategory) => {
+    await toggleActive({ id: category.id, isActive: !category.isActive });
   };
 
-  const handleAddCategory = (data: CategoryFormValues) => {
-    const newCategory: Category = {
-      ...data,
-      id: Date.now().toString(),
-      image:
-        data.image && data.image.length > 0
-          ? URL.createObjectURL(data.image[0])
-          : undefined,
-      level: 0,
-      productCount: 0,
-      isActive: true,
-      sortOrder: categories.length,
-    };
-    setCategories([...categories, newCategory]);
+  const handleToggleFeatured = async (category: NormalizedCategory) => {
+    await toggleFeatured({ id: category.id, featured: !category.featured });
   };
 
   return (
-    <AdminCategoriesTemplate
-      categories={categories}
-      onCategoryStatusChange={handleCategoryStatusChange}
-      onAddCategory={handleAddCategory}
-    />
+    <>
+      <AdminCategoriesTemplate
+        server={server}
+        onEditCategory={undefined}
+        onDeleteCategory={handleDeleteCategory}
+        onToggleActive={handleToggleActive}
+        onToggleFeatured={handleToggleFeatured}
+        mutationState={mutationState}
+        isCategoryMutating={isCategoryMutating}
+      />
+
+      <ConfirmDeleteDialog
+        open={!!deletingCategory}
+        onOpenChange={(open) => !open && setDeletingCategory(null)}
+        onConfirm={confirmDelete}
+        isDeleting={mutationState.deletingId === deletingCategory?.id}
+        itemName={deletingCategory?.name}
+        entityType="category"
+      />
+    </>
   );
 }

@@ -1,12 +1,17 @@
-import ProductAdditionalInfoTab from "#/components/base/products/details/product-additional-info-tab";
-import ProductDescriptionTab from "#/components/base/products/details/product-description-tab";
-import ProductShippingTab from "#/components/base/products/details/product-shipping-tab";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "#/components/ui/tabs";
-import type { StoreProduct } from "#/types/store-types";
+import ProductAdditionalInfoTab from "@/components/base/products/details/product-additional-info-tab";
+import ProductDescriptionTab from "@/components/base/products/details/product-description-tab";
+import ProductShippingTab from "@/components/base/products/details/product-shipping-tab";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { StoreProduct } from "@/types/store-types";
+import ProductReviewsTab from "./product-reviews-tab";
 
-type Props = { product: StoreProduct };
+interface ProductDetailsTabsProps {
+  product: StoreProduct;
+}
 
-export default function ProductDetailsTabs({ product }: Props) {
+export default function ProductDetailsTabs({
+  product,
+}: ProductDetailsTabsProps) {
   // Map attributes to specifications
   const specifications: Record<string, string> = {};
   if (product.attributeIds && product.attributeNames) {
@@ -69,7 +74,7 @@ export default function ProductDetailsTabs({ product }: Props) {
           <ProductAdditionalInfoTab specifications={specifications} />
         </TabsContent>
         <TabsContent value="reviews">
-          {/* <ProductReviewsTab productId={product.id} /> */}
+          <ProductReviewsTab productId={product.id} />
         </TabsContent>
         <TabsContent value="shipping">
           <ProductShippingTab shipping={shipping} />

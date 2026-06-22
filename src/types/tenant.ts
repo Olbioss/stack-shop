@@ -1,4 +1,4 @@
-export type AdminTenant = {
+export interface AdminTenant {
   id: string;
   name: string;
   slug: string;
@@ -9,9 +9,9 @@ export type AdminTenant = {
   joinedDate: string;
   productCount: number;
   orderCount: number;
-};
+}
 
-export type AdminTenantDetailsProps = {
+export interface AdminTenantDetailsProps {
   tenant: {
     id: string;
     name: string;
@@ -22,6 +22,12 @@ export type AdminTenantDetailsProps = {
       email: string;
       avatar?: string;
     };
+    vendorId: string;
+    commissionRate: string;
+    stripeConnectedAccountId?: string | null;
+    stripeOnboardingComplete?: boolean;
+    stripeChargesEnabled?: boolean;
+    stripePayoutsEnabled?: boolean;
     plan: string;
     status: "active" | "suspended" | "pending";
     joinedDate: string;
@@ -32,4 +38,4 @@ export type AdminTenantDetailsProps = {
       customers: number;
     };
   };
-};
+}

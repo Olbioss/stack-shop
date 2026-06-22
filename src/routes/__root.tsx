@@ -5,7 +5,6 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/base/provider/theme-provider";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
@@ -55,10 +54,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             position: "bottom-right",
           }}
           plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
+            // {
+            //   name: "Tanstack Router",
+            //   render: <TanStackRouterDevtoolsPanel />,
+            // },
             TanStackQueryDevtools,
           ]}
         />

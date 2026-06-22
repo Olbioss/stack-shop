@@ -1,26 +1,35 @@
+import type { DataTableServer } from "#/components/base/data-table/types";
 import TagHeader from "#/components/containers/shared/tags/tag-header";
 import TagsTable from "#/components/containers/shared/tags/tag-table";
-import { ADMIN_TAG_PERMISSIONS } from "#/lib/config/tag-permissions";
-import type { Tag } from "@/types/tags";
+import type {
+  TagMutationState,
+  TagTableActions,
+} from "#/components/containers/shared/tags/tag-table-columns";
+import type { TagItem } from "@/types/tags";
 
-interface AdminTagsTemplateProps {
-  tags: Tag[];
-  onAddTag: (data: { name: string; description: string }) => void;
-  onDeleteTag: (tagId: string) => void;
+interface AdminTagsTemplateProps extends TagTableActions {
+  server: DataTableServer<TagItem>;
+  mutationState?: TagMutationState;
+  isTagMutating?: (id: string) => boolean;
 }
 
 export default function AdminTagsTemplate({
-  tags,
-  onAddTag,
-  onDeleteTag,
+  server,
+  onDelete,
+  onToggleActive,
+  mutationState,
+  isTagMutating,
 }: AdminTagsTemplateProps) {
   return (
     <div className="space-y-6">
-      <TagHeader role="admin" onAddTag={onAddTag} />
+      <TagHeader role="admin" showAddButton={false} />
       <TagsTable
-        tags={tags}
-        permissions={ADMIN_TAG_PERMISSIONS}
-        onDeleteTag={onDeleteTag}
+        server={server}
+        onDelete={onDelete}
+        onToggleActive={onToggleActive}
+        mutationState={mutationState}
+        isTagMutating={isTagMutating}
+        mode="admin"
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import DataTable from "#/components/base/data-table/data-table";
+import DataTable from "@/components/base/data-table/data-table";
 import type { DataTableServer } from "@/components/base/data-table/types";
-import { VENDOR_STATUS_OPTIONS } from "@/hooks/vendor/use-vendor-entity-fetcher";
+import { VENDOR_STATUS_OPTIONS } from "@/lib/constants";
 import type { NormalizedCategory } from "@/types/category-types";
 import {
   type CategoryMutationState,
@@ -61,14 +61,14 @@ export function VendorCategoryTable({
 }
 
 interface AdminCategoryTableProps extends CategoryTableActions {
-  categories: NormalizedCategory[];
+  server: DataTableServer<NormalizedCategory>;
   className?: string;
   mutationState?: CategoryMutationState;
   isCategoryMutating?: (id: string) => boolean;
 }
 
 export function AdminCategoryTable({
-  categories,
+  server,
   className,
   onEdit,
   onDelete,
@@ -111,7 +111,8 @@ export function AdminCategoryTable({
   return (
     <DataTable
       columns={columns}
-      data={categories}
+      server={server}
+      context="admin"
       initialPageSize={10}
       filterableColumns={filterableColumns}
       globalFilterPlaceholder="Search categories..."

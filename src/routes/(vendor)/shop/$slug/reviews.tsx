@@ -3,7 +3,8 @@ import { useState } from "react";
 import AddReviewDialog from "#/components/containers/vendor/reviews/add-review-dialog";
 import ShopReviewsTemplate from "#/components/templates/vendor/shop-reviews-template";
 import { mockReviews } from "#/data/review";
-import type { Review, ReviewFormValues } from "#/types/review";
+import type { Review } from "#/types/review";
+import type { ReviewFormValues } from "#/types/review-form";
 
 export const Route = createFileRoute("/(vendor)/shop/$slug/reviews")({
   component: RouteComponent,

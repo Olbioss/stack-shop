@@ -4,10 +4,10 @@ import OrderActions from "#/components/containers/vendor/order-details/order-act
 import OrderItemsList from "#/components/containers/vendor/order-details/order-items-list";
 import OrderSummary from "#/components/containers/vendor/order-details/order-summary";
 import OrderTimeline from "#/components/containers/vendor/order-details/order-timeline";
-import type { OrderItemResponse, OrderStatus } from "#/types/orders";
-import { Button } from "@/components/ui/button";
+import { Button } from "#/components/ui/button";
+import type { OrderItemResponse, OrderStatus } from "@/types/orders";
 
-type VendorOrderDetailResponse = {
+interface VendorOrderDetailResponse {
   id: string;
   orderNumber: string;
   status: OrderStatus;
@@ -42,9 +42,9 @@ type VendorOrderDetailResponse = {
   }[];
   createdAt: string;
   updatedAt: string;
-};
+}
 
-type Props = {
+interface ShopOrderDetailsTemplateProps {
   shopSlug?: string;
   order: VendorOrderDetailResponse;
   mode?: "vendor" | "admin";
@@ -53,14 +53,14 @@ type Props = {
     params?: Record<string, string>;
     label?: string;
   };
-};
+}
 
 export default function ShopOrderDetailsTemplate({
   shopSlug,
   order,
   mode = "vendor",
   backLink,
-}: Props) {
+}: ShopOrderDetailsTemplateProps) {
   // Transform order items for display
   const items = order.items.map((item) => ({
     id: item.id,
@@ -137,9 +137,6 @@ export default function ShopOrderDetailsTemplate({
     params: { slug: shopSlug ?? "" },
     label: "Back to Orders",
   };
-
-  // 4:20
-  // claude --resume bed7ec17-2589-4202-b88b-59dca55fa760
 
   return (
     <div className="space-y-6">

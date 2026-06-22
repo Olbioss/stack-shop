@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { PageSkeleton } from "#/components/base/common/page-skeleton";
 import AdminTenantsTemplate from "#/components/templates/admin/tenants/admin-tenants-template";
-import { mockTenants } from "#/data/tenants";
-import type { AdminTenant } from "#/types/tenant";
+import { createAdminTenantsFetcher } from "#/hooks/admin/use-admin-entity-fetchers";
 
 export const Route = createFileRoute("/(admin)/admin/tenants/")({
   component: RouteComponent,
+  pendingComponent: PageSkeleton,
 });
 
 function RouteComponent() {
-  const [tenants] = useState<AdminTenant[]>(mockTenants);
+  const server = createAdminTenantsFetcher();
 
-  return <AdminTenantsTemplate tenants={tenants} />;
+  return <AdminTenantsTemplate server={server} />;
 }

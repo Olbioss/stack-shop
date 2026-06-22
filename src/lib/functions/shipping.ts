@@ -3,24 +3,24 @@
  *
  * Server functions for shipping management in the vendor dashboard.
  */
-
 import { createServerFn } from "@tanstack/react-start";
 import { and, asc, count, desc, eq, ilike } from "drizzle-orm";
-import { db } from "#/lib/db";
-import { shippingMethods } from "#/lib/db/schema/shipping-schema";
-import { requireShopAccess } from "#/lib/helper/vendors";
-import { authMiddleware } from "#/lib/middleware/auth";
+import { db } from "../db";
+import { shippingMethods } from "../db/schema/shipping-schema";
+import { requireShopAccess } from "../helper/vendor";
+import { authMiddleware } from "../middleware/auth";
 import {
   createShippingMethodSchema,
   deleteShippingMethodSchema,
   getShippingMethodByIdSchema,
   getShippingMethodsQuerySchema,
   updateShippingMethodSchema,
-} from "#/lib/validators/shipping";
+} from "../validators/shipping";
 
 // ============================================================================
 // Get Shipping Methods (List with Pagination)
 // ============================================================================
+
 export const getShippingMethods = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .inputValidator(getShippingMethodsQuerySchema)
@@ -35,10 +35,13 @@ export const getShippingMethods = createServerFn({ method: "GET" })
     // Build where conditions
     const conditions = [eq(shippingMethods.shopId, shopId)];
 
-    if (search) conditions.push(ilike(shippingMethods.name, `%${search}%`));
+    if (search) {
+      conditions.push(ilike(shippingMethods.name, `%${search}%`));
+    }
 
-    if (isActive !== undefined)
+    if (isActive !== undefined) {
       conditions.push(eq(shippingMethods.isActive, isActive));
+    }
 
     const whereClause = and(...conditions);
 
@@ -103,7 +106,9 @@ export const getShippingMethodById = createServerFn({ method: "GET" })
       )
       .limit(1);
 
-    if (!shippingMethod) throw new Error("Shipping method not found.");
+    if (!shippingMethod) {
+      throw new Error("Shipping method not found.");
+    }
 
     return {
       shippingMethod: {
@@ -162,8 +167,9 @@ export const updateShippingMethod = createServerFn({ method: "POST" })
 
     // Prepare update data
     const updateData: any = { ...updates };
-    if (updates.price !== undefined)
+    if (updates.price !== undefined) {
       updateData.price = updates.price.toString();
+    }
 
     const [updatedMethod] = await db
       .update(shippingMethods)
@@ -173,8 +179,9 @@ export const updateShippingMethod = createServerFn({ method: "POST" })
       )
       .returning();
 
-    if (!updatedMethod)
+    if (!updatedMethod) {
       throw new Error("Shipping method not found or update failed.");
+    }
 
     return {
       success: true,
@@ -189,6 +196,7 @@ export const updateShippingMethod = createServerFn({ method: "POST" })
 // ============================================================================
 // Delete Shipping Method
 // ============================================================================
+
 export const deleteShippingMethod = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .inputValidator(deleteShippingMethodSchema)

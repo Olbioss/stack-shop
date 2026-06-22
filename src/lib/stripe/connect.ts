@@ -65,7 +65,7 @@ export async function createAccountLink(
   return accountLink.url!;
 }
 
-export async function getConnectedAccount(connectedAccountId: string): Promise<{
+export async function getAccountStatus(connectedAccountId: string): Promise<{
   detailsSubmitted: boolean;
   chargesEnabled: boolean;
   payoutsEnabled: boolean;

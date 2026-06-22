@@ -1,6 +1,5 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { Store } from "lucide-react";
-import { signOut } from "#/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut } from "@/lib/auth-client";
 
 type User = {
   name?: string | null;
@@ -36,7 +36,10 @@ export default function UserMenu({ user }: { user: User }) {
   const handleSignOut = async () => {
     const currentPath = window.location.pathname + window.location.search;
     await signOut();
-    router.navigate({ to: "/sign-in", search: { redirectTo: currentPath } });
+    router.navigate({
+      to: "/sign-in",
+      search: { redirectTo: currentPath },
+    });
   };
 
   return (

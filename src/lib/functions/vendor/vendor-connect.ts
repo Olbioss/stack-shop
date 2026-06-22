@@ -14,7 +14,7 @@ import {
   createAccountLink,
   createConnectedAccount,
   createLoginLink,
-  getConnectedAccount as getStripeAccountStatus,
+  getAccountStatus as getStripeAccountStatus,
 } from "@/lib/stripe/connect";
 import type { StripeConnectStatus } from "@/types/orders";
 

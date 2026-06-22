@@ -38,7 +38,6 @@ import { Route as adminAdminStaffRouteImport } from './routes/(admin)/admin/staf
 import { Route as adminAdminSettingsRouteImport } from './routes/(admin)/admin/settings'
 import { Route as adminAdminReviewsRouteImport } from './routes/(admin)/admin/reviews'
 import { Route as adminAdminProductsRouteImport } from './routes/(admin)/admin/products'
-import { Route as adminAdminOrdersRouteImport } from './routes/(admin)/admin/orders'
 import { Route as adminAdminMyStoreRouteImport } from './routes/(admin)/admin/my-store'
 import { Route as adminAdminCouponsRouteImport } from './routes/(admin)/admin/coupons'
 import { Route as adminAdminCategoriesRouteImport } from './routes/(admin)/admin/categories'
@@ -49,6 +48,7 @@ import { Route as storeLayoutStoreIndexRouteImport } from './routes/(store)/_lay
 import { Route as storeLayoutProductIndexRouteImport } from './routes/(store)/_layout/product/index'
 import { Route as storeLayoutCategoryIndexRouteImport } from './routes/(store)/_layout/category/index'
 import { Route as adminAdminTenantsIndexRouteImport } from './routes/(admin)/admin/tenants/index'
+import { Route as adminAdminOrdersIndexRouteImport } from './routes/(admin)/admin/orders/index'
 import { Route as vendorShopSlugTransactionsRouteImport } from './routes/(vendor)/shop/$slug/transactions'
 import { Route as vendorShopSlugTaxesRouteImport } from './routes/(vendor)/shop/$slug/taxes'
 import { Route as vendorShopSlugTagsRouteImport } from './routes/(vendor)/shop/$slug/tags'
@@ -64,6 +64,7 @@ import { Route as storeLayoutStoreSlugRouteImport } from './routes/(store)/_layo
 import { Route as storeLayoutProductProductIdRouteImport } from './routes/(store)/_layout/product/$productId'
 import { Route as storeLayoutCategorySlugRouteImport } from './routes/(store)/_layout/category/$slug'
 import { Route as adminAdminTenantsTenantIdRouteImport } from './routes/(admin)/admin/tenants/$tenantId'
+import { Route as adminAdminOrdersOrderIdRouteImport } from './routes/(admin)/admin/orders/$orderId'
 import { Route as vendorShopSlugProductsIndexRouteImport } from './routes/(vendor)/shop/$slug/products/index'
 import { Route as vendorShopSlugOrdersIndexRouteImport } from './routes/(vendor)/shop/$slug/orders/index'
 import { Route as vendorShopSlugOrdersOrderIdRouteImport } from './routes/(vendor)/shop/$slug/orders/$orderId'
@@ -212,11 +213,6 @@ const adminAdminProductsRoute = adminAdminProductsRouteImport.update({
   path: '/products',
   getParentRoute: () => adminAdminRoute,
 } as any)
-const adminAdminOrdersRoute = adminAdminOrdersRouteImport.update({
-  id: '/orders',
-  path: '/orders',
-  getParentRoute: () => adminAdminRoute,
-} as any)
 const adminAdminMyStoreRoute = adminAdminMyStoreRouteImport.update({
   id: '/my-store',
   path: '/my-store',
@@ -266,6 +262,11 @@ const storeLayoutCategoryIndexRoute =
 const adminAdminTenantsIndexRoute = adminAdminTenantsIndexRouteImport.update({
   id: '/tenants/',
   path: '/tenants/',
+  getParentRoute: () => adminAdminRoute,
+} as any)
+const adminAdminOrdersIndexRoute = adminAdminOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
   getParentRoute: () => adminAdminRoute,
 } as any)
 const vendorShopSlugTransactionsRoute =
@@ -348,6 +349,11 @@ const adminAdminTenantsTenantIdRoute =
     path: '/tenants/$tenantId',
     getParentRoute: () => adminAdminRoute,
   } as any)
+const adminAdminOrdersOrderIdRoute = adminAdminOrdersOrderIdRouteImport.update({
+  id: '/orders/$orderId',
+  path: '/orders/$orderId',
+  getParentRoute: () => adminAdminRoute,
+} as any)
 const vendorShopSlugProductsIndexRoute =
   vendorShopSlugProductsIndexRouteImport.update({
     id: '/products/',
@@ -378,7 +384,6 @@ export interface FileRoutesByFullPath {
   '/admin/categories': typeof adminAdminCategoriesRoute
   '/admin/coupons': typeof adminAdminCouponsRoute
   '/admin/my-store': typeof adminAdminMyStoreRoute
-  '/admin/orders': typeof adminAdminOrdersRoute
   '/admin/products': typeof adminAdminProductsRoute
   '/admin/reviews': typeof adminAdminReviewsRoute
   '/admin/settings': typeof adminAdminSettingsRoute
@@ -401,6 +406,7 @@ export interface FileRoutesByFullPath {
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/admin/': typeof adminAdminIndexRoute
   '/': typeof storeLayoutIndexRoute
+  '/admin/orders/$orderId': typeof adminAdminOrdersOrderIdRoute
   '/admin/tenants/$tenantId': typeof adminAdminTenantsTenantIdRoute
   '/category/$slug': typeof storeLayoutCategorySlugRoute
   '/product/$productId': typeof storeLayoutProductProductIdRoute
@@ -416,6 +422,7 @@ export interface FileRoutesByFullPath {
   '/shop/$slug/tags': typeof vendorShopSlugTagsRoute
   '/shop/$slug/taxes': typeof vendorShopSlugTaxesRoute
   '/shop/$slug/transactions': typeof vendorShopSlugTransactionsRoute
+  '/admin/orders/': typeof adminAdminOrdersIndexRoute
   '/admin/tenants/': typeof adminAdminTenantsIndexRoute
   '/category/': typeof storeLayoutCategoryIndexRoute
   '/product/': typeof storeLayoutProductIndexRoute
@@ -435,7 +442,6 @@ export interface FileRoutesByTo {
   '/admin/categories': typeof adminAdminCategoriesRoute
   '/admin/coupons': typeof adminAdminCouponsRoute
   '/admin/my-store': typeof adminAdminMyStoreRoute
-  '/admin/orders': typeof adminAdminOrdersRoute
   '/admin/products': typeof adminAdminProductsRoute
   '/admin/reviews': typeof adminAdminReviewsRoute
   '/admin/settings': typeof adminAdminSettingsRoute
@@ -457,6 +463,7 @@ export interface FileRoutesByTo {
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/admin': typeof adminAdminIndexRoute
   '/': typeof storeLayoutIndexRoute
+  '/admin/orders/$orderId': typeof adminAdminOrdersOrderIdRoute
   '/admin/tenants/$tenantId': typeof adminAdminTenantsTenantIdRoute
   '/category/$slug': typeof storeLayoutCategorySlugRoute
   '/product/$productId': typeof storeLayoutProductProductIdRoute
@@ -472,6 +479,7 @@ export interface FileRoutesByTo {
   '/shop/$slug/tags': typeof vendorShopSlugTagsRoute
   '/shop/$slug/taxes': typeof vendorShopSlugTaxesRoute
   '/shop/$slug/transactions': typeof vendorShopSlugTransactionsRoute
+  '/admin/orders': typeof adminAdminOrdersIndexRoute
   '/admin/tenants': typeof adminAdminTenantsIndexRoute
   '/category': typeof storeLayoutCategoryIndexRoute
   '/product': typeof storeLayoutProductIndexRoute
@@ -495,7 +503,6 @@ export interface FileRoutesById {
   '/(admin)/admin/categories': typeof adminAdminCategoriesRoute
   '/(admin)/admin/coupons': typeof adminAdminCouponsRoute
   '/(admin)/admin/my-store': typeof adminAdminMyStoreRoute
-  '/(admin)/admin/orders': typeof adminAdminOrdersRoute
   '/(admin)/admin/products': typeof adminAdminProductsRoute
   '/(admin)/admin/reviews': typeof adminAdminReviewsRoute
   '/(admin)/admin/settings': typeof adminAdminSettingsRoute
@@ -518,6 +525,7 @@ export interface FileRoutesById {
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/(admin)/admin/': typeof adminAdminIndexRoute
   '/(store)/_layout/': typeof storeLayoutIndexRoute
+  '/(admin)/admin/orders/$orderId': typeof adminAdminOrdersOrderIdRoute
   '/(admin)/admin/tenants/$tenantId': typeof adminAdminTenantsTenantIdRoute
   '/(store)/_layout/category/$slug': typeof storeLayoutCategorySlugRoute
   '/(store)/_layout/product/$productId': typeof storeLayoutProductProductIdRoute
@@ -533,6 +541,7 @@ export interface FileRoutesById {
   '/(vendor)/shop/$slug/tags': typeof vendorShopSlugTagsRoute
   '/(vendor)/shop/$slug/taxes': typeof vendorShopSlugTaxesRoute
   '/(vendor)/shop/$slug/transactions': typeof vendorShopSlugTransactionsRoute
+  '/(admin)/admin/orders/': typeof adminAdminOrdersIndexRoute
   '/(admin)/admin/tenants/': typeof adminAdminTenantsIndexRoute
   '/(store)/_layout/category/': typeof storeLayoutCategoryIndexRoute
   '/(store)/_layout/product/': typeof storeLayoutProductIndexRoute
@@ -555,7 +564,6 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/coupons'
     | '/admin/my-store'
-    | '/admin/orders'
     | '/admin/products'
     | '/admin/reviews'
     | '/admin/settings'
@@ -578,6 +586,7 @@ export interface FileRouteTypes {
     | '/api/webhooks/stripe'
     | '/admin/'
     | '/'
+    | '/admin/orders/$orderId'
     | '/admin/tenants/$tenantId'
     | '/category/$slug'
     | '/product/$productId'
@@ -593,6 +602,7 @@ export interface FileRouteTypes {
     | '/shop/$slug/tags'
     | '/shop/$slug/taxes'
     | '/shop/$slug/transactions'
+    | '/admin/orders/'
     | '/admin/tenants/'
     | '/category/'
     | '/product/'
@@ -612,7 +622,6 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/coupons'
     | '/admin/my-store'
-    | '/admin/orders'
     | '/admin/products'
     | '/admin/reviews'
     | '/admin/settings'
@@ -634,6 +643,7 @@ export interface FileRouteTypes {
     | '/api/webhooks/stripe'
     | '/admin'
     | '/'
+    | '/admin/orders/$orderId'
     | '/admin/tenants/$tenantId'
     | '/category/$slug'
     | '/product/$productId'
@@ -649,6 +659,7 @@ export interface FileRouteTypes {
     | '/shop/$slug/tags'
     | '/shop/$slug/taxes'
     | '/shop/$slug/transactions'
+    | '/admin/orders'
     | '/admin/tenants'
     | '/category'
     | '/product'
@@ -671,7 +682,6 @@ export interface FileRouteTypes {
     | '/(admin)/admin/categories'
     | '/(admin)/admin/coupons'
     | '/(admin)/admin/my-store'
-    | '/(admin)/admin/orders'
     | '/(admin)/admin/products'
     | '/(admin)/admin/reviews'
     | '/(admin)/admin/settings'
@@ -694,6 +704,7 @@ export interface FileRouteTypes {
     | '/api/webhooks/stripe'
     | '/(admin)/admin/'
     | '/(store)/_layout/'
+    | '/(admin)/admin/orders/$orderId'
     | '/(admin)/admin/tenants/$tenantId'
     | '/(store)/_layout/category/$slug'
     | '/(store)/_layout/product/$productId'
@@ -709,6 +720,7 @@ export interface FileRouteTypes {
     | '/(vendor)/shop/$slug/tags'
     | '/(vendor)/shop/$slug/taxes'
     | '/(vendor)/shop/$slug/transactions'
+    | '/(admin)/admin/orders/'
     | '/(admin)/admin/tenants/'
     | '/(store)/_layout/category/'
     | '/(store)/_layout/product/'
@@ -937,13 +949,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof adminAdminProductsRouteImport
       parentRoute: typeof adminAdminRoute
     }
-    '/(admin)/admin/orders': {
-      id: '/(admin)/admin/orders'
-      path: '/orders'
-      fullPath: '/admin/orders'
-      preLoaderRoute: typeof adminAdminOrdersRouteImport
-      parentRoute: typeof adminAdminRoute
-    }
     '/(admin)/admin/my-store': {
       id: '/(admin)/admin/my-store'
       path: '/my-store'
@@ -1012,6 +1017,13 @@ declare module '@tanstack/react-router' {
       path: '/tenants'
       fullPath: '/admin/tenants/'
       preLoaderRoute: typeof adminAdminTenantsIndexRouteImport
+      parentRoute: typeof adminAdminRoute
+    }
+    '/(admin)/admin/orders/': {
+      id: '/(admin)/admin/orders/'
+      path: '/orders'
+      fullPath: '/admin/orders/'
+      preLoaderRoute: typeof adminAdminOrdersIndexRouteImport
       parentRoute: typeof adminAdminRoute
     }
     '/(vendor)/shop/$slug/transactions': {
@@ -1119,6 +1131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof adminAdminTenantsTenantIdRouteImport
       parentRoute: typeof adminAdminRoute
     }
+    '/(admin)/admin/orders/$orderId': {
+      id: '/(admin)/admin/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/admin/orders/$orderId'
+      preLoaderRoute: typeof adminAdminOrdersOrderIdRouteImport
+      parentRoute: typeof adminAdminRoute
+    }
     '/(vendor)/shop/$slug/products/': {
       id: '/(vendor)/shop/$slug/products/'
       path: '/products'
@@ -1149,7 +1168,6 @@ interface adminAdminRouteChildren {
   adminAdminCategoriesRoute: typeof adminAdminCategoriesRoute
   adminAdminCouponsRoute: typeof adminAdminCouponsRoute
   adminAdminMyStoreRoute: typeof adminAdminMyStoreRoute
-  adminAdminOrdersRoute: typeof adminAdminOrdersRoute
   adminAdminProductsRoute: typeof adminAdminProductsRoute
   adminAdminReviewsRoute: typeof adminAdminReviewsRoute
   adminAdminSettingsRoute: typeof adminAdminSettingsRoute
@@ -1159,7 +1177,9 @@ interface adminAdminRouteChildren {
   adminAdminTransactionsRoute: typeof adminAdminTransactionsRoute
   adminAdminUsersRoute: typeof adminAdminUsersRoute
   adminAdminIndexRoute: typeof adminAdminIndexRoute
+  adminAdminOrdersOrderIdRoute: typeof adminAdminOrdersOrderIdRoute
   adminAdminTenantsTenantIdRoute: typeof adminAdminTenantsTenantIdRoute
+  adminAdminOrdersIndexRoute: typeof adminAdminOrdersIndexRoute
   adminAdminTenantsIndexRoute: typeof adminAdminTenantsIndexRoute
 }
 
@@ -1169,7 +1189,6 @@ const adminAdminRouteChildren: adminAdminRouteChildren = {
   adminAdminCategoriesRoute: adminAdminCategoriesRoute,
   adminAdminCouponsRoute: adminAdminCouponsRoute,
   adminAdminMyStoreRoute: adminAdminMyStoreRoute,
-  adminAdminOrdersRoute: adminAdminOrdersRoute,
   adminAdminProductsRoute: adminAdminProductsRoute,
   adminAdminReviewsRoute: adminAdminReviewsRoute,
   adminAdminSettingsRoute: adminAdminSettingsRoute,
@@ -1179,7 +1198,9 @@ const adminAdminRouteChildren: adminAdminRouteChildren = {
   adminAdminTransactionsRoute: adminAdminTransactionsRoute,
   adminAdminUsersRoute: adminAdminUsersRoute,
   adminAdminIndexRoute: adminAdminIndexRoute,
+  adminAdminOrdersOrderIdRoute: adminAdminOrdersOrderIdRoute,
   adminAdminTenantsTenantIdRoute: adminAdminTenantsTenantIdRoute,
+  adminAdminOrdersIndexRoute: adminAdminOrdersIndexRoute,
   adminAdminTenantsIndexRoute: adminAdminTenantsIndexRoute,
 }
 

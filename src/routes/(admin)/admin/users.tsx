@@ -1,40 +1,87 @@
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { ConfirmDeleteDialog } from "#/components/base/common/confirm-delete-dialog";
+import { PageSkeleton } from "#/components/base/common/page-skeleton";
+import { AddUserDialog } from "#/components/containers/shared/users/add-user-dialog";
 import AdminUsersTemplate from "#/components/templates/admin/admin-users-template";
-import { mockUsers } from "#/data/users";
-import type { User, UserFormValues } from "#/types/users";
+import { useUsers } from "#/hooks/admin/use-users";
+import type { AdminUser, AdminUserFormValues, UserRole } from "#/types/users";
 
 export const Route = createFileRoute("/(admin)/admin/users")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const [users, setUsers] = useState<User[]>(mockUsers);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [deletingUser, setDeletingUser] = useState<AdminUser | null>(null);
+  const {
+    queryOptions,
+    createUser,
+    deleteUser,
+    banUser,
+    unbanUser,
+    updateRole,
+    isCreating,
+    isDeleting,
+  } = useUsers();
+  const { data, isLoading, isError } = useQuery(queryOptions());
+  const users = data?.users ?? [];
 
-  const handleAddUser = (data: UserFormValues) => {
-    const newUser: User = {
-      ...data,
-      id: String(users.length + 1),
-      avatar: `https://placehold.co/40?text=${data.name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")}`,
-      totalOrders: 0,
-      totalSpent: "$0.00",
-      createdAt: new Date(),
-    };
-    setUsers([...users, newUser]);
+  const handleAddUser = async (data: AdminUserFormValues) => {
+    await createUser(data);
   };
 
-  const handleDeleteUser = (id: string) => {
-    setUsers(users.filter((user) => user.id !== id));
+  const handleConfirmDelete = async () => {
+    if (!deletingUser) return;
+    await deleteUser(deletingUser.id);
+    setDeletingUser(null);
   };
+
+  const handleBanUser = async (userId: string) => await banUser({ userId });
+
+  const handleUnbanUser = async (userId: string) => await unbanUser({ userId });
+
+  const handleUpdateRole = async (userId: string, role: UserRole) =>
+    await updateRole({ userId, role });
+
+  if (isLoading) return <PageSkeleton />;
+
+  if (isError)
+    return (
+      <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-destructive">
+        Failed to load users.
+      </div>
+    );
 
   return (
-    <AdminUsersTemplate
-      users={users}
-      onAddUser={handleAddUser}
-      onDeleteUser={handleDeleteUser}
-    />
+    <>
+      <AddUserDialog
+        open={isAddDialogOpen}
+        onOpenChange={setIsAddDialogOpen}
+        onSubmit={handleAddUser}
+        isSubmitting={isCreating}
+      />
+      <ConfirmDeleteDialog
+        open={!!deletingUser}
+        onOpenChange={(open) => {
+          if (!open) setDeletingUser(null);
+        }}
+        onConfirm={handleConfirmDelete}
+        itemName={deletingUser?.name}
+        entityType="user"
+        isDeleting={isDeleting}
+      />
+      <AdminUsersTemplate
+        users={users}
+        onOpenAddDialog={() => setIsAddDialogOpen(true)}
+        onDeleteUser={(userId) =>
+          setDeletingUser(users.find((user) => user.id === userId) ?? null)
+        }
+        onBanUser={handleBanUser}
+        onUnbanUser={handleUnbanUser}
+        onUpdateRole={handleUpdateRole}
+      />
+    </>
   );
 }

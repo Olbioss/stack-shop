@@ -1,27 +1,28 @@
 import { createServerFn } from "@tanstack/react-start";
 import { and, eq } from "drizzle-orm";
-import { db } from "#/lib/db";
-import { products } from "#/lib/db/schema/products-schema";
+import { db } from "@/lib/db";
+import { products } from "@/lib/db/schema/products-schema";
 import {
   executeProductQuery,
   fetchProductWithRelations,
-} from "#/lib/helper/products-query-helpers";
+} from "@/lib/helper/products-query-helpers";
+import { getProductRatingStats } from "@/lib/helper/review-query-helpers";
 import {
   getFeaturedProductsSchema,
   getProductByIdSchema,
   getProductBySlugSchema,
   getRelatedProductsSchema,
   storeProductsQuerySchema,
-} from "#/lib/validators/shared/product-query";
+} from "@/lib/validators/shared/product-query";
 import {
   createPaginatedResponse,
   emptyPaginatedResponse,
-} from "#/types/api-response";
-import type { NormalizedProduct } from "#/types/products";
+} from "@/types/api-response";
+import type { NormalizedProduct, ProductQueryOptions } from "@/types/products";
 import type {
   StoreProduct,
   StoreProductListResponse,
-} from "#/types/store-types";
+} from "@/types/store-types";
 
 /**
  * Transform NormalizedProduct to StoreProduct by removing sensitive fields
@@ -39,68 +40,56 @@ function toStoreProduct(product: NormalizedProduct): StoreProduct {
 export const getStoreProducts = createServerFn({ method: "GET" })
   .inputValidator(storeProductsQuerySchema)
   .handler(async ({ data }): Promise<StoreProductListResponse> => {
-    const {
-      limit,
-      offset,
-      search,
-      categoryId,
-      brandId,
-      tagId,
-      productType,
-      isFeatured,
-      inStock,
-      minPrice,
-      maxPrice,
-      sortBy,
-      sortDirection,
-      shopId,
-      shopSlug,
-    } = data; // Base conditions: only active, published products
-
     const baseConditions = [
       eq(products.status, "active"),
       eq(products.isActive, true),
     ];
 
     // Filter by shop if specified
-    if (shopId) {
-      baseConditions.push(eq(products.shopId, shopId));
+    if (data.shopId) {
+      baseConditions.push(eq(products.shopId, data.shopId));
     }
 
     // If shopSlug is provided, look up the shop first
-    if (shopSlug && !shopId) {
+    if (data.shopSlug && !data.shopId) {
       const { shops } = await import("@/lib/db/schema/shop-schema");
       const [shop] = await db
         .select({ id: shops.id })
         .from(shops)
-        .where(eq(shops.slug, shopSlug));
+        .where(eq(shops.slug, data.shopSlug));
 
       if (shop) {
         baseConditions.push(eq(products.shopId, shop.id));
       } else {
-        return emptyPaginatedResponse<StoreProduct>(limit!, offset!);
+        return emptyPaginatedResponse<StoreProduct>(data.limit!, data.offset!);
       }
     }
 
-    const mappedSortBy = sortBy === "price" ? "sellingPrice" : sortBy;
+    let mappedSortBy: ProductQueryOptions["sortBy"];
+    if (data.sortBy === "price") {
+      mappedSortBy = "sellingPrice";
+    } else {
+      mappedSortBy = data.sortBy;
+    }
 
     // Execute query using shared helper
     const result = await executeProductQuery({
       baseConditions,
-      search,
-      productType,
-      categoryId,
-      brandId,
-      tagId,
-      isFeatured,
+      search: data.search,
+      productType: data.productType,
+      categoryId: data.categoryId,
+      brandId: data.brandId,
+      tagId: data.tagId,
+      isFeatured: data.isFeatured,
       isActive: true,
-      inStock,
-      minPrice,
-      maxPrice,
-      limit,
-      offset,
+      inStock: data.inStock,
+      minPrice: data.minPrice,
+      maxPrice: data.maxPrice,
+      minRating: data.minRating,
+      limit: data.limit,
+      offset: data.offset,
       sortBy: mappedSortBy,
-      sortDirection,
+      sortDirection: data.sortDirection,
       includeShopInfo: true,
       includeVendorInfo: false,
       excludeCostPrice: true,
@@ -163,17 +152,18 @@ export const getStoreProductBySlug = createServerFn({ method: "GET" })
 
     // Get rating stats
     // TODO: Uncomment this when rating stats are implemented
-    // const ratingStats = await getProductRatingStats(product.id);
+    const ratingStats = await getProductRatingStats(product.id);
 
     return {
       product: toStoreProduct(normalizedProduct),
-      //   ratingStats,
+      ratingStats,
     };
   });
 
 // ============================================================================
 // Get Product by ID (Store Front - Public)
 // ============================================================================
+
 /**
  * Get a single product by ID
  * Only returns if the product is active and published
@@ -195,7 +185,9 @@ export const getStoreProductById = createServerFn({ method: "GET" })
         )
       );
 
-    if (!product) throw new Error("Product not found.");
+    if (!product) {
+      throw new Error("Product not found.");
+    }
 
     // Fetch with relations
     const normalizedProduct = await fetchProductWithRelations(product, {
@@ -206,17 +198,18 @@ export const getStoreProductById = createServerFn({ method: "GET" })
 
     // Get rating stats
     // TODO: Uncomment this when rating stats are implemented
-    // const ratingStats = await getProductRatingStats(product.id);
+    const ratingStats = await getProductRatingStats(product.id);
 
     return {
       product: toStoreProduct(normalizedProduct),
-      //   ratingStats,
+      ratingStats,
     };
   });
 
 // ============================================================================
 // Get Featured Products (Store Front - Public)
 // ============================================================================
+
 /**
  * Get featured products for homepage or promotional sections
  */
@@ -247,6 +240,7 @@ export const getFeaturedProducts = createServerFn({ method: "GET" })
 // ============================================================================
 // Get Related Products (Store Front - Public)
 // ============================================================================
+
 /**
  * Get related products based on category and brand
  * Used on product detail pages for cross-selling
@@ -262,7 +256,9 @@ export const getRelatedProducts = createServerFn({ method: "GET" })
       .from(products)
       .where(eq(products.id, productId));
 
-    if (!sourceProduct) return { products: [] };
+    if (!sourceProduct) {
+      return { products: [] };
+    }
 
     // Build conditions for related products
     const baseConditions = [

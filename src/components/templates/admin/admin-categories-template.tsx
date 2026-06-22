@@ -1,26 +1,39 @@
-import { ADMIN_CATEGORY_PERMISSIONS } from "#/lib/config/category-permissions";
+import type { DataTableServer } from "#/components/base/data-table/types";
+import { AdminCategoryTable } from "#/components/containers/shared/categories/category-table";
+import type { AdminCategoryMutationState } from "#/hooks/admin/use-admin-categories";
 import CategoryHeader from "@/components/containers/shared/categories/category-header";
-import CategoryTable from "@/components/containers/shared/categories/category-table";
-import type { Category, CategoryFormValues } from "@/types/category-types";
+import type { NormalizedCategory } from "@/types/category-types";
 
 interface AdminCategoriesTemplateProps {
-  categories: Category[];
-  onCategoryStatusChange: (categoryId: string, newStatus: boolean) => void;
-  onAddCategory: (category: CategoryFormValues) => void;
+  server: DataTableServer<NormalizedCategory>;
+  onEditCategory?: (category: NormalizedCategory) => void;
+  onDeleteCategory?: (category: NormalizedCategory) => void;
+  onToggleActive?: (category: NormalizedCategory) => void;
+  onToggleFeatured?: (category: NormalizedCategory) => void;
+  mutationState?: AdminCategoryMutationState;
+  isCategoryMutating?: (id: string) => boolean;
 }
 
 export default function AdminCategoriesTemplate({
-  categories,
-  onCategoryStatusChange,
-  onAddCategory,
+  server,
+  onEditCategory,
+  onDeleteCategory,
+  onToggleActive,
+  onToggleFeatured,
+  mutationState,
+  isCategoryMutating,
 }: AdminCategoriesTemplateProps) {
   return (
     <div className="space-y-6">
-      <CategoryHeader onAddCategory={onAddCategory} role="admin" />
-      <CategoryTable
-        categories={categories}
-        permissions={ADMIN_CATEGORY_PERMISSIONS}
-        onToggleStatus={onCategoryStatusChange}
+      <CategoryHeader role="admin" />
+      <AdminCategoryTable
+        server={server}
+        onEdit={onEditCategory}
+        onDelete={onDeleteCategory}
+        onToggleActive={onToggleActive}
+        onToggleFeatured={onToggleFeatured}
+        mutationState={mutationState}
+        isCategoryMutating={isCategoryMutating}
       />
     </div>
   );

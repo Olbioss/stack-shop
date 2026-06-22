@@ -8,6 +8,7 @@ import { getProducts } from "#/lib/functions/vendor/products";
 import { getShippingMethods } from "#/lib/functions/vendor/shipping";
 import { getTags } from "#/lib/functions/vendor/tag";
 import { getTaxRates } from "#/lib/functions/vendor/tax";
+import { getVendorTransactions } from "#/lib/functions/vendor/transactions";
 import {
   booleanFilterTransform,
   createServerFetcher,
@@ -20,6 +21,7 @@ import type { ProductItem } from "#/types/products";
 import type { ShippingMethodItem } from "#/types/shipping";
 import type { TagItem } from "#/types/tags";
 import type { TaxRateItem } from "#/types/taxes";
+import type { VendorTransactionResponse } from "#/types/transaction";
 import { getCategories } from "@/lib/functions/vendor/categories";
 import type { NormalizedCategory } from "@/types/category-types";
 import { vendorShippingKeys } from "../common/use-shipping";
@@ -29,6 +31,7 @@ import { vendorCouponsKeys } from "./use-coupons";
 import { vendorTagsKeys } from "./use-tags";
 import { vendorTaxRatesKeys } from "./use-tax-rates";
 import { vendorOrderKeys } from "./use-vendor-orders";
+import { vendorTransactionKeys } from "./use-vendor-transactions";
 
 export const VENDOR_STATUS_OPTIONS = [
   { label: "Active", value: "true" },
@@ -211,6 +214,31 @@ export function createVendorShippingFetcher(
       transformFilters: booleanFilterTransform,
     }),
     queryKey: vendorShippingKeys.lists(shopId),
+  };
+}
+
+// ============================================================================
+// Transactions Fetcher
+// ============================================================================
+export function createVendorTransactionsFetcher(
+  shopSlug: string
+): DataTableServer<VendorTransactionResponse> {
+  return {
+    fetcher: createServerFetcher<VendorTransactionResponse, any>({
+      fetchFn: async (query) => {
+        const response = await getVendorTransactions({
+          data: { ...query, shopSlug },
+        });
+        return {
+          data: response.transactions ?? [],
+          total: response.total ?? 0,
+        };
+      },
+      sortFieldMap: { createdAt: "createdAt", totalAmount: "totalAmount" },
+      filterFieldMap: { status: "status" },
+      defaultQuery: { sortBy: "createdAt", sortDirection: "desc" },
+    }),
+    queryKey: vendorTransactionKeys.list({ shopSlug }),
   };
 }
 
