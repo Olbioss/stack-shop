@@ -1,24 +1,89 @@
-import { Star, ThumbsUp } from "lucide-react";
-import { useState } from "react";
+import { MessageSquare, Star, ThumbsUp } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "#/components/ui/avatar";
 import { Button } from "#/components/ui/button";
 import { Card, CardContent } from "#/components/ui/card";
 import { Progress } from "#/components/ui/progress";
-import { type MockReview, mockReviews } from "#/data/reviews";
+import { useReviewMutations, useShopReviews } from "#/hooks/store/use-reviews";
+import type { StoreReviewResponse } from "#/types/review";
 
 type Props = {
+  shopId: string;
   rating: number;
   reviewCount: number;
 };
 
-export default function StoreReviews({ rating, reviewCount }: Props) {
-  const [reviews] = useState<MockReview[]>(mockReviews);
+export default function StoreReviews({ shopId, rating, reviewCount }: Props) {
+  const {
+    data: reviewsData,
+    isLoading,
+    error,
+  } = useShopReviews(shopId, {
+    limit: 10,
+    offset: 0,
+  });
 
+  // Review mutations for helpful voting
+  const { voteHelpful } = useReviewMutations();
+
+  // Extract data from response
+  const reviews = reviewsData?.reviews ?? [];
+  const totalReviews = reviewsData?.total ?? reviewCount;
+  const ratingStats = reviewsData?.ratingStats;
+  const ratingBreakdown = ratingStats?.breakdown ?? {
+    5: 0,
+    4: 0,
+    3: 0,
+    2: 0,
+    1: 0,
+  };
+
+  // Calculate rating distribution
   const ratingDistribution = [5, 4, 3, 2, 1].map((star) => {
-    const count = reviews.filter((r) => r.rating === star).length;
-    const percentage = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
+    const count = ratingBreakdown[star as keyof typeof ratingBreakdown] || 0;
+    const percentage = totalReviews > 0 ? (count / totalReviews) * 100 : 0;
     return { star, count, percentage };
   });
+
+  // Handle helpful vote
+  const handleVoteHelpful = (reviewId: string) => {
+    voteHelpful.mutate({ reviewId, productId: "" }); // productId not needed for shop reviews invalidation
+  };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="space-y-8">
+        <Card>
+          <CardContent className="p-6">
+            <div className="grid @2xl:grid-cols-2 gap-8">
+              <div className="flex flex-col items-center justify-center space-y-2 border-muted @2xl:border-r p-6">
+                <div className="h-12 w-20 animate-pulse rounded bg-muted" />
+                <div className="h-5 w-32 animate-pulse rounded bg-muted" />
+              </div>
+              <div className="space-y-3">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="h-6 animate-pulse rounded bg-muted" />
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <MessageSquare className="mb-4 h-12 w-12 text-muted-foreground" />
+        <h3 className="mb-2 font-semibold text-lg">Unable to load reviews</h3>
+        <p className="text-muted-foreground text-sm">
+          There was an error loading reviews. Please try again later.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -42,7 +107,7 @@ export default function StoreReviews({ rating, reviewCount }: Props) {
                 ))}
               </div>
               <p className="text-muted-foreground text-sm">
-                Based on {reviewCount} reviews
+                Based on {totalReviews} reviews
               </p>
             </div>
 
@@ -71,7 +136,7 @@ export default function StoreReviews({ rating, reviewCount }: Props) {
 
         {reviews.length > 0 ? (
           <div className="space-y-4">
-            {reviews.map((review) => (
+            {reviews.map((review: StoreReviewResponse) => (
               <Card key={review.id}>
                 <CardContent className="p-6">
                   <div className="flex gap-4">
@@ -126,7 +191,15 @@ export default function StoreReviews({ rating, reviewCount }: Props) {
                       </p>
 
                       <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="sm" className="h-8 gap-1">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 gap-1"
+                          onClick={() => handleVoteHelpful(review.id)}
+                          disabled={
+                            voteHelpful.isPending || review.hasVotedHelpful
+                          }
+                        >
                           <ThumbsUp className="size-3.5" />
                           <span className="text-xs">
                             Helpful ({review.helpfulCount})

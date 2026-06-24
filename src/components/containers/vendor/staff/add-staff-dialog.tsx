@@ -46,6 +46,7 @@ const fields: EntityFormField[] = [
     required: true,
     selectOptions: [
       { value: "active", label: "Active" },
+      { value: "invited", label: "Invited" },
       { value: "inactive", label: "Inactive" },
     ],
   },
@@ -55,9 +56,9 @@ const fields: EntityFormField[] = [
     type: "custom",
     render: ({ form }) => (
       <form.Field name="image">
-        {(field) => (
+        {(field: any) => (
           <UIField>
-            <FieldLabel htmlFor={field.name}>Category Image</FieldLabel>
+            <FieldLabel htmlFor={field.name}>Avatar</FieldLabel>
             <Input
               id={field.name}
               type="file"

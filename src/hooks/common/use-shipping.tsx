@@ -18,7 +18,7 @@ import {
   getShippingMethodById,
   getShippingMethods,
   updateShippingMethod,
-} from "@/lib/functions/vendor/shipping";
+} from "@/lib/functions/shipping";
 import type {
   CreateShippingMethodInput,
   UpdateShippingMethodInput,

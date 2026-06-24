@@ -1,14 +1,9 @@
-import {
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { DataTable } from "#/components/base/data-table/data-table-core";
-import { DataTablePagination } from "#/components/base/data-table/data-table-pagination";
-import { DataTableToolbar } from "#/components/base/data-table/data-table-toolbar";
-import { columns, type Order } from "#/components/base/store/order/columns";
+import type { ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import React from "react";
+import { DataTableCore } from "@/components/base/data-table/data-table-core";
+import { DataTablePagination } from "@/components/base/data-table/data-table-pagination";
+import { DataTableToolbar } from "@/components/base/data-table/data-table-toolbar";
+import { columns, type Order } from "@/components/base/store/order/columns";
 
 // Mock data
 const data: Order[] = [
@@ -50,20 +45,69 @@ const data: Order[] = [
 ];
 
 export default function OrdersTable() {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    globalFilterFn: "includesString",
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [_rowSelection, setRowSelection] = React.useState({});
+  const [globalFilter, setGlobalFilter] = React.useState("");
+
+  // We need to manually manage pagination state for the controlled component
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
   });
+
+  // We can't pass the table instance directly to DataTableCore in the current implementation
+  // So we'll use the core component which handles the table instance internally
+  // But wait, the DataTableCore provided in the codebase handles its own useReactTable.
+  // We should pass the props it needs.
+
   return (
-    <div className="container mx-auto space-y-3 py-10">
-      <DataTableToolbar table={table} searchPlaceholder="Search orders..." />
-      <DataTable columns={columns} table={table} />
-      <DataTablePagination table={table} />
+    <div className="space-y-4">
+      <DataTableToolbar
+        globalFilter={globalFilter}
+        onGlobalFilterChange={setGlobalFilter}
+        columnFilters={columnFilters}
+        onColumnFilterChange={(columnId, value) => {
+          setColumnFilters((prev) => {
+            const filtered = prev.filter((f) => f.id !== columnId);
+            if (value !== "" && value !== undefined && value !== null) {
+              filtered.push({ id: columnId, value });
+            }
+            return filtered;
+          });
+        }}
+        allColumns={columns.map((col) => ({
+          id: (col as any).accessorKey || (col as any).id,
+          label: ((col as any).header as string) || (col as any).id,
+          visible: true,
+          toggle: () => {}, // Simplified for now as DataTableCore handles visibility internally or we need to lift state
+        }))}
+      />
+      <DataTableCore
+        columns={columns}
+        data={data}
+        pageIndex={pagination.pageIndex}
+        pageSize={pagination.pageSize}
+        pageCount={Math.ceil(data.length / pagination.pageSize)}
+        onPaginationChange={setPagination}
+        sorting={sorting}
+        onSortingChange={setSorting}
+        columnFilters={columnFilters}
+        onColumnFiltersChange={setColumnFilters}
+        globalFilter={globalFilter}
+        onGlobalFilterChange={setGlobalFilter}
+        enableRowSelection={true}
+        onRowSelection={setRowSelection}
+      />
+      <DataTablePagination
+        pageIndex={pagination.pageIndex}
+        pageSize={pagination.pageSize}
+        pageCount={Math.ceil(data.length / pagination.pageSize)}
+        total={data.length}
+        onPageChange={setPagination}
+      />
     </div>
   );
 }

@@ -5,7 +5,6 @@
  * No authentication required - anyone can browse brands.
  * Only returns active brands.
  */
-
 import { createServerFn } from "@tanstack/react-start";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
@@ -30,7 +29,6 @@ import type { BrandItem, BrandListResponse } from "@/types/brands";
 // ============================================================================
 // Get Brands (Store Front - Public)
 // ============================================================================
-
 /**
  * Get brands for the public storefront
  * Only returns active brands
@@ -86,7 +84,6 @@ export const getStoreBrands = createServerFn({ method: "GET" })
 // ============================================================================
 // Get Brand by Slug (Store Front - Public)
 // ============================================================================
-
 /**
  * Get a single brand by slug for brand pages
  * Only returns if the brand is active
@@ -135,7 +132,6 @@ export const getStoreBrandBySlug = createServerFn({ method: "GET" })
 // ============================================================================
 // Get Brand by ID (Store Front - Public)
 // ============================================================================
-
 /**
  * Get a single brand by ID
  * Only returns if the brand is active

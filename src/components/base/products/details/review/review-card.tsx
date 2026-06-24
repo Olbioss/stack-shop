@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type Props = {
+interface ReviewCardProps {
   userName: string;
   userAvatar: string;
   date: string;
@@ -15,7 +15,7 @@ type Props = {
   hasVotedHelpful?: boolean;
   onVoteHelpful?: () => void;
   isVoting?: boolean;
-};
+}
 
 export default function ReviewCard({
   userName,
@@ -29,7 +29,7 @@ export default function ReviewCard({
   hasVotedHelpful = false,
   onVoteHelpful,
   isVoting = false,
-}: Props) {
+}: ReviewCardProps) {
   return (
     <div className={cn("flex gap-4 border-b py-6 last:border-0", className)}>
       <Avatar className="h-10 w-10">

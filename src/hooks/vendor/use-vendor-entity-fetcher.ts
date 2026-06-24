@@ -1,11 +1,12 @@
 import type { DataTableServer } from "#/components/base/data-table/types";
 import { vendorProductsKeys } from "#/hooks/vendor/use-products";
+import { getShippingMethods } from "#/lib/functions/shipping";
 import { getAttributes } from "#/lib/functions/vendor/attributes";
 import { getBrands } from "#/lib/functions/vendor/brands";
 import { getCoupons } from "#/lib/functions/vendor/coupons";
 import { getVendorOrders } from "#/lib/functions/vendor/order";
 import { getProducts } from "#/lib/functions/vendor/products";
-import { getShippingMethods } from "#/lib/functions/vendor/shipping";
+import { getVendorReviews } from "#/lib/functions/vendor/review";
 import { getTags } from "#/lib/functions/vendor/tag";
 import { getTaxRates } from "#/lib/functions/vendor/tax";
 import { getVendorTransactions } from "#/lib/functions/vendor/transactions";
@@ -18,6 +19,7 @@ import type { BrandItem } from "#/types/brands";
 import type { CouponItem } from "#/types/coupons";
 import type { VendorOrderResponse } from "#/types/orders";
 import type { ProductItem } from "#/types/products";
+import type { DetailedReviewResponse } from "#/types/review";
 import type { ShippingMethodItem } from "#/types/shipping";
 import type { TagItem } from "#/types/tags";
 import type { TaxRateItem } from "#/types/taxes";
@@ -31,6 +33,7 @@ import { vendorCouponsKeys } from "./use-coupons";
 import { vendorTagsKeys } from "./use-tags";
 import { vendorTaxRatesKeys } from "./use-tax-rates";
 import { vendorOrderKeys } from "./use-vendor-orders";
+import { vendorReviewsKeys } from "./use-vendor-reviews";
 import { vendorTransactionKeys } from "./use-vendor-transactions";
 
 export const VENDOR_STATUS_OPTIONS = [
@@ -262,5 +265,32 @@ export function createVendorOrdersFetcher(
       defaultQuery: { sortBy: "createdAt", sortDirection: "desc" },
     }),
     queryKey: vendorOrderKeys.list({ shopSlug }),
+  };
+}
+
+// ============================================================================
+// Reviews Fetcher
+// ============================================================================
+export function createVendorReviewsFetcher(
+  shopSlug: string
+): DataTableServer<DetailedReviewResponse> {
+  return {
+    fetcher: createServerFetcher<DetailedReviewResponse, any>({
+      fetchFn: async (query) => {
+        const response = await getVendorReviews({
+          data: { ...query, shopSlug },
+        });
+        return { data: response.data ?? [], total: response.total ?? 0 };
+      },
+      // Server sorts by createdAt desc via the shared review query helper.
+      sortFieldMap: { createdAt: "createdAt", rating: "rating" },
+      filterFieldMap: {
+        status: "status",
+        rating: "rating",
+        productId: "productId",
+      },
+      defaultQuery: { sortBy: "createdAt", sortDirection: "desc" },
+    }),
+    queryKey: vendorReviewsKeys.list({ shopSlug }),
   };
 }

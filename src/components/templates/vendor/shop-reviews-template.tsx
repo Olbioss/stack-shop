@@ -1,20 +1,26 @@
-import ReviewTable from "#/components/containers/shared/reviews/review-table";
-import ReviewHeader from "#/components/containers/vendor/reviews/review-header";
-import type { Review } from "@/types/review";
+import PageHeader from "@/components/base/common/page-header";
+import type { DataTableServer } from "@/components/base/data-table/types";
+import VendorReviewTable from "@/components/containers/shared/reviews/vendor-review-table";
+import type { DetailedReviewResponse } from "@/types/review";
 
 interface ShopReviewsTemplateProps {
-  reviews: Review[];
-  onAddReview: () => void;
+  server: DataTableServer<DetailedReviewResponse>;
+  shopSlug: string;
 }
 
 export default function ShopReviewsTemplate({
-  reviews,
-  onAddReview,
+  server,
+  shopSlug,
 }: ShopReviewsTemplateProps) {
   return (
     <div className="space-y-6">
-      <ReviewHeader onAddReview={onAddReview} />
-      <ReviewTable reviews={reviews} />
+      <PageHeader
+        title="Reviews"
+        description="Manage customer reviews and ratings for your shop"
+      />
+      <div className="rounded-md">
+        <VendorReviewTable server={server} shopSlug={shopSlug} />
+      </div>
     </div>
   );
 }

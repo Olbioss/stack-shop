@@ -5,6 +5,7 @@ import { Input } from "#/components/ui/input";
 import { SidebarTrigger } from "#/components/ui/sidebar";
 import { cn } from "#/lib/utils";
 import { ModeToggle } from "../provider/mode-toggle";
+import NotificationDropdown from "./notification-dropdown";
 
 type Props = {
   title?: string;
@@ -17,6 +18,7 @@ export default function VendorHeader({
   title,
   showSearch = true,
   className,
+  shopSlug,
 }: Props) {
   return (
     <header
@@ -41,17 +43,17 @@ export default function VendorHeader({
       </div>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="size-5" />
-          <span className="absolute top-1 right-1 flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-destructive opacity-75" />
-            <span className="relative inline-flex size-2 rounded-full bg-destructive" />
-          </span>
-          <span className="sr-only">Notifications</span>
-        </Button>
+        {shopSlug ? (
+          <NotificationDropdown shopSlug={shopSlug} />
+        ) : (
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="size-5" />
+            <span className="sr-only">Notifications</span>
+          </Button>
+        )}
 
         <Button variant="ghost" size="icon" asChild>
-          <Link to="/dashboard">
+          <Link to="/admin/settings">
             <Settings className="size-5" />
             <span className="sr-only">Settings</span>
           </Link>

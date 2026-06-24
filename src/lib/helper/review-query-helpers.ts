@@ -445,9 +445,7 @@ export async function executeDetailedReviewQuery(
 
   const total = countResult[0]?.count ?? 0;
 
-  if (reviews.length === 0) {
-    return { data: [], total, limit, offset };
-  }
+  if (reviews.length === 0) return { data: [], total, limit, offset };
 
   // Batch fetch related data
   const reviewsWithVendorId = reviews.map((r) => ({

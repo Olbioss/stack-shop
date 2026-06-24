@@ -27,7 +27,9 @@ import { Route as storeLayoutWishlistRouteImport } from './routes/(store)/_layou
 import { Route as storeLayoutTrackOrderRouteImport } from './routes/(store)/_layout/track-order'
 import { Route as storeLayoutProfileRouteImport } from './routes/(store)/_layout/profile'
 import { Route as storeLayoutOrdersRouteImport } from './routes/(store)/_layout/orders'
+import { Route as storeLayoutOrderTrackingRouteImport } from './routes/(store)/_layout/order-tracking'
 import { Route as storeLayoutOrderConfirmationRouteImport } from './routes/(store)/_layout/order-confirmation'
+import { Route as storeLayoutMyReviewsRouteImport } from './routes/(store)/_layout/my-reviews'
 import { Route as storeLayoutCheckoutRouteImport } from './routes/(store)/_layout/checkout'
 import { Route as storeLayoutCartRouteImport } from './routes/(store)/_layout/cart'
 import { Route as adminAdminUsersRouteImport } from './routes/(admin)/admin/users'
@@ -56,6 +58,7 @@ import { Route as vendorShopSlugStaffRouteImport } from './routes/(vendor)/shop/
 import { Route as vendorShopSlugShippingRouteImport } from './routes/(vendor)/shop/$slug/shipping'
 import { Route as vendorShopSlugSettingsRouteImport } from './routes/(vendor)/shop/$slug/settings'
 import { Route as vendorShopSlugReviewsRouteImport } from './routes/(vendor)/shop/$slug/reviews'
+import { Route as vendorShopSlugNotificationsRouteImport } from './routes/(vendor)/shop/$slug/notifications'
 import { Route as vendorShopSlugCouponsRouteImport } from './routes/(vendor)/shop/$slug/coupons'
 import { Route as vendorShopSlugCategoriesRouteImport } from './routes/(vendor)/shop/$slug/categories'
 import { Route as vendorShopSlugBrandsRouteImport } from './routes/(vendor)/shop/$slug/brands'
@@ -157,12 +160,23 @@ const storeLayoutOrdersRoute = storeLayoutOrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => storeLayoutRoute,
 } as any)
+const storeLayoutOrderTrackingRoute =
+  storeLayoutOrderTrackingRouteImport.update({
+    id: '/order-tracking',
+    path: '/order-tracking',
+    getParentRoute: () => storeLayoutRoute,
+  } as any)
 const storeLayoutOrderConfirmationRoute =
   storeLayoutOrderConfirmationRouteImport.update({
     id: '/order-confirmation',
     path: '/order-confirmation',
     getParentRoute: () => storeLayoutRoute,
   } as any)
+const storeLayoutMyReviewsRoute = storeLayoutMyReviewsRouteImport.update({
+  id: '/my-reviews',
+  path: '/my-reviews',
+  getParentRoute: () => storeLayoutRoute,
+} as any)
 const storeLayoutCheckoutRoute = storeLayoutCheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
@@ -305,6 +319,12 @@ const vendorShopSlugReviewsRoute = vendorShopSlugReviewsRouteImport.update({
   path: '/reviews',
   getParentRoute: () => vendorShopSlugRoute,
 } as any)
+const vendorShopSlugNotificationsRoute =
+  vendorShopSlugNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => vendorShopSlugRoute,
+  } as any)
 const vendorShopSlugCouponsRoute = vendorShopSlugCouponsRouteImport.update({
   id: '/coupons',
   path: '/coupons',
@@ -394,7 +414,9 @@ export interface FileRoutesByFullPath {
   '/admin/users': typeof adminAdminUsersRoute
   '/cart': typeof storeLayoutCartRoute
   '/checkout': typeof storeLayoutCheckoutRoute
+  '/my-reviews': typeof storeLayoutMyReviewsRoute
   '/order-confirmation': typeof storeLayoutOrderConfirmationRoute
+  '/order-tracking': typeof storeLayoutOrderTrackingRoute
   '/orders': typeof storeLayoutOrdersRoute
   '/profile': typeof storeLayoutProfileRoute
   '/track-order': typeof storeLayoutTrackOrderRoute
@@ -415,6 +437,7 @@ export interface FileRoutesByFullPath {
   '/shop/$slug/brands': typeof vendorShopSlugBrandsRoute
   '/shop/$slug/categories': typeof vendorShopSlugCategoriesRoute
   '/shop/$slug/coupons': typeof vendorShopSlugCouponsRoute
+  '/shop/$slug/notifications': typeof vendorShopSlugNotificationsRoute
   '/shop/$slug/reviews': typeof vendorShopSlugReviewsRoute
   '/shop/$slug/settings': typeof vendorShopSlugSettingsRoute
   '/shop/$slug/shipping': typeof vendorShopSlugShippingRoute
@@ -452,7 +475,9 @@ export interface FileRoutesByTo {
   '/admin/users': typeof adminAdminUsersRoute
   '/cart': typeof storeLayoutCartRoute
   '/checkout': typeof storeLayoutCheckoutRoute
+  '/my-reviews': typeof storeLayoutMyReviewsRoute
   '/order-confirmation': typeof storeLayoutOrderConfirmationRoute
+  '/order-tracking': typeof storeLayoutOrderTrackingRoute
   '/orders': typeof storeLayoutOrdersRoute
   '/profile': typeof storeLayoutProfileRoute
   '/track-order': typeof storeLayoutTrackOrderRoute
@@ -472,6 +497,7 @@ export interface FileRoutesByTo {
   '/shop/$slug/brands': typeof vendorShopSlugBrandsRoute
   '/shop/$slug/categories': typeof vendorShopSlugCategoriesRoute
   '/shop/$slug/coupons': typeof vendorShopSlugCouponsRoute
+  '/shop/$slug/notifications': typeof vendorShopSlugNotificationsRoute
   '/shop/$slug/reviews': typeof vendorShopSlugReviewsRoute
   '/shop/$slug/settings': typeof vendorShopSlugSettingsRoute
   '/shop/$slug/shipping': typeof vendorShopSlugShippingRoute
@@ -513,7 +539,9 @@ export interface FileRoutesById {
   '/(admin)/admin/users': typeof adminAdminUsersRoute
   '/(store)/_layout/cart': typeof storeLayoutCartRoute
   '/(store)/_layout/checkout': typeof storeLayoutCheckoutRoute
+  '/(store)/_layout/my-reviews': typeof storeLayoutMyReviewsRoute
   '/(store)/_layout/order-confirmation': typeof storeLayoutOrderConfirmationRoute
+  '/(store)/_layout/order-tracking': typeof storeLayoutOrderTrackingRoute
   '/(store)/_layout/orders': typeof storeLayoutOrdersRoute
   '/(store)/_layout/profile': typeof storeLayoutProfileRoute
   '/(store)/_layout/track-order': typeof storeLayoutTrackOrderRoute
@@ -534,6 +562,7 @@ export interface FileRoutesById {
   '/(vendor)/shop/$slug/brands': typeof vendorShopSlugBrandsRoute
   '/(vendor)/shop/$slug/categories': typeof vendorShopSlugCategoriesRoute
   '/(vendor)/shop/$slug/coupons': typeof vendorShopSlugCouponsRoute
+  '/(vendor)/shop/$slug/notifications': typeof vendorShopSlugNotificationsRoute
   '/(vendor)/shop/$slug/reviews': typeof vendorShopSlugReviewsRoute
   '/(vendor)/shop/$slug/settings': typeof vendorShopSlugSettingsRoute
   '/(vendor)/shop/$slug/shipping': typeof vendorShopSlugShippingRoute
@@ -574,7 +603,9 @@ export interface FileRouteTypes {
     | '/admin/users'
     | '/cart'
     | '/checkout'
+    | '/my-reviews'
     | '/order-confirmation'
+    | '/order-tracking'
     | '/orders'
     | '/profile'
     | '/track-order'
@@ -595,6 +626,7 @@ export interface FileRouteTypes {
     | '/shop/$slug/brands'
     | '/shop/$slug/categories'
     | '/shop/$slug/coupons'
+    | '/shop/$slug/notifications'
     | '/shop/$slug/reviews'
     | '/shop/$slug/settings'
     | '/shop/$slug/shipping'
@@ -632,7 +664,9 @@ export interface FileRouteTypes {
     | '/admin/users'
     | '/cart'
     | '/checkout'
+    | '/my-reviews'
     | '/order-confirmation'
+    | '/order-tracking'
     | '/orders'
     | '/profile'
     | '/track-order'
@@ -652,6 +686,7 @@ export interface FileRouteTypes {
     | '/shop/$slug/brands'
     | '/shop/$slug/categories'
     | '/shop/$slug/coupons'
+    | '/shop/$slug/notifications'
     | '/shop/$slug/reviews'
     | '/shop/$slug/settings'
     | '/shop/$slug/shipping'
@@ -692,7 +727,9 @@ export interface FileRouteTypes {
     | '/(admin)/admin/users'
     | '/(store)/_layout/cart'
     | '/(store)/_layout/checkout'
+    | '/(store)/_layout/my-reviews'
     | '/(store)/_layout/order-confirmation'
+    | '/(store)/_layout/order-tracking'
     | '/(store)/_layout/orders'
     | '/(store)/_layout/profile'
     | '/(store)/_layout/track-order'
@@ -713,6 +750,7 @@ export interface FileRouteTypes {
     | '/(vendor)/shop/$slug/brands'
     | '/(vendor)/shop/$slug/categories'
     | '/(vendor)/shop/$slug/coupons'
+    | '/(vendor)/shop/$slug/notifications'
     | '/(vendor)/shop/$slug/reviews'
     | '/(vendor)/shop/$slug/settings'
     | '/(vendor)/shop/$slug/shipping'
@@ -872,11 +910,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof storeLayoutOrdersRouteImport
       parentRoute: typeof storeLayoutRoute
     }
+    '/(store)/_layout/order-tracking': {
+      id: '/(store)/_layout/order-tracking'
+      path: '/order-tracking'
+      fullPath: '/order-tracking'
+      preLoaderRoute: typeof storeLayoutOrderTrackingRouteImport
+      parentRoute: typeof storeLayoutRoute
+    }
     '/(store)/_layout/order-confirmation': {
       id: '/(store)/_layout/order-confirmation'
       path: '/order-confirmation'
       fullPath: '/order-confirmation'
       preLoaderRoute: typeof storeLayoutOrderConfirmationRouteImport
+      parentRoute: typeof storeLayoutRoute
+    }
+    '/(store)/_layout/my-reviews': {
+      id: '/(store)/_layout/my-reviews'
+      path: '/my-reviews'
+      fullPath: '/my-reviews'
+      preLoaderRoute: typeof storeLayoutMyReviewsRouteImport
       parentRoute: typeof storeLayoutRoute
     }
     '/(store)/_layout/checkout': {
@@ -1075,6 +1127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof vendorShopSlugReviewsRouteImport
       parentRoute: typeof vendorShopSlugRoute
     }
+    '/(vendor)/shop/$slug/notifications': {
+      id: '/(vendor)/shop/$slug/notifications'
+      path: '/notifications'
+      fullPath: '/shop/$slug/notifications'
+      preLoaderRoute: typeof vendorShopSlugNotificationsRouteImport
+      parentRoute: typeof vendorShopSlugRoute
+    }
     '/(vendor)/shop/$slug/coupons': {
       id: '/(vendor)/shop/$slug/coupons'
       path: '/coupons'
@@ -1211,7 +1270,9 @@ const adminAdminRouteWithChildren = adminAdminRoute._addFileChildren(
 interface storeLayoutRouteChildren {
   storeLayoutCartRoute: typeof storeLayoutCartRoute
   storeLayoutCheckoutRoute: typeof storeLayoutCheckoutRoute
+  storeLayoutMyReviewsRoute: typeof storeLayoutMyReviewsRoute
   storeLayoutOrderConfirmationRoute: typeof storeLayoutOrderConfirmationRoute
+  storeLayoutOrderTrackingRoute: typeof storeLayoutOrderTrackingRoute
   storeLayoutOrdersRoute: typeof storeLayoutOrdersRoute
   storeLayoutProfileRoute: typeof storeLayoutProfileRoute
   storeLayoutTrackOrderRoute: typeof storeLayoutTrackOrderRoute
@@ -1228,7 +1289,9 @@ interface storeLayoutRouteChildren {
 const storeLayoutRouteChildren: storeLayoutRouteChildren = {
   storeLayoutCartRoute: storeLayoutCartRoute,
   storeLayoutCheckoutRoute: storeLayoutCheckoutRoute,
+  storeLayoutMyReviewsRoute: storeLayoutMyReviewsRoute,
   storeLayoutOrderConfirmationRoute: storeLayoutOrderConfirmationRoute,
+  storeLayoutOrderTrackingRoute: storeLayoutOrderTrackingRoute,
   storeLayoutOrdersRoute: storeLayoutOrdersRoute,
   storeLayoutProfileRoute: storeLayoutProfileRoute,
   storeLayoutTrackOrderRoute: storeLayoutTrackOrderRoute,
@@ -1265,6 +1328,7 @@ interface vendorShopSlugRouteChildren {
   vendorShopSlugBrandsRoute: typeof vendorShopSlugBrandsRoute
   vendorShopSlugCategoriesRoute: typeof vendorShopSlugCategoriesRoute
   vendorShopSlugCouponsRoute: typeof vendorShopSlugCouponsRoute
+  vendorShopSlugNotificationsRoute: typeof vendorShopSlugNotificationsRoute
   vendorShopSlugReviewsRoute: typeof vendorShopSlugReviewsRoute
   vendorShopSlugSettingsRoute: typeof vendorShopSlugSettingsRoute
   vendorShopSlugShippingRoute: typeof vendorShopSlugShippingRoute
@@ -1283,6 +1347,7 @@ const vendorShopSlugRouteChildren: vendorShopSlugRouteChildren = {
   vendorShopSlugBrandsRoute: vendorShopSlugBrandsRoute,
   vendorShopSlugCategoriesRoute: vendorShopSlugCategoriesRoute,
   vendorShopSlugCouponsRoute: vendorShopSlugCouponsRoute,
+  vendorShopSlugNotificationsRoute: vendorShopSlugNotificationsRoute,
   vendorShopSlugReviewsRoute: vendorShopSlugReviewsRoute,
   vendorShopSlugSettingsRoute: vendorShopSlugSettingsRoute,
   vendorShopSlugShippingRoute: vendorShopSlugShippingRoute,

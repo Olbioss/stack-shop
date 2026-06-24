@@ -27,6 +27,7 @@ export default function ShopDashboardLayout({
         <VendorHeader
           title={headerTitle || `${shopName} Dashboard`}
           showSearch={showSearch}
+          shopSlug={shopSlug}
         />
         <main
           className={cn(
