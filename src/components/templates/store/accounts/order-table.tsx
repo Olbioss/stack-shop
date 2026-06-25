@@ -1,50 +1,29 @@
 import type { ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import { PackageOpen } from "lucide-react";
 import React from "react";
 import { DataTableCore } from "@/components/base/data-table/data-table-core";
 import { DataTablePagination } from "@/components/base/data-table/data-table-pagination";
 import { DataTableToolbar } from "@/components/base/data-table/data-table-toolbar";
 import { columns, type Order } from "@/components/base/store/order/columns";
-
-// Mock data
-const data: Order[] = [
-  {
-    id: "ORD-001",
-    date: "2023-10-25",
-    status: "Delivered",
-    total: 120.5,
-    items: 3,
-  },
-  {
-    id: "ORD-002",
-    date: "2023-11-02",
-    status: "Processing",
-    total: 45.0,
-    items: 1,
-  },
-  {
-    id: "ORD-003",
-    date: "2023-11-10",
-    status: "Cancelled",
-    total: 89.99,
-    items: 2,
-  },
-  {
-    id: "ORD-004",
-    date: "2023-11-15",
-    status: "Delivered",
-    total: 250.0,
-    items: 5,
-  },
-  {
-    id: "ORD-005",
-    date: "2023-11-20",
-    status: "Processing",
-    total: 35.5,
-    items: 1,
-  },
-];
+import { useCustomerOrders } from "@/hooks/store/use-orders";
+import type { OrderStatus } from "@/types/orders";
 
 export default function OrdersTable() {
+  const { data, isLoading, error } = useCustomerOrders();
+
+  const orders: Order[] = React.useMemo(
+    () =>
+      (data?.orders ?? []).map((order) => ({
+        id: order.id,
+        orderNumber: order.orderNumber,
+        createdAt: order.createdAt,
+        status: order.status as OrderStatus,
+        itemCount: order.items.length,
+        total: order.totalAmount,
+      })),
+    [data]
+  );
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -58,10 +37,39 @@ export default function OrdersTable() {
     pageSize: 10,
   });
 
-  // We can't pass the table instance directly to DataTableCore in the current implementation
-  // So we'll use the core component which handles the table instance internally
-  // But wait, the DataTableCore provided in the codebase handles its own useReactTable.
-  // We should pass the props it needs.
+  if (isLoading) {
+    return (
+      <div className="space-y-3 py-2">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="h-12 animate-pulse rounded bg-muted" />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <PackageOpen className="mb-4 size-12 text-muted-foreground" />
+        <h3 className="mb-2 font-semibold text-lg">Unable to load orders</h3>
+        <p className="text-muted-foreground text-sm">
+          There was an error loading your orders. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <PackageOpen className="mb-4 size-12 text-muted-foreground" />
+        <h3 className="mb-2 font-semibold text-lg">No orders yet</h3>
+        <p className="text-muted-foreground text-sm">
+          You haven't placed any orders yet.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -87,10 +95,10 @@ export default function OrdersTable() {
       />
       <DataTableCore
         columns={columns}
-        data={data}
+        data={orders}
         pageIndex={pagination.pageIndex}
         pageSize={pagination.pageSize}
-        pageCount={Math.ceil(data.length / pagination.pageSize)}
+        pageCount={Math.ceil(orders.length / pagination.pageSize)}
         onPaginationChange={setPagination}
         sorting={sorting}
         onSortingChange={setSorting}
@@ -104,8 +112,8 @@ export default function OrdersTable() {
       <DataTablePagination
         pageIndex={pagination.pageIndex}
         pageSize={pagination.pageSize}
-        pageCount={Math.ceil(data.length / pagination.pageSize)}
-        total={data.length}
+        pageCount={Math.ceil(orders.length / pagination.pageSize)}
+        total={orders.length}
         onPageChange={setPagination}
       />
     </div>

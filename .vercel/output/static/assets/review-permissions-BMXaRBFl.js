@@ -1,0 +1,1 @@
+var e={canDelete:!0,canEdit:!0,canView:!0,canUpdateStatus:!0},t={canDelete:!1,canEdit:!0,canView:!0,canUpdateStatus:!0};export{t as n,e as t};

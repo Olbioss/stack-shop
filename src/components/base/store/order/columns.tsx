@@ -10,44 +10,70 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { OrderStatus } from "@/types/orders";
 
 export type Order = {
   id: string;
-  date: string;
-  status: "Delivered" | "Processing" | "Cancelled";
+  orderNumber: string;
+  createdAt: string;
+  status: OrderStatus;
+  itemCount: number;
   total: number;
-  items: number;
+};
+
+const statusVariant: Record<
+  OrderStatus,
+  "default" | "secondary" | "destructive"
+> = {
+  pending: "default",
+  confirmed: "default",
+  processing: "default",
+  shipped: "default",
+  delivered: "secondary",
+  cancelled: "destructive",
+  refunded: "destructive",
 };
 
 export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "orderNumber",
     header: "Order ID",
-    cell: ({ row }) => <div className="font-medium">{row.getValue("id")}</div>,
+    cell: ({ row }) => (
+      <div className="font-medium">{row.getValue("orderNumber")}</div>
+    ),
   },
   {
-    accessorKey: "date",
+    accessorKey: "createdAt",
     header: "Date",
+    cell: ({ row }) => {
+      const value = row.getValue("createdAt") as string;
+      return (
+        <div>
+          {new Date(value).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("status") as string;
+      const status = row.getValue("status") as OrderStatus;
       return (
-        <Badge
-          variant={
-            status === "Delivered"
-              ? "secondary"
-              : status === "Processing"
-                ? "default"
-                : "destructive"
-          }
-        >
+        <Badge variant={statusVariant[status] ?? "default"} className="capitalize">
           {status}
         </Badge>
       );
     },
+  },
+  {
+    accessorKey: "itemCount",
+    header: "Items",
+    cell: ({ row }) => <div>{row.getValue("itemCount")}</div>,
   },
   {
     accessorKey: "total",
@@ -77,13 +103,12 @@ export const columns: ColumnDef<Order>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(order.id)}
+              onClick={() => navigator.clipboard.writeText(order.orderNumber)}
             >
               Copy order ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View details</DropdownMenuItem>
-            <DropdownMenuItem>View invoice</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

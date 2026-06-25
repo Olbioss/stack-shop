@@ -1,0 +1,1 @@
+var e=(t,n)=>{let r={type:`request`,...n||t};return{options:r,middleware:t=>e({},Object.assign(r,{middleware:t})),inputValidator:t=>e({},Object.assign(r,{inputValidator:t})),client:t=>e({},Object.assign(r,{client:t})),server:t=>e({},Object.assign(r,{server:t}))}};export{e as t};
