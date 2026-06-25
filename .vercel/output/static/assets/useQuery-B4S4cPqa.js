@@ -1,1 +1,0 @@
-import{an as e,en as t}from"./index-Dv7hyXwV.js";function n(n,r){return t(n,e,r)}export{n as t};

@@ -1,1 +1,0 @@
-function e(e){return({value:t})=>{let n=e.safeParse(t);return n.success?void 0:n.error.issues[0].message}}function t(e){return({value:t})=>{if(t==null||typeof t==`string`&&t.trim()===``||t===``)return;let n=e.safeParse(t);return n.success?void 0:n.error.issues[0]?.message}}export{t as n,e as t};

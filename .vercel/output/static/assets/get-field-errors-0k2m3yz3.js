@@ -1,1 +1,0 @@
-function e(e){return Array.isArray(e)?e.filter(e=>typeof e==`string`):[]}export{e as t};
