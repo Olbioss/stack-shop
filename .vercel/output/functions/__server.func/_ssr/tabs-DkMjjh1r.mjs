@@ -1,8 +1,8 @@
 import "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as cn } from "./utils-Pgq5HWQm.mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { i as Trigger, n as List, r as Root2, t as Content } from "../_libs/radix-ui__react-tabs.mjs";
 require_react();
 var import_jsx_runtime = require_jsx_runtime();

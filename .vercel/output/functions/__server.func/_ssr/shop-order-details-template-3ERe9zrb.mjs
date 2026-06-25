@@ -1,19 +1,19 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as Button } from "./button-DQSToWRX.mjs";
-import { t as Separator$1 } from "./separator-CLOPUVDG.mjs";
-import { B as Package, Jt as ArrowLeft, St as CreditCard, Z as LoaderCircle, bt as Download, i as User } from "../_libs/lucide-react.mjs";
 import { p as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { t as Label$1 } from "./label-CqfikwJF.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
+import { B as Package, Jt as ArrowLeft, St as CreditCard, Z as LoaderCircle, bt as Download, i as User } from "../_libs/lucide-react.mjs";
+import { t as Separator$1 } from "./separator-CLOPUVDG.mjs";
+import { t as Label$1 } from "./label-CqfikwJF.mjs";
 import { t as Textarea } from "./textarea-vo1OZjof.mjs";
-import { a as useUpdateAdminOrderStatus } from "./use-admin-orders-ebDgXDm5.mjs";
+import { n as useUpdateVendorOrderStatus } from "./use-vendor-orders-Q75zrqay.mjs";
 import { a as CardHeader, n as CardContent, o as CardTitle, r as CardDescription, t as Card } from "./card-BDvQuHpQ.mjs";
 import { a as SelectValue, i as SelectTrigger, n as SelectContent, r as SelectItem, t as Select$1 } from "./select-DjArhxEw.mjs";
 import { t as Badge } from "./badge-NA1wPZ4a.mjs";
+import { a as useUpdateAdminOrderStatus } from "./use-admin-orders-ebDgXDm5.mjs";
 import { t as useDownloadInvoice } from "./use-invoice-BBcD1lL8.mjs";
-import { n as useUpdateVendorOrderStatus } from "./use-vendor-orders-Q75zrqay.mjs";
 import { t as OrderStatusTimeline } from "./order-status-timeline-obxIndBm.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/shop-order-details-template-3ERe9zrb.js
 var import_react = /* @__PURE__ */ __toESM(require_react());

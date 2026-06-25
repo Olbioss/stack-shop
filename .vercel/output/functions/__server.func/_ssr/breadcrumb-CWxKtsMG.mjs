@@ -1,7 +1,7 @@
 import "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as cn } from "./utils-Pgq5HWQm.mjs";
 import { w as require_jsx_runtime, y as Slot } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { jt as ChevronRight } from "../_libs/lucide-react.mjs";
 require_react();
 var import_jsx_runtime = require_jsx_runtime();

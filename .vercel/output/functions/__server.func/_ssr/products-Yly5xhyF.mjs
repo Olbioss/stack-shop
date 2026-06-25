@@ -1,6 +1,6 @@
 import { r as createServerFn } from "./ssr.mjs";
-import { t as createSsrRpc } from "./createSsrRpc-CXFXGZZ3.mjs";
 import { a as getProductByIdSchema, i as getFeaturedProductsSchema, l as storeProductsQuerySchema, o as getProductBySlugSchema, s as getRelatedProductsSchema } from "./product-query-DTSuSPZY.mjs";
+import { t as createSsrRpc } from "./createSsrRpc-CXFXGZZ3.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/products-Yly5xhyF.js
 /**
 * Transform NormalizedProduct to StoreProduct by removing sensitive fields

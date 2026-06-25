@@ -1,7 +1,7 @@
 import "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as cn } from "./utils-Pgq5HWQm.mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { n as CheckboxIndicator, t as Checkbox } from "../_libs/@radix-ui/react-checkbox+[...].mjs";
 import { Pt as Check } from "../_libs/lucide-react.mjs";
 require_react();

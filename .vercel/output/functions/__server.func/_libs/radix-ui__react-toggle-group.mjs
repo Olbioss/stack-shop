@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { _ as Primitive, f as useControllableState, g as createContextScope, o as useDirection, w as require_jsx_runtime } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { _ as createRovingFocusGroupScope, g as Root, h as Item } from "./@radix-ui/react-dropdown-menu+[...].mjs";
 import { t as Toggle } from "./radix-ui__react-toggle.mjs";
 //#region node_modules/@radix-ui/react-toggle-group/dist/index.mjs

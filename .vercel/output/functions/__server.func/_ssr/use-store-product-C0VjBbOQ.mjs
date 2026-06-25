@@ -1,5 +1,5 @@
-import { i as queryOptions, r as infiniteQueryOptions } from "../_libs/tanstack__react-query.mjs";
 import { a as getStoreProducts, i as getStoreProductBySlug, n as getRelatedProducts, r as getStoreProductById, t as getFeaturedProducts } from "./products-Yly5xhyF.mjs";
+import { i as queryOptions, r as infiniteQueryOptions } from "../_libs/tanstack__react-query.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/use-store-product-C0VjBbOQ.js
 var PRODUCTS_PAGE_SIZE = {
 	initial: 12,

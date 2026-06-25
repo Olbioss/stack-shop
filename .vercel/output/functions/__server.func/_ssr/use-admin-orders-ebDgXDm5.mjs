@@ -1,8 +1,8 @@
 import { r as createServerFn } from "./ssr.mjs";
 import { t as createSsrRpc } from "./createSsrRpc-CXFXGZZ3.mjs";
 import { c as useQueryClient, n as useMutation, o as useQuery } from "../_libs/tanstack__react-query.mjs";
-import { t as adminMiddleware } from "./admin-CYCFP3zk.mjs";
 import { i as getOrderByIdSchema, o as getOrdersSchema, s as updateOrderStatusSchema, t as cancelOrderSchema } from "./order-Bl2io5m_.mjs";
+import { t as adminMiddleware } from "./admin-CYCFP3zk.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/use-admin-orders-ebDgXDm5.js
 var getAdminOrders = createServerFn({ method: "GET" }).middleware([adminMiddleware]).inputValidator(getOrdersSchema).handler(createSsrRpc("da8a6d05d4bb1eab7702a1bc0cac31da8b6c9f576df4c063a6b5ee63377b90c4"));
 var getAdminOrderDetails = createServerFn({ method: "GET" }).middleware([adminMiddleware]).inputValidator(getOrderByIdSchema).handler(createSsrRpc("8ea723f0277401280f14644a46a98c8c9b4da6162eca582e36533da66819047b"));

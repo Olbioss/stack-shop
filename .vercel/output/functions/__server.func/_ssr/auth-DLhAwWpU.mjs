@@ -1,4 +1,4 @@
-import { Dt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
+import { Gt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/auth-DLhAwWpU.js
 var passwordSchema = zod_default.string().min(8, "Password must be at least 8 characters").max(128, "Password must be at most 128 characters").refine((val) => /[A-Z]/.test(val), { message: "Must contain at least one uppercase letter" }).refine((val) => /[a-z]/.test(val), { message: "Must contain at least one lowercase letter" }).refine((val) => /\d/.test(val), { message: "Must contain at least one number" }).refine((val) => /[^A-Za-z0-9]/.test(val), { message: "Must contain at least one special character" });
 var loginSchema = zod_default.object({

@@ -1,4 +1,4 @@
-import { It as custom } from "./@better-auth/core+[...].mjs";
+import { en as custom } from "./@better-auth/core+[...].mjs";
 //#region node_modules/@tanstack/router-zod-adapter/dist/esm/index.js
 var zodSearchValidator = (options) => {
 	const input = "input" in options ? options.input : "input";

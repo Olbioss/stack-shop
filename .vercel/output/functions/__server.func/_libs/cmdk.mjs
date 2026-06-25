@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { S as composeRefs, _ as Primitive, u as useId } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { f as Overlay, m as Root, p as Portal, u as Content } from "./@radix-ui/react-alert-dialog+[...].mjs";
 //#region node_modules/cmdk/dist/chunk-NZJY6EH4.mjs
 var U = 1, Y$1 = .9, H = .8, J = .17, p = .1, u = .999, $ = .9999;

@@ -1,6 +1,6 @@
 import { o as __toESM, r as __exportAll, t as __commonJSMin } from "../../_runtime.mjs";
-import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { Writable } from "node:stream";
 //#region node_modules/prettier/plugins/html.mjs
 var html_exports = /* @__PURE__ */ __exportAll({

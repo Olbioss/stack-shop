@@ -1,6 +1,6 @@
 import { o as __toESM, t as __commonJSMin } from "../../_runtime.mjs";
-import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { _ as Primitive, g as createContextScope, p as useLayoutEffect2, w as require_jsx_runtime } from "./react-accordion+[...].mjs";
+import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { C as useCallbackRef } from "./react-alert-dialog+[...].mjs";
 //#region node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.production.js
 /**

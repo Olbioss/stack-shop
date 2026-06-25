@@ -1,6 +1,6 @@
 import { o as __toESM } from "../../_runtime.mjs";
-import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import "./react-router+[...].mjs";
 import { o as dehydrate } from "../tanstack__query-core.mjs";
 import { s as QueryClientProvider } from "../tanstack__react-query.mjs";

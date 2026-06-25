@@ -1,6 +1,6 @@
 import { o as __toESM } from "../../_runtime.mjs";
-import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { C as useComposedRefs, _ as Primitive, d as Presence, f as useControllableState, g as createContextScope, p as useLayoutEffect2, w as require_jsx_runtime } from "./react-accordion+[...].mjs";
+import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { t as composeEventHandlers } from "../radix-ui__primitive.mjs";
 //#region node_modules/@radix-ui/react-use-previous/dist/index.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);

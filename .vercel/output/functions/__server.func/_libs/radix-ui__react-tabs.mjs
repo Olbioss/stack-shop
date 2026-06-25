@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { _ as Primitive, d as Presence, f as useControllableState, g as createContextScope, o as useDirection, u as useId, w as require_jsx_runtime } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { t as composeEventHandlers } from "./radix-ui__primitive.mjs";
 import { _ as createRovingFocusGroupScope, g as Root, h as Item } from "./@radix-ui/react-dropdown-menu+[...].mjs";
 //#region node_modules/@radix-ui/react-tabs/dist/index.mjs

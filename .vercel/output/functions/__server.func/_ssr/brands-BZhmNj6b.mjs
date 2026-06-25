@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { t as ConfirmDeleteDialog } from "./confirm-delete-dialog-BCCUdt4j.mjs";
 import { t as DataTable } from "./page-header-DLbA-yB-.mjs";
 import { f as useAdminBrands, n as createAdminBrandsFetcher } from "./use-admin-entity-fetchers-DkFElJdN.mjs";

@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { C as useComposedRefs, _ as Primitive, d as Presence, g as createContextScope, o as useDirection, p as useLayoutEffect2, w as require_jsx_runtime } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { t as composeEventHandlers } from "./radix-ui__primitive.mjs";
 import { C as useCallbackRef } from "./@radix-ui/react-alert-dialog+[...].mjs";
 import { t as clamp } from "./radix-ui__number.mjs";

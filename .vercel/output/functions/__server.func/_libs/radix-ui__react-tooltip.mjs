@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { C as useComposedRefs, _ as Primitive, d as Presence, f as useControllableState, g as createContextScope, u as useId, w as require_jsx_runtime, x as createSlottable } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { p as Root } from "./@radix-ui/react-select+[...].mjs";
 import { t as composeEventHandlers } from "./radix-ui__primitive.mjs";
 import { S as DismissableLayer, b as Portal$1 } from "./@radix-ui/react-alert-dialog+[...].mjs";

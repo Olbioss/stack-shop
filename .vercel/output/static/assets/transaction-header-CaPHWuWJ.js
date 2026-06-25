@@ -1,0 +1,1 @@
+import{o as e}from"./utils-ittJnOEj.js";import{t}from"./page-header-KvkNSSEH.js";var n=e();function r({role:e=`vendor`,children:r,className:i}){return(0,n.jsx)(t,{title:`Transactions`,description:e===`admin`?`View and manage platform-wide transactions`:`View and manage your shop transactions`,className:i,children:r})}export{r as t};

@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { C as useComposedRefs, _ as Primitive, f as useControllableState, g as createContextScope, m as createCollection, o as useDirection, w as require_jsx_runtime } from "./@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
 import { t as composeEventHandlers } from "./radix-ui__primitive.mjs";
 import { i as usePrevious, r as useSize } from "./@radix-ui/react-checkbox+[...].mjs";
 import { t as clamp } from "./radix-ui__number.mjs";

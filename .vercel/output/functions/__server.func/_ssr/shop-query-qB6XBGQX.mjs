@@ -1,4 +1,4 @@
-import { Dt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
+import { Gt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/shop-query-qB6XBGQX.js
 var adminShopsQuerySchema = zod_default.object({
 	limit: zod_default.coerce.number().min(1).max(100).optional().default(10),

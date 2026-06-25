@@ -1,4 +1,4 @@
-import { Dt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
+import { Gt as zod_default } from "../_libs/@better-auth/core+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/notifications-GtjpqX23.js
 var getNotificationsSchema = zod_default.object({
 	shopSlug: zod_default.string(),

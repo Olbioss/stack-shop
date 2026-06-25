@@ -1,6 +1,6 @@
 import { o as __toESM, t as __commonJSMin } from "../../_runtime.mjs";
-import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../@floating-ui/react-dom+[...].mjs";
 import { i as require_shim } from "../@radix-ui/react-avatar+[...].mjs";
 import { a as uuid, i as functionalUpdate, n as FieldApi, r as FormApi, t as mergeAndUpdate } from "./form-core+[...].mjs";
 //#region node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.production.js

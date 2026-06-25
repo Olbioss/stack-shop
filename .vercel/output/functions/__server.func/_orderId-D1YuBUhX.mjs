@@ -1,8 +1,8 @@
 import { w as require_jsx_runtime } from "./_libs/@radix-ui/react-accordion+[...].mjs";
 import { Z as LoaderCircle } from "./_libs/lucide-react.mjs";
-import { t as Route } from "./_orderId-CqFxar2X.mjs";
 import { r as useAdminOrderDetails } from "./_ssr/use-admin-orders-ebDgXDm5.mjs";
 import { t as ShopOrderDetailsTemplate } from "./_ssr/shop-order-details-template-3ERe9zrb.mjs";
+import { t as Route } from "./_orderId-CqFxar2X.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/_orderId-D1YuBUhX.js
 var import_jsx_runtime = require_jsx_runtime();
 function RouteComponent() {

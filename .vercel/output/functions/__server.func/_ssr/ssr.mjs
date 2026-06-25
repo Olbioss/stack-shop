@@ -1,10 +1,10 @@
 import { r as __exportAll } from "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
+import { n as requestHandler, t as getResponse } from "./server-sdejvwzy.mjs";
 import { A as invariant, C as isResolvedRedirect, D as isNotFound, E as rootRouteId, S as isRedirect, b as resolveManifestAssetLink, o as RouterProvider, t as renderRouterToStream, w as parseRedirect, x as executeRewriteInput } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as createMemoryHistory } from "../_libs/tanstack__history.mjs";
 import { a as getOrigin, c as createSerializationAdapter, d as au, f as ou, i as getNormalizedURL, l as makeSerovalPlugin, n as mergeHeaders, o as defaultSerovalPlugins, r as attachRouterServerSsrUtils, s as createRawStreamRPCPlugin, t as defineHandlerCallback, u as Iu } from "../_libs/@tanstack/router-core+[...].mjs";
-import { n as requestHandler, t as getResponse } from "./server-sdejvwzy.mjs";
 import { AsyncLocalStorage } from "node:async_hooks";
 //#region node_modules/.nitro/vite/services/ssr/index.js
 var ssr_exports = /* @__PURE__ */ __exportAll({
@@ -40,7 +40,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-8jLbcal2.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-D_1klpJ0.mjs");
 	const startManifest = tsrStartManifest();
 	const rootRoute = startManifest.routes[rootRouteId] = startManifest.routes["__root__"] || {};
 	rootRoute.assets = rootRoute.assets || [];
@@ -84,22 +84,6 @@ var manifest = {
 	"075fc46c25bf5a6f06f653cc69e04797a973ad8068c7105c04d62acba1c758f3": {
 		functionName: "getRelatedProducts_createServerFn_handler",
 		importer: () => import("./products-5ojfZLLw.mjs")
-	},
-	"c985c0257038d3af45d238f094c72530ff46348e05a8e839a96f08372a98fa0d": {
-		functionName: "getStoreBrands_createServerFn_handler",
-		importer: () => import("./brands-qAaN_Aq8.mjs")
-	},
-	"cc2c2f4bdcb5655d563a05bd48beb517d988a4abec57d3df351baf5976f22b69": {
-		functionName: "getStoreBrandBySlug_createServerFn_handler",
-		importer: () => import("./brands-qAaN_Aq8.mjs")
-	},
-	"8e28051b09bd6de4147b4d803d99d4942da10f33349108e88311b7ace8777e5e": {
-		functionName: "getStoreBrandById_createServerFn_handler",
-		importer: () => import("./brands-qAaN_Aq8.mjs")
-	},
-	"a4a4240aa356429c0a3ffe747814824c0385bece1760fcacc844a6614637d8cb": {
-		functionName: "getPopularBrands_createServerFn_handler",
-		importer: () => import("./brands-qAaN_Aq8.mjs")
 	},
 	"b04ce292aa7f9be0e63e14495def752bb27b1700d040ff7206f583fd839d4348": {
 		functionName: "getStoreShops_createServerFn_handler",
@@ -153,6 +137,38 @@ var manifest = {
 		functionName: "deleteShop_createServerFn_handler",
 		importer: () => import("./shops-DKUQksEf.mjs")
 	},
+	"c985c0257038d3af45d238f094c72530ff46348e05a8e839a96f08372a98fa0d": {
+		functionName: "getStoreBrands_createServerFn_handler",
+		importer: () => import("./brands-qAaN_Aq8.mjs")
+	},
+	"cc2c2f4bdcb5655d563a05bd48beb517d988a4abec57d3df351baf5976f22b69": {
+		functionName: "getStoreBrandBySlug_createServerFn_handler",
+		importer: () => import("./brands-qAaN_Aq8.mjs")
+	},
+	"8e28051b09bd6de4147b4d803d99d4942da10f33349108e88311b7ace8777e5e": {
+		functionName: "getStoreBrandById_createServerFn_handler",
+		importer: () => import("./brands-qAaN_Aq8.mjs")
+	},
+	"a4a4240aa356429c0a3ffe747814824c0385bece1760fcacc844a6614637d8cb": {
+		functionName: "getPopularBrands_createServerFn_handler",
+		importer: () => import("./brands-qAaN_Aq8.mjs")
+	},
+	"569f5726728bc21c844611c73e4b004d0743a5bfff6f50ceae4644608a20939e": {
+		functionName: "getAdminCoupons_createServerFn_handler",
+		importer: () => import("./coupon-Ctj4T4dn.mjs")
+	},
+	"74d66f188050ba1abf820ca788531adb49f36cfea27a8eaac9f26f075b041e43": {
+		functionName: "getAdminCouponById_createServerFn_handler",
+		importer: () => import("./coupon-Ctj4T4dn.mjs")
+	},
+	"dbdc9b28a99030c7c739e5c8115679e15f4cb423cb249c00a84bbc5c03b64f99": {
+		functionName: "toggleAdminCouponActive_createServerFn_handler",
+		importer: () => import("./coupon-Ctj4T4dn.mjs")
+	},
+	"5910becd58485153b5fa191aa2a237dbc4eeeac8f0781da04dbd6aea2f0b45c8": {
+		functionName: "deleteAdminCoupon_createServerFn_handler",
+		importer: () => import("./coupon-Ctj4T4dn.mjs")
+	},
 	"67b074e17b14bdcde92e8dd706a5430fda53dc12cc945883bfc91aa29b0c17d7": {
 		functionName: "createCheckoutSession_createServerFn_handler",
 		importer: () => import("./order-By96E4UD.mjs")
@@ -180,190 +196,6 @@ var manifest = {
 	"243003ddda7bbebf54d255c4ce101c00f44ea33daf7ab89b585dff534c8bcc5a": {
 		functionName: "getOrderPaymentSession_createServerFn_handler",
 		importer: () => import("./order-By96E4UD.mjs")
-	},
-	"569f5726728bc21c844611c73e4b004d0743a5bfff6f50ceae4644608a20939e": {
-		functionName: "getAdminCoupons_createServerFn_handler",
-		importer: () => import("./coupon-Ctj4T4dn.mjs")
-	},
-	"74d66f188050ba1abf820ca788531adb49f36cfea27a8eaac9f26f075b041e43": {
-		functionName: "getAdminCouponById_createServerFn_handler",
-		importer: () => import("./coupon-Ctj4T4dn.mjs")
-	},
-	"dbdc9b28a99030c7c739e5c8115679e15f4cb423cb249c00a84bbc5c03b64f99": {
-		functionName: "toggleAdminCouponActive_createServerFn_handler",
-		importer: () => import("./coupon-Ctj4T4dn.mjs")
-	},
-	"5910becd58485153b5fa191aa2a237dbc4eeeac8f0781da04dbd6aea2f0b45c8": {
-		functionName: "deleteAdminCoupon_createServerFn_handler",
-		importer: () => import("./coupon-Ctj4T4dn.mjs")
-	},
-	"da8a6d05d4bb1eab7702a1bc0cac31da8b6c9f576df4c063a6b5ee63377b90c4": {
-		functionName: "getAdminOrders_createServerFn_handler",
-		importer: () => import("./order-B3XETuuk.mjs")
-	},
-	"8ea723f0277401280f14644a46a98c8c9b4da6162eca582e36533da66819047b": {
-		functionName: "getAdminOrderDetails_createServerFn_handler",
-		importer: () => import("./order-B3XETuuk.mjs")
-	},
-	"a1801a9022f9ecc873b9a5638cbd37d12341d581a211b780db92d7703dcf8fe3": {
-		functionName: "updateAdminOrderStatus_createServerFn_handler",
-		importer: () => import("./order-B3XETuuk.mjs")
-	},
-	"28fbbd217356e3abaf9763a0d72f028eeb248d022aa588429632b278060206d0": {
-		functionName: "adminCancelOrder_createServerFn_handler",
-		importer: () => import("./order-B3XETuuk.mjs")
-	},
-	"2854ce7585d82e96d203d25e4a1b5d00a8d4f7b3009e2e8ad9ed70e97928526f": {
-		functionName: "getAdminOrderStats_createServerFn_handler",
-		importer: () => import("./order-B3XETuuk.mjs")
-	},
-	"4a996a56854488ac0707d39ffca766fef984da97f3973cb6ab3ae1da2106ecb6": {
-		functionName: "getAdminCategories_createServerFn_handler",
-		importer: () => import("./category-jwNQShYO.mjs")
-	},
-	"4482b03b70fbed4c8287fb29e75b93068a87c0ea450fc2d1bc3d8d4a760c2bec": {
-		functionName: "getAdminCategoryById_createServerFn_handler",
-		importer: () => import("./category-jwNQShYO.mjs")
-	},
-	"5343743de31ef139c2de66fe140049480d4466a0f173c4a57bc4f513483fa851": {
-		functionName: "toggleAdminCategoryActive_createServerFn_handler",
-		importer: () => import("./category-jwNQShYO.mjs")
-	},
-	"621e2ccced018a42e08209dee427b1ec8fded6fb5228eb63de05265ed8cf3699": {
-		functionName: "toggleAdminCategoryFeatured_createServerFn_handler",
-		importer: () => import("./category-jwNQShYO.mjs")
-	},
-	"f28d4e33f8ffbbdab91f906075db41272bfcbfcec6c064b870082fcb12a7db8a": {
-		functionName: "deleteAdminCategory_createServerFn_handler",
-		importer: () => import("./category-jwNQShYO.mjs")
-	},
-	"7e36a167532c758f1599c786fb3c1d77b7471c6b1720454ec1acc672eeac6821": {
-		functionName: "getAdminBrands_createServerFn_handler",
-		importer: () => import("./brand-sjdZpidi.mjs")
-	},
-	"0f65d61ef60c80e6adbbd26ad61a5f636d98e179b409f4bd704aad1c6a7eb6ac": {
-		functionName: "getAdminBrandById_createServerFn_handler",
-		importer: () => import("./brand-sjdZpidi.mjs")
-	},
-	"20dc87ef7a85ac89daa1f0a41f4ee6be3a555b247a3191b7892f7e3aa546850b": {
-		functionName: "toggleAdminBrandActive_createServerFn_handler",
-		importer: () => import("./brand-sjdZpidi.mjs")
-	},
-	"7272428238f6e2b9c516e661169e039491663c2d0552047b60dff58f04080130": {
-		functionName: "deleteAdminBrand_createServerFn_handler",
-		importer: () => import("./brand-sjdZpidi.mjs")
-	},
-	"571870e3d5d8477b74ba42c576a28d51cfe4e4d7759cb3868427fd4bc82b7dbd": {
-		functionName: "getAdminAttributes_createServerFn_handler",
-		importer: () => import("./attribute-3OZxm8Hz.mjs")
-	},
-	"544f16e66abb7a47003bf4c854e72313242077b40715b8539d0fb0b0f08cb280": {
-		functionName: "getAdminAttributeById_createServerFn_handler",
-		importer: () => import("./attribute-3OZxm8Hz.mjs")
-	},
-	"ec7b6c3c79e96f4d3321bc1acce31cba64d7176e198918ce605cd28d7b6fcf79": {
-		functionName: "toggleAdminAttributeActive_createServerFn_handler",
-		importer: () => import("./attribute-3OZxm8Hz.mjs")
-	},
-	"35d0f1270c5ee22fe116ff235f010577a00f94bfc19efcf41549615970b6e3e2": {
-		functionName: "updateAdminAttribute_createServerFn_handler",
-		importer: () => import("./attribute-3OZxm8Hz.mjs")
-	},
-	"63803ef7efa2f99c78b773410fa89ea2061d9df386dd218de489424748137093": {
-		functionName: "deleteAdminAttribute_createServerFn_handler",
-		importer: () => import("./attribute-3OZxm8Hz.mjs")
-	},
-	"f13d708f47c4bcd371dc7e84d9f3ca4c41da49ab6bea71aec8906008a26bd74f": {
-		functionName: "getAdminTags_createServerFn_handler",
-		importer: () => import("./tag-D2ba5ASQ.mjs")
-	},
-	"f78fa2f90c9646720f3104ea7a657cb22a9636bdabe399f56085d6380740f3ea": {
-		functionName: "getAdminTagById_createServerFn_handler",
-		importer: () => import("./tag-D2ba5ASQ.mjs")
-	},
-	"6ac389aea3648e98926f5c381ec85975e93ba796be8a3a9af6e2c1e3240f296e": {
-		functionName: "toggleAdminTagActive_createServerFn_handler",
-		importer: () => import("./tag-D2ba5ASQ.mjs")
-	},
-	"15e45ad8a73a280d6e77def1d9d6a5a43ffb9dd833b4f6ffe9a5295fa1cd0884": {
-		functionName: "deleteAdminTag_createServerFn_handler",
-		importer: () => import("./tag-D2ba5ASQ.mjs")
-	},
-	"f9b4aa597073222881ec9dcfc9f5a5fe0c77d7f3b36be8e017c62f7992e153d2": {
-		functionName: "getAdminTaxRates_createServerFn_handler",
-		importer: () => import("./tax-vnFZLSgB.mjs")
-	},
-	"86196c83edf0bc205d26ccc17399255593b5c74428c2675543e39a6a32c926b3": {
-		functionName: "getAdminTaxRateById_createServerFn_handler",
-		importer: () => import("./tax-vnFZLSgB.mjs")
-	},
-	"b09a69df13bcfa8fad8e6db12be1d0a85cfa73b29c2f350b66421d01d1b91f74": {
-		functionName: "toggleAdminTaxRateActive_createServerFn_handler",
-		importer: () => import("./tax-vnFZLSgB.mjs")
-	},
-	"a2c58aaaac113054645de0ae0255757cfcb3354b2cd14f1c041615b10f333f45": {
-		functionName: "deleteAdminTaxRate_createServerFn_handler",
-		importer: () => import("./tax-vnFZLSgB.mjs")
-	},
-	"ac2c4a1d06ff99ff6c6cbedbb8d5784e3241c2d52c226a49e234e6e162b4dc01": {
-		functionName: "getAdminShops_createServerFn_handler",
-		importer: () => import("./shops-B9oDmKJQ.mjs")
-	},
-	"67fa3db952412772f8cc6f4563c8f85481ee1f3138c1bd159035c6c7f20e172c": {
-		functionName: "getAdminShopById_createServerFn_handler",
-		importer: () => import("./shops-B9oDmKJQ.mjs")
-	},
-	"33a845a8a9ad8219cc57494b62837a429087e63884bd45b57f01bee75622a32a": {
-		functionName: "updateAdminShopStatus_createServerFn_handler",
-		importer: () => import("./shops-B9oDmKJQ.mjs")
-	},
-	"65911f7e5db2a47f88dcc1fddef1d8a5dcfb141d136873a35b63c8835bf69778": {
-		functionName: "deleteAdminShop_createServerFn_handler",
-		importer: () => import("./shops-B9oDmKJQ.mjs")
-	},
-	"5180d7e5ee507ab98bd9911a5923070662c5cd373dbbb25fcf95b90efdc96995": {
-		functionName: "updateVendorCommission_createServerFn_handler",
-		importer: () => import("./shops-B9oDmKJQ.mjs")
-	},
-	"8af94af91125a164f8bed6119e055a3ef1843df13819bbc13ad5fc9668f76403": {
-		functionName: "getAdminProducts_createServerFn_handler",
-		importer: () => import("./product-BshkskT4.mjs")
-	},
-	"9b9b9b283af1c2395e86a563f92f20ae7599380fa78e37b2befc68574e7f1c81": {
-		functionName: "getAdminProductById_createServerFn_handler",
-		importer: () => import("./product-BshkskT4.mjs")
-	},
-	"eb1ac3da5be0f3ea1ef0552fb7806959507cb9af53d1f69854a785a38988845f": {
-		functionName: "updateAdminProductStatus_createServerFn_handler",
-		importer: () => import("./product-BshkskT4.mjs")
-	},
-	"1b0c2c58b08ea7d1eba58eb10b22fad4f5005bd1e08ef85131c1b334a2fa62ea": {
-		functionName: "toggleAdminProductFeatured_createServerFn_handler",
-		importer: () => import("./product-BshkskT4.mjs")
-	},
-	"3bf0df45035a11781010001bf3077fac85a87a3a1adbf671de6c774156b07be6": {
-		functionName: "deleteAdminProduct_createServerFn_handler",
-		importer: () => import("./product-BshkskT4.mjs")
-	},
-	"12777805f64fb1fe810fdfb37b774af0f9d574f40e2017704cda61650821ed42": {
-		functionName: "getAdminReviews_createServerFn_handler",
-		importer: () => import("./review-Bj5wb0tr.mjs")
-	},
-	"18970c1ac69561c894837b0b85d11b2030ae60d9663d49925c3a3925a6eb7780": {
-		functionName: "getAdminReviewStats_createServerFn_handler",
-		importer: () => import("./review-Bj5wb0tr.mjs")
-	},
-	"a8ce7230c03f3611e526e06a9d2212ea7564780cc71b5b10b71cc213957065f7": {
-		functionName: "updateReviewStatus_createServerFn_handler",
-		importer: () => import("./review-Bj5wb0tr.mjs")
-	},
-	"e416445483c691ebfd2462e9e902a3c14977ac62a52080cc8df16f34849db403": {
-		functionName: "adminDeleteReview_createServerFn_handler",
-		importer: () => import("./review-Bj5wb0tr.mjs")
-	},
-	"c3282a8291deedaeda9357ce21851e48bcf3b4230293074ee5a5d88947223ded": {
-		functionName: "getAdminReviewById_createServerFn_handler",
-		importer: () => import("./review-Bj5wb0tr.mjs")
 	},
 	"d2fb2bc9b075457362a756a7d05f17202b6eb26cf0b32def3a500550a5c04493": {
 		functionName: "getTags_createServerFn_handler",
@@ -409,45 +241,37 @@ var manifest = {
 		functionName: "toggleTaxRateActive_createServerFn_handler",
 		importer: () => import("./tax-CBfKuTUR.mjs")
 	},
-	"587789bfe7c37ecda4e35816350db3f39589de82c5fc7acebaaaa3be49491edc": {
-		functionName: "getAttributes_createServerFn_handler",
-		importer: () => import("./attributes-DN48EhMu.mjs")
+	"f9b4aa597073222881ec9dcfc9f5a5fe0c77d7f3b36be8e017c62f7992e153d2": {
+		functionName: "getAdminTaxRates_createServerFn_handler",
+		importer: () => import("./tax-vnFZLSgB.mjs")
 	},
-	"c000805e0f6582998eb2897ddc4a39631a80f83ed983f631dde09d6b61f64cc2": {
-		functionName: "getAttributeById_createServerFn_handler",
-		importer: () => import("./attributes-DN48EhMu.mjs")
+	"86196c83edf0bc205d26ccc17399255593b5c74428c2675543e39a6a32c926b3": {
+		functionName: "getAdminTaxRateById_createServerFn_handler",
+		importer: () => import("./tax-vnFZLSgB.mjs")
 	},
-	"7b35d90dcbe7e347bcc5be1ccc0658a450170f65a68a3418c1cecd0fa7deebba": {
-		functionName: "createAttribute_createServerFn_handler",
-		importer: () => import("./attributes-DN48EhMu.mjs")
+	"b09a69df13bcfa8fad8e6db12be1d0a85cfa73b29c2f350b66421d01d1b91f74": {
+		functionName: "toggleAdminTaxRateActive_createServerFn_handler",
+		importer: () => import("./tax-vnFZLSgB.mjs")
 	},
-	"be71035562387bfeee6a5c2e633fa7c9160d2f04ffbf9b85800aa9cad025bbf5": {
-		functionName: "updateAttribute_createServerFn_handler",
-		importer: () => import("./attributes-DN48EhMu.mjs")
+	"a2c58aaaac113054645de0ae0255757cfcb3354b2cd14f1c041615b10f333f45": {
+		functionName: "deleteAdminTaxRate_createServerFn_handler",
+		importer: () => import("./tax-vnFZLSgB.mjs")
 	},
-	"3260e2304aed9b928c68d5ebe29e99d9c9d433737b8012f44b27e8570ad13fa2": {
-		functionName: "deleteAttribute_createServerFn_handler",
-		importer: () => import("./attributes-DN48EhMu.mjs")
+	"7e36a167532c758f1599c786fb3c1d77b7471c6b1720454ec1acc672eeac6821": {
+		functionName: "getAdminBrands_createServerFn_handler",
+		importer: () => import("./brand-sjdZpidi.mjs")
 	},
-	"4ef217286a43e24388263aadb9dabe3bfcf53aeac35c084494b834c6c3099cf8": {
-		functionName: "getBrands_createServerFn_handler",
-		importer: () => import("./brands-De7fqoHl.mjs")
+	"0f65d61ef60c80e6adbbd26ad61a5f636d98e179b409f4bd704aad1c6a7eb6ac": {
+		functionName: "getAdminBrandById_createServerFn_handler",
+		importer: () => import("./brand-sjdZpidi.mjs")
 	},
-	"25446829858865e913c3521dfcd002be4e4cc7075577ce2c6273bfe9271c6a81": {
-		functionName: "getBrandById_createServerFn_handler",
-		importer: () => import("./brands-De7fqoHl.mjs")
+	"20dc87ef7a85ac89daa1f0a41f4ee6be3a555b247a3191b7892f7e3aa546850b": {
+		functionName: "toggleAdminBrandActive_createServerFn_handler",
+		importer: () => import("./brand-sjdZpidi.mjs")
 	},
-	"0eb4c4357baecb962af6d25b63c74eeee688219dc1fada1d51426d538849ddff": {
-		functionName: "createBrand_createServerFn_handler",
-		importer: () => import("./brands-De7fqoHl.mjs")
-	},
-	"140b47cb75b83dae8f75df9b5205562701650d8e6af56a70b0a40e2bcbdfa555": {
-		functionName: "updateBrand_createServerFn_handler",
-		importer: () => import("./brands-De7fqoHl.mjs")
-	},
-	"63b82dc9ffd443ff86a277a1aadc9d32bd490716e4367e529d3f8fb0053364cb": {
-		functionName: "deleteBrand_createServerFn_handler",
-		importer: () => import("./brands-De7fqoHl.mjs")
+	"7272428238f6e2b9c516e661169e039491663c2d0552047b60dff58f04080130": {
+		functionName: "deleteAdminBrand_createServerFn_handler",
+		importer: () => import("./brand-sjdZpidi.mjs")
 	},
 	"7db5e519f5bd8724e88cf3d70ee2f2b5402c2de398af7cd23db6f07579652336": {
 		functionName: "getShippingMethods_createServerFn_handler",
@@ -469,6 +293,46 @@ var manifest = {
 		functionName: "deleteShippingMethod_createServerFn_handler",
 		importer: () => import("./shipping-R4d289UB.mjs")
 	},
+	"4ef217286a43e24388263aadb9dabe3bfcf53aeac35c084494b834c6c3099cf8": {
+		functionName: "getBrands_createServerFn_handler",
+		importer: () => import("./brands-De7fqoHl.mjs")
+	},
+	"25446829858865e913c3521dfcd002be4e4cc7075577ce2c6273bfe9271c6a81": {
+		functionName: "getBrandById_createServerFn_handler",
+		importer: () => import("./brands-De7fqoHl.mjs")
+	},
+	"0eb4c4357baecb962af6d25b63c74eeee688219dc1fada1d51426d538849ddff": {
+		functionName: "createBrand_createServerFn_handler",
+		importer: () => import("./brands-De7fqoHl.mjs")
+	},
+	"140b47cb75b83dae8f75df9b5205562701650d8e6af56a70b0a40e2bcbdfa555": {
+		functionName: "updateBrand_createServerFn_handler",
+		importer: () => import("./brands-De7fqoHl.mjs")
+	},
+	"63b82dc9ffd443ff86a277a1aadc9d32bd490716e4367e529d3f8fb0053364cb": {
+		functionName: "deleteBrand_createServerFn_handler",
+		importer: () => import("./brands-De7fqoHl.mjs")
+	},
+	"4a996a56854488ac0707d39ffca766fef984da97f3973cb6ab3ae1da2106ecb6": {
+		functionName: "getAdminCategories_createServerFn_handler",
+		importer: () => import("./category-jwNQShYO.mjs")
+	},
+	"4482b03b70fbed4c8287fb29e75b93068a87c0ea450fc2d1bc3d8d4a760c2bec": {
+		functionName: "getAdminCategoryById_createServerFn_handler",
+		importer: () => import("./category-jwNQShYO.mjs")
+	},
+	"5343743de31ef139c2de66fe140049480d4466a0f173c4a57bc4f513483fa851": {
+		functionName: "toggleAdminCategoryActive_createServerFn_handler",
+		importer: () => import("./category-jwNQShYO.mjs")
+	},
+	"621e2ccced018a42e08209dee427b1ec8fded6fb5228eb63de05265ed8cf3699": {
+		functionName: "toggleAdminCategoryFeatured_createServerFn_handler",
+		importer: () => import("./category-jwNQShYO.mjs")
+	},
+	"f28d4e33f8ffbbdab91f906075db41272bfcbfcec6c064b870082fcb12a7db8a": {
+		functionName: "deleteAdminCategory_createServerFn_handler",
+		importer: () => import("./category-jwNQShYO.mjs")
+	},
 	"ac9426bb67c84a3999b7d6ca1c3cae0017d43a5e56b392b5222c9525672255d3": {
 		functionName: "getCategories_createServerFn_handler",
 		importer: () => import("./categories-D8wDvisT.mjs")
@@ -489,41 +353,81 @@ var manifest = {
 		functionName: "deleteCategory_createServerFn_handler",
 		importer: () => import("./categories-D8wDvisT.mjs")
 	},
-	"8cc2a15baac0ea5c3ed78fed023590481591f88ddbd41570d2b739a0bfede785": {
-		functionName: "getVendorNotifications_createServerFn_handler",
-		importer: () => import("./notification-XQHMWAus.mjs")
+	"587789bfe7c37ecda4e35816350db3f39589de82c5fc7acebaaaa3be49491edc": {
+		functionName: "getAttributes_createServerFn_handler",
+		importer: () => import("./attributes-DN48EhMu.mjs")
 	},
-	"c995827ce11d022207b5147c817dc15421b5ddd5f680635e27cdf142a3646400": {
-		functionName: "markNotificationAsRead_createServerFn_handler",
-		importer: () => import("./notification-XQHMWAus.mjs")
+	"c000805e0f6582998eb2897ddc4a39631a80f83ed983f631dde09d6b61f64cc2": {
+		functionName: "getAttributeById_createServerFn_handler",
+		importer: () => import("./attributes-DN48EhMu.mjs")
 	},
-	"c23d37665a6fc36ee1c99742623a9d973a5b6ca7d51c77425e10920b174a5324": {
-		functionName: "markAllNotificationsAsRead_createServerFn_handler",
-		importer: () => import("./notification-XQHMWAus.mjs")
+	"7b35d90dcbe7e347bcc5be1ccc0658a450170f65a68a3418c1cecd0fa7deebba": {
+		functionName: "createAttribute_createServerFn_handler",
+		importer: () => import("./attributes-DN48EhMu.mjs")
 	},
-	"814123b36a9ef276651e09a036619d2a502f884eab8640e15bb53e7135dc13e4": {
-		functionName: "createNotification_createServerFn_handler",
-		importer: () => import("./notification-XQHMWAus.mjs")
+	"be71035562387bfeee6a5c2e633fa7c9160d2f04ffbf9b85800aa9cad025bbf5": {
+		functionName: "updateAttribute_createServerFn_handler",
+		importer: () => import("./attributes-DN48EhMu.mjs")
 	},
-	"98315c507bfec44dce41e598015c64bcaa8f9768027ab711d3fb136d8f13e40c": {
-		functionName: "getProducts_createServerFn_handler",
-		importer: () => import("./products-b6QwIsf_.mjs")
+	"3260e2304aed9b928c68d5ebe29e99d9c9d433737b8012f44b27e8570ad13fa2": {
+		functionName: "deleteAttribute_createServerFn_handler",
+		importer: () => import("./attributes-DN48EhMu.mjs")
 	},
-	"54d1a37b17d6aba826dea10efa3f6a99a128772a7f0fdd7e87ff5405a416b222": {
-		functionName: "getProductById_createServerFn_handler",
-		importer: () => import("./products-b6QwIsf_.mjs")
+	"8af94af91125a164f8bed6119e055a3ef1843df13819bbc13ad5fc9668f76403": {
+		functionName: "getAdminProducts_createServerFn_handler",
+		importer: () => import("./product-BshkskT4.mjs")
 	},
-	"36f7409d7cdd3490960a90dab8edf7cab13bdaeb0d6fced6cc1f679f0a5c6fc3": {
-		functionName: "createProduct_createServerFn_handler",
-		importer: () => import("./products-b6QwIsf_.mjs")
+	"9b9b9b283af1c2395e86a563f92f20ae7599380fa78e37b2befc68574e7f1c81": {
+		functionName: "getAdminProductById_createServerFn_handler",
+		importer: () => import("./product-BshkskT4.mjs")
 	},
-	"269ca78e3e645938008c5fc1dd78f5f12a151d360101d7c843caefe33ea24890": {
-		functionName: "updateProduct_createServerFn_handler",
-		importer: () => import("./products-b6QwIsf_.mjs")
+	"eb1ac3da5be0f3ea1ef0552fb7806959507cb9af53d1f69854a785a38988845f": {
+		functionName: "updateAdminProductStatus_createServerFn_handler",
+		importer: () => import("./product-BshkskT4.mjs")
 	},
-	"41f4a38332ffa8c374057a8fb0c6b66f5d29ea1df7f766d4b97f00eb7f1ec198": {
-		functionName: "deleteProduct_createServerFn_handler",
-		importer: () => import("./products-b6QwIsf_.mjs")
+	"1b0c2c58b08ea7d1eba58eb10b22fad4f5005bd1e08ef85131c1b334a2fa62ea": {
+		functionName: "toggleAdminProductFeatured_createServerFn_handler",
+		importer: () => import("./product-BshkskT4.mjs")
+	},
+	"3bf0df45035a11781010001bf3077fac85a87a3a1adbf671de6c774156b07be6": {
+		functionName: "deleteAdminProduct_createServerFn_handler",
+		importer: () => import("./product-BshkskT4.mjs")
+	},
+	"f13d708f47c4bcd371dc7e84d9f3ca4c41da49ab6bea71aec8906008a26bd74f": {
+		functionName: "getAdminTags_createServerFn_handler",
+		importer: () => import("./tag-D2ba5ASQ.mjs")
+	},
+	"f78fa2f90c9646720f3104ea7a657cb22a9636bdabe399f56085d6380740f3ea": {
+		functionName: "getAdminTagById_createServerFn_handler",
+		importer: () => import("./tag-D2ba5ASQ.mjs")
+	},
+	"6ac389aea3648e98926f5c381ec85975e93ba796be8a3a9af6e2c1e3240f296e": {
+		functionName: "toggleAdminTagActive_createServerFn_handler",
+		importer: () => import("./tag-D2ba5ASQ.mjs")
+	},
+	"15e45ad8a73a280d6e77def1d9d6a5a43ffb9dd833b4f6ffe9a5295fa1cd0884": {
+		functionName: "deleteAdminTag_createServerFn_handler",
+		importer: () => import("./tag-D2ba5ASQ.mjs")
+	},
+	"12777805f64fb1fe810fdfb37b774af0f9d574f40e2017704cda61650821ed42": {
+		functionName: "getAdminReviews_createServerFn_handler",
+		importer: () => import("./review-Bj5wb0tr.mjs")
+	},
+	"18970c1ac69561c894837b0b85d11b2030ae60d9663d49925c3a3925a6eb7780": {
+		functionName: "getAdminReviewStats_createServerFn_handler",
+		importer: () => import("./review-Bj5wb0tr.mjs")
+	},
+	"a8ce7230c03f3611e526e06a9d2212ea7564780cc71b5b10b71cc213957065f7": {
+		functionName: "updateReviewStatus_createServerFn_handler",
+		importer: () => import("./review-Bj5wb0tr.mjs")
+	},
+	"e416445483c691ebfd2462e9e902a3c14977ac62a52080cc8df16f34849db403": {
+		functionName: "adminDeleteReview_createServerFn_handler",
+		importer: () => import("./review-Bj5wb0tr.mjs")
+	},
+	"c3282a8291deedaeda9357ce21851e48bcf3b4230293074ee5a5d88947223ded": {
+		functionName: "getAdminReviewById_createServerFn_handler",
+		importer: () => import("./review-Bj5wb0tr.mjs")
 	},
 	"3faca418e59f080a191f35a86f6ff5aedd8e22e6d329eeeecbc8ecbb4bdb0f26": {
 		functionName: "getCoupons_createServerFn_handler",
@@ -557,9 +461,85 @@ var manifest = {
 		functionName: "getAvailableCouponsForUser_createServerFn_handler",
 		importer: () => import("./coupons-BmpL6DAK.mjs")
 	},
-	"fa63f1354f704fc0a3cd3bb34a6a16ff934d52aca2f9bbda826229000a26f853": {
-		functionName: "registerVendor_createServerFn_handler",
-		importer: () => import("./vendor-Dyh3Xopr.mjs")
+	"571870e3d5d8477b74ba42c576a28d51cfe4e4d7759cb3868427fd4bc82b7dbd": {
+		functionName: "getAdminAttributes_createServerFn_handler",
+		importer: () => import("./attribute-3OZxm8Hz.mjs")
+	},
+	"544f16e66abb7a47003bf4c854e72313242077b40715b8539d0fb0b0f08cb280": {
+		functionName: "getAdminAttributeById_createServerFn_handler",
+		importer: () => import("./attribute-3OZxm8Hz.mjs")
+	},
+	"ec7b6c3c79e96f4d3321bc1acce31cba64d7176e198918ce605cd28d7b6fcf79": {
+		functionName: "toggleAdminAttributeActive_createServerFn_handler",
+		importer: () => import("./attribute-3OZxm8Hz.mjs")
+	},
+	"35d0f1270c5ee22fe116ff235f010577a00f94bfc19efcf41549615970b6e3e2": {
+		functionName: "updateAdminAttribute_createServerFn_handler",
+		importer: () => import("./attribute-3OZxm8Hz.mjs")
+	},
+	"63803ef7efa2f99c78b773410fa89ea2061d9df386dd218de489424748137093": {
+		functionName: "deleteAdminAttribute_createServerFn_handler",
+		importer: () => import("./attribute-3OZxm8Hz.mjs")
+	},
+	"da8a6d05d4bb1eab7702a1bc0cac31da8b6c9f576df4c063a6b5ee63377b90c4": {
+		functionName: "getAdminOrders_createServerFn_handler",
+		importer: () => import("./order-B3XETuuk.mjs")
+	},
+	"8ea723f0277401280f14644a46a98c8c9b4da6162eca582e36533da66819047b": {
+		functionName: "getAdminOrderDetails_createServerFn_handler",
+		importer: () => import("./order-B3XETuuk.mjs")
+	},
+	"a1801a9022f9ecc873b9a5638cbd37d12341d581a211b780db92d7703dcf8fe3": {
+		functionName: "updateAdminOrderStatus_createServerFn_handler",
+		importer: () => import("./order-B3XETuuk.mjs")
+	},
+	"28fbbd217356e3abaf9763a0d72f028eeb248d022aa588429632b278060206d0": {
+		functionName: "adminCancelOrder_createServerFn_handler",
+		importer: () => import("./order-B3XETuuk.mjs")
+	},
+	"2854ce7585d82e96d203d25e4a1b5d00a8d4f7b3009e2e8ad9ed70e97928526f": {
+		functionName: "getAdminOrderStats_createServerFn_handler",
+		importer: () => import("./order-B3XETuuk.mjs")
+	},
+	"ac2c4a1d06ff99ff6c6cbedbb8d5784e3241c2d52c226a49e234e6e162b4dc01": {
+		functionName: "getAdminShops_createServerFn_handler",
+		importer: () => import("./shops-B9oDmKJQ.mjs")
+	},
+	"67fa3db952412772f8cc6f4563c8f85481ee1f3138c1bd159035c6c7f20e172c": {
+		functionName: "getAdminShopById_createServerFn_handler",
+		importer: () => import("./shops-B9oDmKJQ.mjs")
+	},
+	"33a845a8a9ad8219cc57494b62837a429087e63884bd45b57f01bee75622a32a": {
+		functionName: "updateAdminShopStatus_createServerFn_handler",
+		importer: () => import("./shops-B9oDmKJQ.mjs")
+	},
+	"65911f7e5db2a47f88dcc1fddef1d8a5dcfb141d136873a35b63c8835bf69778": {
+		functionName: "deleteAdminShop_createServerFn_handler",
+		importer: () => import("./shops-B9oDmKJQ.mjs")
+	},
+	"5180d7e5ee507ab98bd9911a5923070662c5cd373dbbb25fcf95b90efdc96995": {
+		functionName: "updateVendorCommission_createServerFn_handler",
+		importer: () => import("./shops-B9oDmKJQ.mjs")
+	},
+	"98315c507bfec44dce41e598015c64bcaa8f9768027ab711d3fb136d8f13e40c": {
+		functionName: "getProducts_createServerFn_handler",
+		importer: () => import("./products-b6QwIsf_.mjs")
+	},
+	"54d1a37b17d6aba826dea10efa3f6a99a128772a7f0fdd7e87ff5405a416b222": {
+		functionName: "getProductById_createServerFn_handler",
+		importer: () => import("./products-b6QwIsf_.mjs")
+	},
+	"36f7409d7cdd3490960a90dab8edf7cab13bdaeb0d6fced6cc1f679f0a5c6fc3": {
+		functionName: "createProduct_createServerFn_handler",
+		importer: () => import("./products-b6QwIsf_.mjs")
+	},
+	"269ca78e3e645938008c5fc1dd78f5f12a151d360101d7c843caefe33ea24890": {
+		functionName: "updateProduct_createServerFn_handler",
+		importer: () => import("./products-b6QwIsf_.mjs")
+	},
+	"41f4a38332ffa8c374057a8fb0c6b66f5d29ea1df7f766d4b97f00eb7f1ec198": {
+		functionName: "deleteProduct_createServerFn_handler",
+		importer: () => import("./products-b6QwIsf_.mjs")
 	},
 	"a666737e81104e36ec1c0c0de3a0595553c00115fe1e4c9fe61a1b048e5776aa": {
 		functionName: "getVendorReviews_createServerFn_handler",
@@ -572,6 +552,10 @@ var manifest = {
 	"ed663de432dfbce4e241eab3267d1d1c7f71e38b7ef729f9ede9708654776643": {
 		functionName: "respondToReview_createServerFn_handler",
 		importer: () => import("./review-Cg23-Ojc.mjs")
+	},
+	"fa63f1354f704fc0a3cd3bb34a6a16ff934d52aca2f9bbda826229000a26f853": {
+		functionName: "registerVendor_createServerFn_handler",
+		importer: () => import("./vendor-Dyh3Xopr.mjs")
 	},
 	"89728cf8fd73c70694a0955356ca2e588c58a81e8c354e91241f0cb3d3715b1b": {
 		functionName: "getStoreCoupons_createServerFn_handler",
@@ -588,6 +572,22 @@ var manifest = {
 	"0c89d0f28c386616f83f1f91d4c8c1a75bb0b896a4f2c23135b87f35d6090ecf": {
 		functionName: "getFeaturedCoupons_createServerFn_handler",
 		importer: () => import("./coupon-DCQUbQfe.mjs")
+	},
+	"8cc2a15baac0ea5c3ed78fed023590481591f88ddbd41570d2b739a0bfede785": {
+		functionName: "getVendorNotifications_createServerFn_handler",
+		importer: () => import("./notification-XQHMWAus.mjs")
+	},
+	"c995827ce11d022207b5147c817dc15421b5ddd5f680635e27cdf142a3646400": {
+		functionName: "markNotificationAsRead_createServerFn_handler",
+		importer: () => import("./notification-XQHMWAus.mjs")
+	},
+	"c23d37665a6fc36ee1c99742623a9d973a5b6ca7d51c77425e10920b174a5324": {
+		functionName: "markAllNotificationsAsRead_createServerFn_handler",
+		importer: () => import("./notification-XQHMWAus.mjs")
+	},
+	"814123b36a9ef276651e09a036619d2a502f884eab8640e15bb53e7135dc13e4": {
+		functionName: "createNotification_createServerFn_handler",
+		importer: () => import("./notification-XQHMWAus.mjs")
 	},
 	"9324b57f4d3fc760530ab4820798d75e1358b52e7bcb3422006e04d3e0a3f3c0": {
 		functionName: "getCart_createServerFn_handler",
@@ -617,14 +617,6 @@ var manifest = {
 		functionName: "getAvailableShippingMethods_createServerFn_handler",
 		importer: () => import("./shipping-Y23MAwrS.mjs")
 	},
-	"809b3dd5d0ad5dd1f952187f8e7ffc123ff2a73600bb5508d4b0af315fc85c12": {
-		functionName: "getAdminTransactions_createServerFn_handler",
-		importer: () => import("./transaction-CKUmn5AN.mjs")
-	},
-	"2c2c619106088cb82b1227f8ff6b7b35c224b298c04e698b5e80f27c6174c0da": {
-		functionName: "getAdminTransactionStats_createServerFn_handler",
-		importer: () => import("./transaction-CKUmn5AN.mjs")
-	},
 	"87caa8bd223f38d78ccad0506fc11618ee7df5dea85bc88d9d915ad2b7c281a8": {
 		functionName: "currentUser_createServerFn_handler",
 		importer: () => import("./users-JBnlFcvf.mjs")
@@ -637,6 +629,18 @@ var manifest = {
 		functionName: "getUsers_createServerFn_handler",
 		importer: () => import("./users-JBnlFcvf.mjs")
 	},
+	"00ddaffaf3588a784802330aaff1cbbb40ccdd60550166a3bbea5088d522bc23": {
+		functionName: "getShopDashboardData_createServerFn_handler",
+		importer: () => import("./dashboard-Bpcw9dy0.mjs")
+	},
+	"809b3dd5d0ad5dd1f952187f8e7ffc123ff2a73600bb5508d4b0af315fc85c12": {
+		functionName: "getAdminTransactions_createServerFn_handler",
+		importer: () => import("./transaction-CKUmn5AN.mjs")
+	},
+	"2c2c619106088cb82b1227f8ff6b7b35c224b298c04e698b5e80f27c6174c0da": {
+		functionName: "getAdminTransactionStats_createServerFn_handler",
+		importer: () => import("./transaction-CKUmn5AN.mjs")
+	},
 	"d8e25468e3a9cca3a78b3348b4431e674c2c3e0ddaaf5b32d805c33d8f5b10ed": {
 		functionName: "getVendorTransactions_createServerFn_handler",
 		importer: () => import("./transactions-BP7dEEgf.mjs")
@@ -644,10 +648,6 @@ var manifest = {
 	"f93abd37ca8fc9c7d1950ff83fb57b21887b78e01314cd2001cacafc7caa45ca": {
 		functionName: "getVendorTransactionStats_createServerFn_handler",
 		importer: () => import("./transactions-BP7dEEgf.mjs")
-	},
-	"00ddaffaf3588a784802330aaff1cbbb40ccdd60550166a3bbea5088d522bc23": {
-		functionName: "getShopDashboardData_createServerFn_handler",
-		importer: () => import("./dashboard-Bpcw9dy0.mjs")
 	},
 	"d8030022d2ee68b38e753810b1e88d494a532431773b5a1651823a3ad4d54445": {
 		functionName: "getVendorOrders_createServerFn_handler",
@@ -664,50 +664,6 @@ var manifest = {
 	"cf9464380bf08096876a70e5fb5efbb80688d36188a26ebcfbdf473eb44caa3a": {
 		functionName: "getVendorOrderStats_createServerFn_handler",
 		importer: () => import("./order-Dm331LD9.mjs")
-	},
-	"245430af01ba4f382981d82ee4d30a75593d72179215e4bfa032fc1d0d1ea640": {
-		functionName: "getWishlist_createServerFn_handler",
-		importer: () => import("./wishlist-DBdYJJFk.mjs")
-	},
-	"3255777bc3528258b1411c218a598d72d90d34c1d61ca0220c35162d355617c6": {
-		functionName: "toggleWishlist_createServerFn_handler",
-		importer: () => import("./wishlist-DBdYJJFk.mjs")
-	},
-	"5b0adee9a0c2d5441423f75e2214368ff10b19701dc934c1cd5f250a46babe4d": {
-		functionName: "checkWishlistStatus_createServerFn_handler",
-		importer: () => import("./wishlist-DBdYJJFk.mjs")
-	},
-	"1a5aea9a8154500ebfc35f4e7a6aa68d7ee79bd4877ca5766c04cdbf15502ba1": {
-		functionName: "checkReviewEligibility_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"658db7789624a10e1caf06572a96b16ddf845d454aa76514ae49ffd850db63b3": {
-		functionName: "createReview_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"9b0279cfc84a0c14c510dc5996bd1a2d03a57905d4e9a628e5bc0bd2b2d6e5d6": {
-		functionName: "updateReview_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"1c608054a42f725d7dcffcec8bf30c6fe028f11c0545c35957d4d2383812aee4": {
-		functionName: "deleteReview_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"9cd4cb972d639c9379af00f4bb42e89dbaa8891e7df54a49ebb5c156c75051d8": {
-		functionName: "getProductReviews_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"13ec9a5931545cc64330cca9e6140d868959cec1d779eddd97100faed4776a96": {
-		functionName: "voteReviewHelpful_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"d3d278e74014659046f62b3a5007e443b3a49cd0888c3347d21ba4b0ff6a2ad0": {
-		functionName: "getUserReviews_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
-	},
-	"c8b6c56920301b77108221d3cedac873faeda69cfe4b827025b35b220104a4de": {
-		functionName: "getShopReviews_createServerFn_handler",
-		importer: () => import("./review-CEoKec8o.mjs")
 	},
 	"8dbc4d5ef5657e6cdfd0867d009137e8c2a7b34ff8b126630ee23aae7676bd61": {
 		functionName: "getDashboardStats_createServerFn_handler",
@@ -749,6 +705,22 @@ var manifest = {
 		functionName: "getPlatformHealth_createServerFn_handler",
 		importer: () => import("./dashboard-CMTXHaQp.mjs")
 	},
+	"85c3f1772072e6228b648c442b332a5ab1ce66e1b4e4a56577a4007587538a4c": {
+		functionName: "startStripeOnboarding_createServerFn_handler",
+		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	},
+	"756d3100dac0b27bf66ab74c9fede1d1d125edc27e9d903ffebae07294ebe6b2": {
+		functionName: "getVendorStripeStatus_createServerFn_handler",
+		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	},
+	"32c7f0ec3787dfc02d0bb9db3c138531651d3ee6b6e043e32b47d4606e0d1524": {
+		functionName: "getStripeDashboardLink_createServerFn_handler",
+		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	},
+	"4972f4be4d5ea269f15d62867a558d5fb4ab0b2c5e666c6440974763736d88ed": {
+		functionName: "disconnectStripeAccount_createServerFn_handler",
+		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	},
 	"6dbf2ed035dcf8ef932760b200dfc48bfe05b7bb449d2967b8b99ca0a7a126a2": {
 		functionName: "getUserAddresses_createServerFn_handler",
 		importer: () => import("./address-BzcR6X3n.mjs")
@@ -769,21 +741,49 @@ var manifest = {
 		functionName: "setDefaultAddress_createServerFn_handler",
 		importer: () => import("./address-BzcR6X3n.mjs")
 	},
-	"85c3f1772072e6228b648c442b332a5ab1ce66e1b4e4a56577a4007587538a4c": {
-		functionName: "startStripeOnboarding_createServerFn_handler",
-		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	"1a5aea9a8154500ebfc35f4e7a6aa68d7ee79bd4877ca5766c04cdbf15502ba1": {
+		functionName: "checkReviewEligibility_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
 	},
-	"756d3100dac0b27bf66ab74c9fede1d1d125edc27e9d903ffebae07294ebe6b2": {
-		functionName: "getVendorStripeStatus_createServerFn_handler",
-		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	"658db7789624a10e1caf06572a96b16ddf845d454aa76514ae49ffd850db63b3": {
+		functionName: "createReview_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
 	},
-	"32c7f0ec3787dfc02d0bb9db3c138531651d3ee6b6e043e32b47d4606e0d1524": {
-		functionName: "getStripeDashboardLink_createServerFn_handler",
-		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	"9b0279cfc84a0c14c510dc5996bd1a2d03a57905d4e9a628e5bc0bd2b2d6e5d6": {
+		functionName: "updateReview_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
 	},
-	"4972f4be4d5ea269f15d62867a558d5fb4ab0b2c5e666c6440974763736d88ed": {
-		functionName: "disconnectStripeAccount_createServerFn_handler",
-		importer: () => import("./vendor-connect-Bbi9sslW.mjs")
+	"1c608054a42f725d7dcffcec8bf30c6fe028f11c0545c35957d4d2383812aee4": {
+		functionName: "deleteReview_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
+	},
+	"9cd4cb972d639c9379af00f4bb42e89dbaa8891e7df54a49ebb5c156c75051d8": {
+		functionName: "getProductReviews_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
+	},
+	"13ec9a5931545cc64330cca9e6140d868959cec1d779eddd97100faed4776a96": {
+		functionName: "voteReviewHelpful_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
+	},
+	"d3d278e74014659046f62b3a5007e443b3a49cd0888c3347d21ba4b0ff6a2ad0": {
+		functionName: "getUserReviews_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
+	},
+	"c8b6c56920301b77108221d3cedac873faeda69cfe4b827025b35b220104a4de": {
+		functionName: "getShopReviews_createServerFn_handler",
+		importer: () => import("./review-CEoKec8o.mjs")
+	},
+	"245430af01ba4f382981d82ee4d30a75593d72179215e4bfa032fc1d0d1ea640": {
+		functionName: "getWishlist_createServerFn_handler",
+		importer: () => import("./wishlist-DBdYJJFk.mjs")
+	},
+	"3255777bc3528258b1411c218a598d72d90d34c1d61ca0220c35162d355617c6": {
+		functionName: "toggleWishlist_createServerFn_handler",
+		importer: () => import("./wishlist-DBdYJJFk.mjs")
+	},
+	"5b0adee9a0c2d5441423f75e2214368ff10b19701dc934c1cd5f250a46babe4d": {
+		functionName: "checkWishlistStatus_createServerFn_handler",
+		importer: () => import("./wishlist-DBdYJJFk.mjs")
 	},
 	"6847ea9a4634a90f932f170614f284865075c9842546864bce5cbd03c1edeeed": {
 		functionName: "getInvoiceUrl_createServerFn_handler",
@@ -1606,7 +1606,7 @@ var baseManifestPromise;
 var cachedFinalManifestPromise;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-BqwpwX5Y.mjs"),
+		import("./router-Cl6_EIHx.mjs"),
 		import("./start-DBZ-RhOC.mjs"),
 		import("../__23tanstack-start-plugin-adapters-BWZzj-RW.mjs")
 	]);

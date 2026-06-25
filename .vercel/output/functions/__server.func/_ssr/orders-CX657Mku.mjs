@@ -1,10 +1,10 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { n as formatCurrency } from "./utils-Pgq5HWQm.mjs";
 import { w as require_jsx_runtime } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { u as require_react } from "../_libs/@floating-ui/react-dom+[...].mjs";
 import { B as Package, Ct as Clock, Et as CircleCheck, o as Truck } from "../_libs/lucide-react.mjs";
-import { i as useAdminOrderStats } from "./use-admin-orders-ebDgXDm5.mjs";
 import { a as CardHeader, n as CardContent, o as CardTitle, t as Card } from "./card-BDvQuHpQ.mjs";
+import { i as useAdminOrderStats } from "./use-admin-orders-ebDgXDm5.mjs";
 import { t as DataTable } from "./page-header-DLbA-yB-.mjs";
 import { a as createAdminOrdersFetcher } from "./use-admin-entity-fetchers-DkFElJdN.mjs";
 import { i as getSharedOrderFilters, n as createAdminOrderColumns, t as OrderHeader } from "./order-header-CBydyevH.mjs";
