@@ -1,257 +1,114 @@
-Welcome to your new TanStack Start app! 
+# Stack Shop
 
-# Getting Started
+A multi-vendor e-commerce platform built on TanStack Start. One deployment serves three areas: a customer storefront, a per-shop vendor dashboard, and a platform admin panel — backed by Postgres (Drizzle ORM), Better Auth, and Stripe.
 
-To run this application:
+## Features
+
+**Storefront** (`/`)
+- Browse products by category, brand, tag, and store; product detail pages with variants (attributes), images, and reviews
+- Cart, wishlist, and coupon support
+- Stripe-powered checkout, order confirmation, order history, and order tracking
+- Customer profile, addresses, and "my reviews"
+
+**Vendor dashboard** (`/shop/$slug`)
+- Vendor sign-up and onboarding; each vendor manages one or more shops
+- Products (with attributes, images via Uploadcare, tags, shipping methods), orders and per-order detail, transactions
+- Shop-level catalogs: categories, brands, tags, attributes, taxes, coupons, shipping
+- Staff management with granular per-resource permissions, notifications, reviews, shop settings
+
+**Admin panel** (`/admin`)
+- Platform-wide management: tenants (vendors), users, staff, products, orders, transactions, coupons, reviews, categories/brands/tags/attributes, taxes, settings
+
+**Platform**
+- Better Auth authentication: email/password plus Google and GitHub OAuth, two-factor auth, and role-based access (customer by default, vendor, admin) enforced by route middleware
+- Stripe payments with a webhook endpoint (`/api/webhooks/stripe`); multi-vendor transfer design lives in `docs/plans/`
+- Transactional email with React Email templates sent through Brevo SMTP (Nodemailer)
+- Server-side rendering and server functions via TanStack Start + Nitro (deployable to Vercel)
+
+## Tech stack
+
+- **Framework**: TanStack Start (React 19, SSR, file-based routing) with TanStack Router, Query, Form, and Table
+- **Database**: Neon Postgres + Drizzle ORM (schema per domain in `src/lib/db/schema/`)
+- **Auth**: Better Auth (admin + two-factor plugins, Google/GitHub social login)
+- **Payments**: Stripe (server SDK + React Stripe.js)
+- **UI**: Tailwind CSS 4, shadcn/ui (Radix), Recharts, sonner, Zustand
+- **Files/Email**: Uploadcare (product images), React Email + Nodemailer (Brevo)
+- **Tooling**: Bun, Vite, Biome (lint/format), Vitest + Testing Library
+
+## Project structure
+
+```
+src/
+├── routes/
+│   ├── (store)/        # storefront: home, product, category, store, cart,
+│   │                   # checkout, orders, wishlist, reviews, profile
+│   ├── (vendor)/       # vendor dashboard under /shop/$slug + /dashboard
+│   ├── (admin)/        # admin panel under /admin
+│   ├── (auth)/         # sign-in, sign-up, vendor-sign-up
+│   └── api/            # Better Auth handler, Stripe webhook
+├── components/         # ui / base / containers / templates
+├── hooks/              # data hooks split by area: store, vendor, admin, common
+├── lib/
+│   ├── db/             # Drizzle schema, migrations, seed script
+│   ├── functions/      # TanStack server functions
+│   ├── config/         # per-resource staff permission definitions
+│   ├── middleware/     # auth/role guards
+│   ├── emails/         # React Email templates
+│   ├── stripe/         # Stripe helpers
+│   └── validators/     # Zod schemas
+└── data/               # seed data (seeding.json)
+```
+
+## Getting started
+
+### Prerequisites
+
+- [Bun](https://bun.sh)
+- A [Neon](https://neon.tech) Postgres database (any Postgres connection string works)
+- Stripe, Uploadcare, and Brevo accounts for payments, image uploads, and email
+- Google / GitHub OAuth apps if you want social login
+
+### 1. Configure environment
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in: `DATABASE_URL`, `BETTER_AUTH_SECRET` (+ `BETTER_AUTH_URL` / `VITE_BETTER_AUTH_URL`, default `http://localhost:3000`), `GOOGLE_*` / `GITHUB_*` OAuth credentials, `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` / `VITE_STRIPE_PUBLISHABLE_KEY`, `VITE_UPLOADCARE_PUBLIC_KEY`, and the `BREVO_*` SMTP settings.
+
+### 2. Install, migrate, seed
 
 ```bash
 bun install
-bun --bun run dev
+bun run db:migrate   # apply Drizzle migrations
+bun run db:seed      # sample shops, products, categories, etc.
 ```
 
-# Building For Production
-
-To build this application for production:
+### 3. Run
 
 ```bash
-bun --bun run build
+bun run dev          # http://localhost:3000
 ```
 
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+For Stripe webhooks locally:
 
 ```bash
-bun --bun run test
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
-
-
-```bash
-bun --bun run lint
-bun --bun run format
-bun --bun run check
-```
-
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-
-## Setting up Better Auth
-
-1. Generate and set the `BETTER_AUTH_SECRET` environment variable in your `.env.local`:
-
-   ```bash
-   bunx --bun @better-auth/cli secret
-   ```
-
-2. Visit the [Better Auth documentation](https://www.better-auth.com) to unlock the full potential of authentication in your app.
-
-### Adding a Database (Optional)
-
-Better Auth can work in stateless mode, but to persist user data, add a database:
-
-```typescript
-// src/lib/auth.ts
-import { betterAuth } from "better-auth";
-import { Pool } from "pg";
-
-export const auth = betterAuth({
-  database: new Pool({
-    connectionString: process.env.DATABASE_URL,
-  }),
-  // ... rest of config
-});
-```
-
-Then run migrations:
-
-```bash
-bunx --bun @better-auth/cli migrate
-```
-
-
-## Setting up Neon
-
-When running the `dev` command, `vite-plugin-neon-new` will identify there is not a database setup. It will then create and seed a claimable database.
-
-It is the same process as [Neon Launchpad](https://neon.new).
-
-> [!IMPORTANT]  
-> Claimable databases expire in 72 hours.
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+## Scripts
+
+| Command | Description |
+|---|---|
+| `bun run dev` | Dev server on port 3000 |
+| `bun run build` / `bun run preview` | Production build / preview |
+| `bun run test` | Vitest run |
+| `bun run lint` / `format` / `check` | Biome |
+| `bun run db:generate` | Generate a migration from schema changes |
+| `bun run db:migrate` / `db:push` / `db:pull` | Apply / push / pull schema |
+| `bun run db:studio` | Drizzle Studio |
+| `bun run db:seed` | Seed sample data |
+
+## Documentation
+
+Design notes and implementation plans live in `docs/plans/` (e.g. multi-vendor Stripe transfers, data-table query-key threading).
