@@ -1,14 +1,10 @@
 import { adminClient, twoFactorClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
-const baseURL =
-  (typeof import.meta !== "undefined" &&
-    (import.meta as any).env?.VITE_BETTER_AUTH_URL) ||
-  process.env.BETTER_AUTH_URL ||
-  "/api/auth";
-
+// No baseURL: the auth API is same-origin, so the client defaults to
+// window.location.origin. A build-time env value here breaks any deploy
+// whose origin differs from the value baked into the bundle.
 export const authClient = createAuthClient({
-  baseURL,
   plugins: [adminClient(), twoFactorClient()],
 });
 

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { DisplayProduct } from "@/types/store-types";
 import { ColorSwatch } from "./color-radio-item";
 import PriceTag from "./price-tag";
+import QuickViewDialog from "./quick-view-dialog";
 
 interface ProductCardProps {
   product: DisplayProduct;
@@ -24,6 +25,13 @@ export default function ProductCard({
   const { addItem } = useCart();
   const { setIsOpen } = useCartStore();
   const [isAddingThis, setIsAddingThis] = useState(false);
+  const [quickViewOpen, setQuickViewOpen] = useState(false);
+
+  const handleQuickView = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigation if inside a link
+    e.stopPropagation();
+    setQuickViewOpen(true);
+  };
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent navigation if inside a link
@@ -84,6 +92,7 @@ export default function ProductCard({
             variant="secondary"
             className="h-10 w-10 rounded-full shadow-lg transition-transform hover:scale-110"
             title="Quick View"
+            onClick={handleQuickView}
           >
             <Eye className="h-5 w-5" />
             <span className="sr-only">Quick View</span>
@@ -177,6 +186,12 @@ export default function ProductCard({
           </div>
         </div>
       </div>
+
+      <QuickViewDialog
+        product={product}
+        open={quickViewOpen}
+        onOpenChange={setQuickViewOpen}
+      />
     </div>
   );
 }

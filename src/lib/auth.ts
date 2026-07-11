@@ -14,6 +14,10 @@ import { sendEmail } from "./email";
 import OtpEmail from "./emails/otp-email";
 
 export const auth = betterAuth({
+  // Origin used to build OAuth redirect_uri ({baseURL}/api/auth/callback/{provider}).
+  // Must match the callback URLs registered in the GitHub/Google consoles.
+  baseURL: process.env.BETTER_AUTH_URL,
+
   // App name for TOTP issuer
   basePath: "/api/auth",
 
@@ -38,11 +42,11 @@ export const auth = betterAuth({
   // Use a deterministic dev secret if env is missing to prevent runtime errors
   secret: process.env.BETTER_AUTH_SECRET ?? "dev-secret",
   trustedOrigins: [
-    // Local development
-    process.env.VITE_BETTER_AUTH_URL!,
-    // Optionally add your production app URL via env
-    ...(process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : []),
-  ],
+    process.env.VITE_BETTER_AUTH_URL,
+    process.env.BETTER_AUTH_URL,
+    // Vercel preview deployments get a unique origin per deploy
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  ].filter((origin): origin is string => Boolean(origin)),
   emailAndPassword: {
     enabled: true,
     disableSignUp: false,

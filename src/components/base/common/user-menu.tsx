@@ -1,5 +1,5 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { Store } from "lucide-react";
+import { ShieldCheck, Store } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +32,7 @@ export default function UserMenu({ user }: { user: User }) {
   const initials = getInitials(user?.name, user?.email);
   const router = useRouter();
   const isVendor = user?.role === "vendor";
+  const isAdmin = user?.role === "admin";
 
   const handleSignOut = async () => {
     const currentPath = window.location.pathname + window.location.search;
@@ -71,6 +72,20 @@ export default function UserMenu({ user }: { user: User }) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {isAdmin && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link
+                to="/admin"
+                className="w-full cursor-pointer font-medium text-primary"
+              >
+                <ShieldCheck className="mr-2 h-4 w-4" />
+                Admin Dashboard
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
         {isVendor && (
           <>
             <DropdownMenuItem asChild>
