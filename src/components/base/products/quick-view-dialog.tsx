@@ -14,6 +14,7 @@ import {
 import { useCartStore } from "@/lib/store/cart-store";
 import type { DisplayProduct } from "@/types/store-types";
 import { ColorSwatch } from "./color-radio-item";
+import ProductImageGallery from "./details/product-image-gallery";
 import { QuantitySelector } from "./details/quantity-selector";
 import PriceTag from "./price-tag";
 
@@ -65,13 +66,9 @@ export default function QuickViewDialog({
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
         <div className="grid gap-6 sm:grid-cols-2">
           {/* Image Section */}
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-muted">
-            <img
-              src={product.images[0]?.url}
-              alt={product.images[0]?.alt || product.name}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute top-3 left-3 flex flex-col gap-2">
+          <div className="relative">
+            <ProductImageGallery images={product.images} />
+            <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
               {product.price.discountPercentage > 0 && (
                 <Badge className="bg-red-500 hover:bg-red-600">
                   -{product.price.discountPercentage}%
