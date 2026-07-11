@@ -15,7 +15,7 @@ export function StoreStats({ stats, className }: StoreStatsProps) {
       icon: Package,
       label: "Products",
       value: stats.totalProducts.toLocaleString(),
-      color: "text-blue-500",
+      color: "text-info",
     },
     {
       icon: Users,
@@ -24,19 +24,19 @@ export function StoreStats({ stats, className }: StoreStatsProps) {
         stats.followers >= 1000
           ? `${(stats.followers / 1000).toFixed(1)}k`
           : stats.followers.toString(),
-      color: "text-green-500",
+      color: "text-success",
     },
     {
       icon: Star,
       label: "Rating",
       value: stats.rating.toFixed(1),
-      color: "text-yellow-500",
+      color: "text-star",
     },
     {
       icon: Calendar,
       label: "Member Since",
       value: formattedDate,
-      color: "text-purple-500",
+      color: "text-primary",
     },
   ];
 

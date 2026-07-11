@@ -52,7 +52,7 @@ export default function ProductCard({
   return (
     <div
       className={cn(
-        "group relative flex rounded-xl border-2 border-muted border-dashed p-4 transition-colors hover:border-primary/50",
+        "group relative flex rounded-xl border-2 border-dashed p-4 transition-colors hover:border-primary/50",
         variant === "grid" ? "flex-col" : "@2xl:flex-row flex-col gap-6",
         className
       )}
@@ -60,7 +60,7 @@ export default function ProductCard({
       {/* Image Section */}
       <div
         className={cn(
-          "relative overflow-hidden rounded-2xl bg-muted",
+          "relative overflow-hidden rounded-lg bg-muted",
           variant === "grid"
             ? "aspect-square w-full"
             : "aspect-square @2xl:w-48 w-full shrink-0"
@@ -76,12 +76,12 @@ export default function ProductCard({
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {product.price.discountPercentage > 0 && (
-            <Badge className="bg-red-500 hover:bg-red-600">
+            <Badge className="bg-sale text-sale-foreground">
               -{product.price.discountPercentage}%
             </Badge>
           )}
           {product.isNew && product.price.discountPercentage === 0 && (
-            <Badge className="bg-blue-500 hover:bg-blue-600">New</Badge>
+            <Badge className="bg-info text-info-foreground">New</Badge>
           )}
         </div>
 
@@ -123,10 +123,10 @@ export default function ProductCard({
       >
         {/* Top Row: Category & Rating */}
         <div className="flex items-center justify-between">
-          <span className="rounded-full border border-muted-foreground/30 border-dashed bg-muted/50 px-3 py-1 font-medium text-muted-foreground text-xs">
+          <span className="rounded-full border border-dashed bg-muted/50 px-3 py-1 font-medium text-muted-foreground text-xs">
             {product.category.name}
           </span>
-          <div className="flex items-center gap-1 text-amber-500">
+          <div className="flex items-center gap-1 text-star">
             <Star className="h-3.5 w-3.5 fill-current" />
             <span className="font-medium text-sm">
               {product.rating.average}
@@ -161,7 +161,7 @@ export default function ProductCard({
         {/* Price & Colors */}
         <div
           className={cn(
-            "flex items-center justify-between border-muted border-t border-dashed",
+            "flex items-center justify-between border-t border-dashed",
             variant === "grid" ? "pt-3" : "mt-auto pt-4"
           )}
         >

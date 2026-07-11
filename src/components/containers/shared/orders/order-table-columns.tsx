@@ -173,7 +173,7 @@ export const createOrderColumns = ({
           shipped: { variant: "outline", className: "", label: "Shipped" },
           delivered: {
             variant: "default",
-            className: "bg-green-500",
+            className: "bg-success",
             label: "Delivered",
           },
           cancelled: {
@@ -220,7 +220,7 @@ export const createOrderColumns = ({
         > = {
           paid: {
             variant: "default",
-            className: "bg-green-500",
+            className: "bg-success",
             label: "Paid",
           },
           unpaid: { variant: "secondary", className: "", label: "Unpaid" },
@@ -396,7 +396,7 @@ export const createAdminOrderColumns = ({
           shipped: { variant: "outline", className: "", label: "Shipped" },
           delivered: {
             variant: "default",
-            className: "bg-green-500",
+            className: "bg-success",
             label: "Delivered",
           },
           cancelled: {
@@ -441,7 +441,7 @@ export const createAdminOrderColumns = ({
         > = {
           paid: {
             variant: "default",
-            className: "bg-green-500",
+            className: "bg-success",
             label: "Paid",
           },
           unpaid: { variant: "secondary", className: "", label: "Unpaid" },

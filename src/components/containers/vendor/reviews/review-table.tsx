@@ -50,7 +50,7 @@ const StarRating = ({ rating }: { rating: number }) => {
         <Star
           key={star}
           className={`size-4 ${
-            star <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+            star <= rating ? "fill-star text-star" : "text-muted-foreground/40"
           }`}
         />
       ))}
@@ -164,7 +164,7 @@ export default function ReviewTable({ reviews }: ReviewTableProps) {
               <DropdownMenuItem>View Details</DropdownMenuItem>
               {row.original.status === "pending" && (
                 <>
-                  <DropdownMenuItem className="text-green-600">
+                  <DropdownMenuItem className="text-success">
                     Approve
                   </DropdownMenuItem>
                   <DropdownMenuItem className="text-destructive">

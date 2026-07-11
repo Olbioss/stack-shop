@@ -33,7 +33,7 @@ export function PendingReviewsList({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <MessageSquare className="size-5 text-blue-500" />
+            <MessageSquare className="size-5 text-info" />
             Pending Reviews
           </CardTitle>
           <CardDescription>Reviews awaiting moderation</CardDescription>
@@ -54,7 +54,7 @@ export function PendingReviewsList({
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="flex items-center gap-2">
-            <MessageSquare className="size-5 text-blue-500" />
+            <MessageSquare className="size-5 text-info" />
             Pending Reviews
             {reviews.length > 0 && (
               <Badge variant="secondary" className="ml-2">
@@ -87,7 +87,7 @@ export function PendingReviewsList({
                         key={i}
                         className={`size-3 ${
                           i < review.rating
-                            ? "fill-amber-400 text-amber-400"
+                            ? "fill-star text-star"
                             : "text-muted-foreground"
                         }`}
                       />

@@ -42,7 +42,7 @@ export default function AdminOrdersTemplate({
               <Package className="size-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">{stats.totalOrders}</div>
+              <div className="font-bold font-mono text-2xl">{stats.totalOrders}</div>
               <p className="text-muted-foreground text-xs">All time</p>
             </CardContent>
           </Card>
@@ -50,10 +50,10 @@ export default function AdminOrdersTemplate({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="font-medium text-sm">Pending</CardTitle>
-              <Clock className="size-4 text-yellow-600" />
+              <Clock className="size-4 text-warning" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">{stats.pendingOrders}</div>
+              <div className="font-bold font-mono text-2xl">{stats.pendingOrders}</div>
               <p className="text-muted-foreground text-xs">
                 Awaiting processing
               </p>
@@ -63,10 +63,10 @@ export default function AdminOrdersTemplate({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="font-medium text-sm">In Progress</CardTitle>
-              <Truck className="size-4 text-blue-600" />
+              <Truck className="size-4 text-info" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {stats.processingOrders + stats.shippedOrders}
               </div>
               <p className="text-muted-foreground text-xs">
@@ -78,10 +78,10 @@ export default function AdminOrdersTemplate({
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="font-medium text-sm">Revenue</CardTitle>
-              <CheckCircle2 className="size-4 text-green-600" />
+              <CheckCircle2 className="size-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl text-green-600">
+              <div className="font-bold font-mono text-2xl text-success">
                 {formatCurrency(stats.totalRevenue)}
               </div>
               <p className="text-muted-foreground text-xs">

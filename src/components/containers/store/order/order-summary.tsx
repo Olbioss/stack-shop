@@ -32,7 +32,7 @@ export default function OrderSummary({
       {couponDiscount > 0 && (
         <div className="flex justify-between text-base">
           <span className="text-muted-foreground">Coupon</span>
-          <span className="font-medium text-green-600">
+          <span className="font-medium text-success">
             -${couponDiscount.toFixed(2)}
           </span>
         </div>

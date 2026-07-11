@@ -42,7 +42,7 @@ export default function StoreInfoCard({ store, className }: Props) {
               </Link>
               {store.isVerified && (
                 <CheckCircle2
-                  className="h-4 w-4 text-blue-500"
+                  className="h-4 w-4 text-info"
                   aria-label="Verified Store"
                 />
               )}
@@ -50,7 +50,7 @@ export default function StoreInfoCard({ store, className }: Props) {
 
             <div className="flex items-center gap-3 text-muted-foreground text-sm">
               <div className="flex items-center gap-1">
-                <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                <Star className="h-3.5 w-3.5 fill-star text-star" />
                 <span>{store.rating}</span>
                 <span>({store.reviewCount})</span>
               </div>

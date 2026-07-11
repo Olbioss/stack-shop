@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import "@fontsource-variable/archivo";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -8,20 +10,20 @@
 body {
   @apply m-0;
   font-family:
-    "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Archivo Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: "Space Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 @theme inline {
-  --font-sans: "Roboto", sans-serif;
-  --font-mono: "Roboto Mono", monospace;
+  --font-sans: "Archivo Variable", sans-serif;
+  --font-mono: "Space Mono", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -45,6 +47,15 @@ code {
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-sale: var(--sale);
+  --color-sale-foreground: var(--sale-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-star: var(--star);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -75,7 +86,7 @@ code {
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 89.876);
+  --background: oklch(0.985 0.005 85);
   --foreground: oklch(0.218 0 89.876);
   --card: oklch(1 0 89.876);
   --card-foreground: oklch(0.218 0 89.876);
@@ -92,6 +103,15 @@ code {
   --accent: oklch(0.925 0 89.876);
   --accent-foreground: oklch(0.218 0 89.876);
   --destructive: oklch(0.577 0.245 27.325);
+  --success: oklch(0.55 0.12 150);
+  --success-foreground: oklch(0.991 0 89.876);
+  --warning: oklch(0.6 0.13 70);
+  --warning-foreground: oklch(0.991 0 89.876);
+  --sale: oklch(0.58 0.19 30);
+  --sale-foreground: oklch(0.991 0 89.876);
+  --info: oklch(0.55 0.1 245);
+  --info-foreground: oklch(0.991 0 89.876);
+  --star: oklch(0.75 0.15 75);
   --border: oklch(0.84 0.006 286.281);
   --input: oklch(0.84 0.006 286.281);
   --body-80: oklch(0.8452 0 0 / 80);
@@ -105,16 +125,16 @@ code {
   --dark-10: oklch(0.2178 0 0);
   --dark-06: oklch(0.1684 0 0);
   --ring: oklch(0.61 0.001 106.443);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: oklch(0.7 0.09 72);
+  --chart-2: oklch(0.55 0.09 150);
+  --chart-3: oklch(0.5 0.08 260);
+  --chart-4: oklch(0.62 0.14 30);
+  --chart-5: oklch(0.45 0.05 72);
   --sidebar: oklch(0.991 0 89.876);
   --sidebar-foreground: oklch(0.218 0 89.876);
   --sidebar-primary: oklch(0.675 0.113 75.171);
   --sidebar-primary-foreground: oklch(0.991 0 89.876);
-  --sidebar-accent: oklch(0.925 0 89.876);
+  --sidebar-accent: oklch(0.94 0.02 73);
   --sidebar-accent-foreground: oklch(0.218 0 89.876);
   --sidebar-border: oklch(0.84 0.006 286.281);
   --sidebar-ring: oklch(0.61 0.001 106.443);
@@ -138,6 +158,15 @@ code {
   --accent: oklch(0.269 0 89.876);
   --accent-foreground: oklch(0.991 0 89.876);
   --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(0.72 0.13 150);
+  --success-foreground: oklch(0.1684 0 0);
+  --warning: oklch(0.78 0.13 75);
+  --warning-foreground: oklch(0.1684 0 0);
+  --sale: oklch(0.68 0.17 30);
+  --sale-foreground: oklch(0.1684 0 0);
+  --info: oklch(0.68 0.11 245);
+  --info-foreground: oklch(0.1684 0 0);
+  --star: oklch(0.8 0.14 80);
   --border: oklch(0.2686 0 0);
   --input: oklch(0.2178 0 0);
   --dark-06: oklch(0.1684 0 0);
@@ -151,16 +180,16 @@ code {
   --body-70: oklch(0.7665 0.0014 106.43 / 70);
   --body-80: oklch(0.8452 0 0 / 80);
   --ring: oklch(0.6 0.003 84.565);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --chart-1: oklch(0.78 0.08 72);
+  --chart-2: oklch(0.7 0.1 150);
+  --chart-3: oklch(0.66 0.09 260);
+  --chart-4: oklch(0.72 0.13 30);
+  --chart-5: oklch(0.6 0.06 72);
   --sidebar: oklch(0.239 0 89.876);
   --sidebar-foreground: oklch(0.991 0 89.876);
   --sidebar-primary: oklch(0.675 0.113 75.171);
   --sidebar-primary-foreground: oklch(0.991 0 89.876);
-  --sidebar-accent: oklch(0.269 0 89.876);
+  --sidebar-accent: oklch(0.3 0.02 73);
   --sidebar-accent-foreground: oklch(0.991 0 89.876);
   --sidebar-border: oklch(0.321 0 89.876);
   --sidebar-ring: oklch(0.6 0.003 84.565);
@@ -222,13 +251,4 @@ code {
 
 .animate-shimmer {
   animation: shimmer 1.5s infinite;
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

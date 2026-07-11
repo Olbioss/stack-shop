@@ -100,7 +100,7 @@ export default function StoreReviews({ shopId, rating, reviewCount }: Props) {
                     key={i}
                     className={`size-5 ${
                       i < Math.floor(rating)
-                        ? "fill-yellow-400 text-yellow-400"
+                        ? "fill-star text-star"
                         : "text-muted-foreground"
                     }`}
                   />
@@ -117,7 +117,7 @@ export default function StoreReviews({ shopId, rating, reviewCount }: Props) {
                 <div key={star} className="flex items-center gap-3">
                   <div className="flex w-12 items-center gap-1">
                     <span className="text-sm">{star}</span>
-                    <Star className="size-3 fill-yellow-400 text-yellow-400" />
+                    <Star className="size-3 fill-star text-star" />
                   </div>
                   <Progress value={percentage} className="h-2 flex-1" />
                   <span className="w-12 text-muted-foreground text-sm">
@@ -166,7 +166,7 @@ export default function StoreReviews({ shopId, rating, reviewCount }: Props) {
                                   key={i}
                                   className={`size-3.5 ${
                                     i < review.rating
-                                      ? "fill-yellow-400 text-yellow-400"
+                                      ? "fill-star text-star"
                                       : "text-muted-foreground"
                                   }`}
                                 />

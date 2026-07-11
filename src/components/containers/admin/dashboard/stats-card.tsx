@@ -62,20 +62,20 @@ export function StatsCard({
         <Icon className="size-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="font-bold text-2xl">{formatValue(value)}</div>
+        <div className="font-bold font-mono text-2xl">{formatValue(value)}</div>
         {(change !== undefined || changeLabel) && (
           <p className="flex items-center gap-1 text-muted-foreground text-xs">
             {change !== undefined && (
               <>
                 {change >= 0 ? (
-                  <ArrowUp className="size-3 text-green-500" />
+                  <ArrowUp className="size-3 text-success" />
                 ) : (
-                  <ArrowDown className="size-3 text-red-500" />
+                  <ArrowDown className="size-3 text-destructive" />
                 )}
                 <span
                   className={cn(
                     "font-medium",
-                    change >= 0 ? "text-green-500" : "text-red-500"
+                    change >= 0 ? "text-success" : "text-destructive"
                   )}
                 >
                   {Math.abs(change).toFixed(1)}%

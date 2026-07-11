@@ -37,7 +37,7 @@ export default function ProductPrice({
 
       <div className="flex items-center gap-3">
         {hasDiscount && (
-          <span className="font-medium text-destructive text-sm">
+          <span className="font-medium text-sale text-sm">
             Save {currency}
             {(originalPrice - currentPrice).toFixed(2)} ({discountPercentage}%)
           </span>
@@ -45,7 +45,7 @@ export default function ProductPrice({
 
         <Badge
           variant={inStock ? "outline" : "destructive"}
-          className={cn(inStock && "border-green-500 text-green-600")}
+          className={cn(inStock && "border-success text-success")}
         >
           {inStock ? "In Stock" : "Out of Stock"}
         </Badge>

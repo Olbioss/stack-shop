@@ -78,7 +78,7 @@ export default function TransactionsTable({
                     ? "destructive"
                     : "outline"
             }
-            className={status === "paid" ? "bg-green-500" : ""}
+            className={status === "paid" ? "bg-success" : ""}
           >
             {status}
           </Badge>

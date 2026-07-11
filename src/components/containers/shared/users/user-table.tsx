@@ -102,7 +102,7 @@ export default function UserTable({
         return (
           <Badge
             variant={status === "banned" ? "destructive" : "default"}
-            className={status === "active" ? "bg-green-500" : ""}
+            className={status === "active" ? "bg-success" : ""}
           >
             {status}
           </Badge>

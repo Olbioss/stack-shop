@@ -180,13 +180,13 @@ export default function FilterSidebar({
               }
             >
               <div
-                className={`h-4 w-4 rounded-full border ${filters.rating === rating ? "border-primary bg-primary" : "border-gray-300"}`}
+                className={`h-4 w-4 rounded-full border ${filters.rating === rating ? "border-primary bg-primary" : "border-input"}`}
               />
               <div className="flex items-center">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`h-4 w-4 ${i < rating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
+                    className={`h-4 w-4 ${i < rating ? "fill-star text-star" : "text-muted-foreground/40"}`}
                   />
                 ))}
                 <span className="ml-2 text-muted-foreground text-sm">& Up</span>

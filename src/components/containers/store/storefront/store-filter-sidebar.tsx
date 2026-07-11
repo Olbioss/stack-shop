@@ -147,7 +147,7 @@ export default function StoreFilterSidebar({
                 className="flex cursor-pointer items-center gap-1 font-normal"
               >
                 {option.value > 0 && (
-                  <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
+                  <Star className="size-3.5 fill-star text-star" />
                 )}
                 {option.label}
               </Label>

@@ -43,7 +43,7 @@ export default function ReviewCard({
             <div className="flex items-center gap-2">
               <h4 className="font-semibold text-foreground">{userName}</h4>
               {isVerifiedPurchase && (
-                <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                <span className="flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 text-xs font-medium text-success">
                   <Check className="h-3 w-3" />
                   Verified Purchase
                 </span>
@@ -51,7 +51,7 @@ export default function ReviewCard({
             </div>
             <p className="text-muted-foreground text-xs">{date}</p>
           </div>
-          <div className="flex text-yellow-400">
+          <div className="flex text-star">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}

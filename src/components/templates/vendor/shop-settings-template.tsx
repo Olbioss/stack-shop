@@ -200,8 +200,8 @@ function PaymentSettingsSection({
     <>
       {/* Show success message if just completed onboarding */}
       {onboardingStatus === "success" && (
-        <Alert className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
-          <CheckCircle2 className="h-4 w-4 text-green-600" />
+        <Alert className="border-success/30 bg-success/10">
+          <CheckCircle2 className="h-4 w-4 text-success" />
           <AlertTitle>Onboarding Complete</AlertTitle>
           <AlertDescription>
             Your Stripe account has been successfully connected. You can now
@@ -212,8 +212,8 @@ function PaymentSettingsSection({
 
       {/* Show refresh message if onboarding was interrupted */}
       {onboardingStatus === "refresh" && (
-        <Alert className="border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950">
-          <AlertCircle className="h-4 w-4 text-yellow-600" />
+        <Alert className="border-warning/30 bg-warning/10">
+          <AlertCircle className="h-4 w-4 text-warning" />
           <AlertTitle>Onboarding Interrupted</AlertTitle>
           <AlertDescription>
             It looks like your Stripe onboarding was interrupted. Please click
@@ -229,7 +229,7 @@ function PaymentSettingsSection({
               <CardTitle className="flex items-center gap-2">
                 Stripe Connect
                 {status?.isConnected && status.chargesEnabled && (
-                  <Badge variant="default" className="bg-green-600">
+                  <Badge variant="default" className="bg-success">
                     Connected
                   </Badge>
                 )}
@@ -274,8 +274,8 @@ function PaymentSettingsSection({
           ) : status.requiresAction ? (
             // Connected but needs action
             <div className="space-y-4">
-              <Alert className="border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950">
-                <AlertCircle className="h-4 w-4 text-yellow-600" />
+              <Alert className="border-warning/30 bg-warning/10">
+                <AlertCircle className="h-4 w-4 text-warning" />
                 <AlertTitle>Action Required</AlertTitle>
                 <AlertDescription>
                   Please complete the remaining requirements to enable payments.
@@ -301,7 +301,7 @@ function PaymentSettingsSection({
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="rounded-lg border p-4">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600" />
+                    <CheckCircle2 className="h-4 w-4 text-success" />
                     <span className="font-medium text-sm">
                       Onboarding Complete
                     </span>
@@ -310,9 +310,9 @@ function PaymentSettingsSection({
                 <div className="rounded-lg border p-4">
                   <div className="flex items-center gap-2">
                     {status.chargesEnabled ? (
-                      <CheckCircle2 className="h-4 w-4 text-green-600" />
+                      <CheckCircle2 className="h-4 w-4 text-success" />
                     ) : (
-                      <AlertCircle className="h-4 w-4 text-yellow-600" />
+                      <AlertCircle className="h-4 w-4 text-warning" />
                     )}
                     <span className="font-medium text-sm">
                       {status.chargesEnabled
@@ -324,9 +324,9 @@ function PaymentSettingsSection({
                 <div className="rounded-lg border p-4">
                   <div className="flex items-center gap-2">
                     {status.payoutsEnabled ? (
-                      <CheckCircle2 className="h-4 w-4 text-green-600" />
+                      <CheckCircle2 className="h-4 w-4 text-success" />
                     ) : (
-                      <AlertCircle className="h-4 w-4 text-yellow-600" />
+                      <AlertCircle className="h-4 w-4 text-warning" />
                     )}
                     <span className="font-medium text-sm">
                       {status.payoutsEnabled

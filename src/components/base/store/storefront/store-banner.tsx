@@ -42,14 +42,14 @@ export default function StoreBanner({ store, className }: StoreBannerProps) {
               <h1 className="font-bold @2xl:text-3xl text-2xl">{store.name}</h1>
               {store.isVerified && (
                 <CheckCircle2
-                  className="h-6 w-6 text-blue-400"
+                  className="h-6 w-6 text-info"
                   aria-label="Verified Store"
                 />
               )}
             </div>
             <div className="flex items-center gap-3 text-sm">
               <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                <Star className="h-4 w-4 fill-star text-star" />
                 <span className="font-medium">{store.rating.toFixed(1)}</span>
                 <span className="text-white/80">
                   ({store.reviewCount} reviews)

@@ -48,8 +48,8 @@ export default function Collections() {
 
   return (
     <Section
-      title="Elevate Your Style with Our Latest Collection"
-      description="Each piece is crafted to enhance your fashion statement."
+      title="Fresh Finds From Every Shop"
+      description="The latest arrivals across the marketplace — filter by category and dig in."
       rightAsset={
         <StarSolidIcon className="@5xl:h-79 @6xl:h-96.5 h-20 @5xl:w-75.25 @6xl:w-61.5" />
       }

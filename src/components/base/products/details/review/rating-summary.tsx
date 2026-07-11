@@ -32,7 +32,7 @@ export default function RatingSummary({
         <div className="font-bold text-5xl text-foreground">
           {averageRating.toFixed(1)}
         </div>
-        <div className="flex text-yellow-400">
+        <div className="flex text-star">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
@@ -59,7 +59,7 @@ export default function RatingSummary({
             <div key={star} className="flex items-center gap-3 text-sm">
               <div className="flex w-12 shrink-0 items-center gap-1">
                 <span className="font-medium">{star}</span>
-                <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                <Star className="h-3 w-3 fill-star text-star" />
               </div>
               <Progress
                 value={percentage}

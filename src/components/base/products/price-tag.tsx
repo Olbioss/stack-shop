@@ -21,7 +21,7 @@ export default function PriceTag({
     lg: "text-xl font-bold",
   };
   return (
-    <div className={cn("flex items-baseline gap-2", className)}>
+    <div className={cn("flex items-baseline gap-2 font-mono", className)}>
       <span className={cn("font-semibold text-foreground", sizeClasses[size])}>
         {currency}
         {price.toFixed(2)}

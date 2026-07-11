@@ -76,7 +76,7 @@ export function PlatformHealthCard({
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-2">
-                <CreditCard className="size-3 text-green-500" />
+                <CreditCard className="size-3 text-success" />
                 Stripe Connected
               </span>
               <span>
@@ -89,11 +89,11 @@ export function PlatformHealthCard({
 
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="flex items-center gap-2 rounded-md bg-muted/50 p-2">
-              <CheckCircle className="size-3 text-green-500" />
+              <CheckCircle className="size-3 text-success" />
               <span>Active: {data.vendors.active}</span>
             </div>
             <div className="flex items-center gap-2 rounded-md bg-muted/50 p-2">
-              <Clock className="size-3 text-amber-500" />
+              <Clock className="size-3 text-star" />
               <span>Pending: {data.vendors.pendingApproval}</span>
             </div>
           </div>
@@ -112,7 +112,7 @@ export function PlatformHealthCard({
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-2">
-                <CheckCircle className="size-3 text-green-500" />
+                <CheckCircle className="size-3 text-success" />
                 Active Shops
               </span>
               <span>
@@ -124,11 +124,11 @@ export function PlatformHealthCard({
 
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="flex items-center gap-2 rounded-md bg-muted/50 p-2">
-              <Clock className="size-3 text-amber-500" />
+              <Clock className="size-3 text-star" />
               <span>Pending: {data.shops.pending}</span>
             </div>
             <div className="flex items-center gap-2 rounded-md bg-muted/50 p-2">
-              <ShieldAlert className="size-3 text-red-500" />
+              <ShieldAlert className="size-3 text-destructive" />
               <span>Suspended: {data.shops.suspended}</span>
             </div>
           </div>

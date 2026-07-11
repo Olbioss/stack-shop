@@ -61,7 +61,7 @@ export function SecuritySettings() {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 {userHas2FA ? (
-                  <ShieldCheck className="h-5 w-5 text-green-500" />
+                  <ShieldCheck className="h-5 w-5 text-success" />
                 ) : (
                   <ShieldOff className="h-5 w-5 text-muted-foreground" />
                 )}

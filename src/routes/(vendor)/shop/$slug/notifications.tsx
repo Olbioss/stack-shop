@@ -31,11 +31,11 @@ export const Route = createFileRoute("/(vendor)/shop/$slug/notifications")({
 });
 
 const notificationIcons: Record<string, React.ReactNode> = {
-  new_order: <ShoppingCart className="size-4 text-green-500" />,
-  order_status_update: <Package className="size-4 text-blue-500" />,
-  new_review: <Star className="size-4 text-yellow-500" />,
-  low_stock: <AlertTriangle className="size-4 text-orange-500" />,
-  payout: <CreditCard className="size-4 text-emerald-500" />,
+  new_order: <ShoppingCart className="size-4 text-success" />,
+  order_status_update: <Package className="size-4 text-info" />,
+  new_review: <Star className="size-4 text-star" />,
+  low_stock: <AlertTriangle className="size-4 text-warning" />,
+  payout: <CreditCard className="size-4 text-success" />,
   system: <Info className="size-4 text-muted-foreground" />,
 };
 
@@ -149,7 +149,7 @@ function NotificationsPage() {
                   key={notification.id}
                   className={cn(
                     "group relative flex gap-3 px-4 py-3 transition-colors hover:bg-muted/50",
-                    !notification.isRead && "bg-primary/5",
+                    !notification.isRead && "bg-primary/5"
                   )}
                 >
                   <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-muted">
@@ -163,7 +163,7 @@ function NotificationsPage() {
                       <p
                         className={cn(
                           "text-sm leading-tight",
-                          !notification.isRead && "font-medium",
+                          !notification.isRead && "font-medium"
                         )}
                       >
                         {notification.title}

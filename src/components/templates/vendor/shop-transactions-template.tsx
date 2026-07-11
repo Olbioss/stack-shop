@@ -39,10 +39,10 @@ export default function ShopTransactionsTemplate({
               <CardTitle className="font-medium text-sm">
                 Total Earnings
               </CardTitle>
-              <TrendingUp className="size-4 text-green-600" />
+              <TrendingUp className="size-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl text-green-600">
+              <div className="font-bold font-mono text-2xl text-success">
                 {formatCurrency(stats.totalEarnings)}
               </div>
               <p className="text-muted-foreground text-xs">Last 30 days</p>
@@ -54,10 +54,10 @@ export default function ShopTransactionsTemplate({
               <CardTitle className="font-medium text-sm">
                 Pending Earnings
               </CardTitle>
-              <Clock className="size-4 text-yellow-600" />
+              <Clock className="size-4 text-warning" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {formatCurrency(stats.pendingEarnings)}
               </div>
               <p className="text-muted-foreground text-xs">
@@ -74,7 +74,7 @@ export default function ShopTransactionsTemplate({
               <Percent className="size-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {formatCurrency(stats.platformFeesPaid)}
               </div>
               <p className="text-muted-foreground text-xs">Last 30 days</p>
@@ -89,7 +89,7 @@ export default function ShopTransactionsTemplate({
               <CheckCircle2 className="size-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {stats.totalTransactions}
               </div>
               <p className="text-muted-foreground text-xs">

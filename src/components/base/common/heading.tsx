@@ -9,7 +9,7 @@ interface HeadingProps {
 export default function Heading({ title, subtitle, className }: HeadingProps) {
   return (
     <div className={cn("space-y-6", className)}>
-      <h2 className="font-extrabold @6xl:text-5xl text-3xl tracking-tight">
+      <h2 className="font-extrabold @6xl:text-5xl text-3xl uppercase tracking-tight">
         {title}
       </h2>
       {subtitle ? <p className="max-w-prose text-body-40">{subtitle}</p> : null}

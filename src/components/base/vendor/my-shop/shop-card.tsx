@@ -85,7 +85,7 @@ export default function ShopCard({ shop, canManage, className }: Props) {
               <span>{shop.category || "Uncategorized"}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Star className="size-3 fill-yellow-400 text-yellow-400" />
+              <Star className="size-3 fill-star text-star" />
               <span>{shop.rating}</span>
             </div>
           </div>

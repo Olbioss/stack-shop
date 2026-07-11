@@ -29,10 +29,10 @@ export default function AdminTransactionsTemplate({
               <CardTitle className="font-medium text-sm">
                 Total Revenue
               </CardTitle>
-              <TrendingUp className="size-4 text-green-600" />
+              <TrendingUp className="size-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl text-green-600">
+              <div className="font-bold font-mono text-2xl text-success">
                 {formatCurrency(stats.totalRevenue)}
               </div>
               <p className="text-muted-foreground text-xs">Last 30 days</p>
@@ -47,7 +47,7 @@ export default function AdminTransactionsTemplate({
               <Percent className="size-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {formatCurrency(stats.platformFees)}
               </div>
               <p className="text-muted-foreground text-xs">Last 30 days</p>
@@ -59,10 +59,10 @@ export default function AdminTransactionsTemplate({
               <CardTitle className="font-medium text-sm">
                 Vendor Payouts
               </CardTitle>
-              <DollarSign className="size-4 text-blue-600" />
+              <DollarSign className="size-4 text-info" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {formatCurrency(stats.vendorPayouts)}
               </div>
               <p className="text-muted-foreground text-xs">Net payouts</p>
@@ -77,7 +77,7 @@ export default function AdminTransactionsTemplate({
               <CheckCircle2 className="size-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="font-bold text-2xl">
+              <div className="font-bold font-mono text-2xl">
                 {stats.totalTransactions}
               </div>
               <p className="text-muted-foreground text-xs">

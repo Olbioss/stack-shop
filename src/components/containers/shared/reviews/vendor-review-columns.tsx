@@ -57,7 +57,7 @@ const StarRating = ({ rating }: { rating: number }) => {
         <Star
           key={star}
           className={`size-4 ${
-            star <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+            star <= rating ? "fill-star text-star" : "text-muted-foreground/40"
           }`}
         />
       ))}
@@ -203,11 +203,7 @@ export const createVendorReviewColumns = ({
           <div className="flex justify-end">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="h-8 w-8 p-0"
-                  disabled={busy}
-                >
+                <Button variant="ghost" className="h-8 w-8 p-0" disabled={busy}>
                   <span className="sr-only">Open menu</span>
                   <MoreHorizontal className="size-4" />
                 </Button>
@@ -234,7 +230,7 @@ export const createVendorReviewColumns = ({
                     {status !== "approved" && (
                       <DropdownMenuItem
                         onClick={() => onUpdateStatus?.(review.id, "approved")}
-                        className="text-green-600"
+                        className="text-success"
                       >
                         Approve
                       </DropdownMenuItem>

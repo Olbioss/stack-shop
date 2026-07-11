@@ -61,7 +61,7 @@ export default function ProfileForm() {
               />
               <InputGroupAddon align="inline-end">
                 {user.emailVerified ? (
-                  <CheckCircle2 className="size-4 text-emerald-500" />
+                  <CheckCircle2 className="size-4 text-success" />
                 ) : (
                   <XCircle className="size-4 text-destructive" />
                 )}

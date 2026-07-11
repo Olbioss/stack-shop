@@ -95,7 +95,7 @@ export function EditReviewDialog({
                     className={cn(
                       "h-6 w-6 transition-colors",
                       value <= (hoveredRating || rating)
-                        ? "fill-yellow-400 text-yellow-400"
+                        ? "fill-star text-star"
                         : "text-muted-foreground/30"
                     )}
                   />

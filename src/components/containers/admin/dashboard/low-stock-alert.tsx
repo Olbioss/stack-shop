@@ -25,7 +25,7 @@ export function LowStockAlert({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <AlertTriangle className="size-5 text-amber-500" />
+            <AlertTriangle className="size-5 text-star" />
             Low Stock Alerts
           </CardTitle>
           <CardDescription>Products needing restocking</CardDescription>
@@ -46,7 +46,7 @@ export function LowStockAlert({
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="flex items-center gap-2">
-            <AlertTriangle className="size-5 text-amber-500" />
+            <AlertTriangle className="size-5 text-star" />
             Low Stock Alerts
             {products.length > 0 && (
               <Badge variant="secondary" className="ml-2">

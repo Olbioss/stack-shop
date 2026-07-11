@@ -5,8 +5,8 @@ import BallCircleIcon from "#/components/ui/icons/ball-circle";
 export default function CtaBanner() {
   return (
     <Section
-      title="Elevate Your Wardrobe"
-      description="Don't miss out – experience the epitome of fashion by clicking 'Buy Now' and embrace a world of chic elegance delivered to your doorstep. Your style journey begins here."
+      title="Fill One Cart From Ten Shops"
+      description="Browse the whole marketplace, add from any shop, and check out once. New arrivals land every week — your next favorite find is already here."
       containerClassName="bg-primary-70 border-transparent"
       rightAsset={
         <BallCircleIcon className="@5xl:h-[316px] @6xl:h-[386px] h-24 @5xl:w-[301px] @6xl:w-[506px] opacity-30" />

@@ -120,7 +120,7 @@ export const createTransactionColumns = ({
       cell: ({ row }) => {
         const amount = row.original.vendorAmount;
         return (
-          <div className="font-medium text-green-600">
+          <div className="font-medium text-success">
             {formatCurrency(amount)}
           </div>
         );
@@ -169,7 +169,7 @@ export const createTransactionColumns = ({
         const statusConfig = {
           succeeded: {
             variant: "default" as const,
-            className: "bg-green-500",
+            className: "bg-success",
             label: "Paid",
           },
           pending: {

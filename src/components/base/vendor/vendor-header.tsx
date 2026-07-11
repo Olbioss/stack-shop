@@ -23,14 +23,16 @@ export default function VendorHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6",
+        "sticky top-0 z-10 flex h-16 items-center gap-4 border-b-2 border-dashed bg-background px-4 md:px-6",
         className
       )}
     >
       <SidebarTrigger />
 
       <div className="flex flex-1 items-center gap-4">
-        <h1 className="font-semibold text-lg md:text-xl">{title}</h1>
+        <h1 className="font-bold text-lg uppercase tracking-tight md:text-xl">
+          {title}
+        </h1>
 
         {showSearch && (
           <div className="ml-auto flex w-full max-w-md items-center gap-2">

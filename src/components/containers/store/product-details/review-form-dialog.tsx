@@ -171,7 +171,7 @@ export function ReviewFormDialog({
                         className={cn(
                           "h-8 w-8 transition-colors",
                           star <= (hoveredRating || rating)
-                            ? "fill-yellow-400 text-yellow-400"
+                            ? "fill-star text-star"
                             : "text-muted-foreground"
                         )}
                       />

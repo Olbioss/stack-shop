@@ -24,7 +24,7 @@ export default function VendorDashboardLayout({
         <VendorHeader title={headerTitle} showSearch={showSearch} />
         <main
           className={cn(
-            "@container flex flex-1 flex-col gap-4 p-4 md:gap-6 md:p-6",
+            "@container m-4 flex flex-1 flex-col gap-4 rounded-2xl border-2 border-dashed p-4 md:m-6 md:gap-6 md:p-6",
             className
           )}
         >

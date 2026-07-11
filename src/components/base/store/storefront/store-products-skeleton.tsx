@@ -20,16 +20,16 @@ export function StoreProductsSkeleton({ count = 6 }: { count?: number }) {
         {Array.from({ length: count }).map((_, i) => (
           <div
             key={i}
-            className="space-y-4 rounded-xl border-2 border-muted border-dashed p-4"
+            className="space-y-4 rounded-xl border-2 border-dashed p-4"
           >
-            <Skeleton className="aspect-square w-full rounded-t-2xl" />
+            <Skeleton className="aspect-square w-full rounded-lg" />
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <Skeleton className="h-5 w-20" />
                 <Skeleton className="h-4 w-16" />
               </div>
               <Skeleton className="h-6 w-full" />
-              <div className="flex items-center justify-between border-muted border-t border-dashed pt-3">
+              <div className="flex items-center justify-between border-t border-dashed pt-3">
                 <Skeleton className="h-5 w-20" />
                 <div className="flex gap-1">
                   <Skeleton className="h-4 w-4 rounded-full" />

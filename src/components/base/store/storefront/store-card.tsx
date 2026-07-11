@@ -31,7 +31,7 @@ export default function StoreCard({ store, className }: StoreCardProps) {
 
         {/* Verification Badge */}
         {store.isVerified && (
-          <Badge className="absolute top-4 right-4 gap-1 border-blue-500/20 bg-blue-500/90 text-white backdrop-blur-sm">
+          <Badge className="absolute top-4 right-4 gap-1 border-info/20 bg-info/90 text-white backdrop-blur-sm">
             <CheckCircle2 className="size-3" />
             Verified
           </Badge>
@@ -89,7 +89,7 @@ export default function StoreCard({ store, className }: StoreCardProps) {
           </div>
           <div className="flex flex-col items-center gap-1.5 text-center">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-background">
-              <Star className="size-4 fill-yellow-400 text-yellow-400" />
+              <Star className="size-4 fill-star text-star" />
             </div>
             <span className="font-bold text-base">
               {store.rating.toFixed(1)}

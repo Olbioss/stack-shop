@@ -68,7 +68,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                 <span className="font-medium text-muted-foreground text-sm">
                   Store URL
                 </span>
-                <p className="cursor-pointer text-blue-600 underline">
+                <p className="cursor-pointer text-info underline">
                   https://shopstack.com/{tenant.slug}
                 </p>
               </div>
@@ -114,7 +114,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                 <div>
                   <Label>Current Effective Rate</Label>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-2xl">
+                    <span className="font-bold font-mono text-2xl">
                       {baseCommissionRate}%
                     </span>
                   </div>
@@ -155,7 +155,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                   <p className="flex items-center gap-2">
                     {tenant.stripeConnectedAccountId ? (
                       <>
-                        <CheckCircle2 className="size-4 text-green-600" />
+                        <CheckCircle2 className="size-4 text-success" />
                         Connected
                       </>
                     ) : (
@@ -172,7 +172,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                   <p className="flex items-center gap-2">
                     {tenant.stripeOnboardingComplete ? (
                       <>
-                        <CheckCircle2 className="size-4 text-green-600" />
+                        <CheckCircle2 className="size-4 text-success" />
                         Complete
                       </>
                     ) : (
@@ -187,7 +187,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                   <p className="flex items-center gap-2">
                     {tenant.stripeChargesEnabled ? (
                       <>
-                        <CheckCircle2 className="size-4 text-green-600" />
+                        <CheckCircle2 className="size-4 text-success" />
                         Yes
                       </>
                     ) : (
@@ -202,7 +202,7 @@ export default function TenantTabs({ tenant }: AdminTenantDetailsProps) {
                   <p className="flex items-center gap-2">
                     {tenant.stripePayoutsEnabled ? (
                       <>
-                        <CheckCircle2 className="size-4 text-green-600" />
+                        <CheckCircle2 className="size-4 text-success" />
                         Yes
                       </>
                     ) : (

@@ -26,7 +26,7 @@ export default function Navbar({
           key={item.to}
           to={item.to}
           className={cn(
-            "flex @7xl:h-16 items-center justify-center rounded-xl border border-dashed bg-transparent px-[30px] text-lg transition-all hover:border-transparent hover:bg-primary hover:text-background dark:text-body-70 dark:hover:text-background",
+            "flex @7xl:h-16 items-center justify-center rounded-xl border-2 border-dashed bg-transparent px-[30px] text-lg transition-all hover:border-transparent hover:bg-primary hover:text-background dark:text-body-70 dark:hover:text-background",
             linkClassName
           )}
           activeProps={{

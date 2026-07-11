@@ -60,13 +60,13 @@ export default function SubscribeForm() {
                   aria-invalid={isInvalid}
                   placeholder="Your Email"
                   autoComplete="email"
-                  className="@6xl:h-16 h-12 w-full rounded-xl border-none bg-zinc-900 px-4 pr-12 text-zinc-400 placeholder:text-zinc-500 focus-visible:ring-1 focus-visible:ring-zinc-700"
+                  className="@6xl:h-16 h-12 w-full rounded-xl border-none bg-dark-10 px-4 pr-12 text-body-50 placeholder:text-body-50 focus-visible:ring-1 focus-visible:ring-body-20"
                 />
                 <Button
                   variant="ghost"
                   size="icon"
                   type="submit"
-                  className="-translate-y-1/2 absolute top-1/2 right-2 text-zinc-400 hover:bg-transparent hover:text-white"
+                  className="-translate-y-1/2 absolute top-1/2 right-2 text-body-50 hover:bg-transparent hover:text-white"
                 >
                   <ArrowRight className="h-5 w-5" />
                   <span className="sr-only">Subscribe</span>

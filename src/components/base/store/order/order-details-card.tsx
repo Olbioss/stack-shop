@@ -31,7 +31,7 @@ export function OrderDetailsCard({
           </h2>
           <div className="flex flex-wrap gap-4 text-sm">
             <span>Order Date: {orderDate}</span>
-            <span className="text-yellow-300">
+            <span className="text-star">
               Estimated delivery: {estimatedDelivery}
             </span>
           </div>
@@ -53,7 +53,7 @@ export function OrderDetailsCard({
           </Button>
           <Button
             size="lg"
-            className="rounded-full bg-yellow-400 text-background hover:bg-yellow-500"
+            className="rounded-full bg-warning text-warning-foreground hover:bg-warning/90"
             onClick={() => {
               toast.success("Opening order tracking");
               navigate({

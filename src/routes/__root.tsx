@@ -5,8 +5,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/base/provider/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
@@ -45,9 +45,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider defaultTheme="system" storageKey="theme">
+        <ThemeProvider defaultTheme="light" storageKey="theme">
           {children}
-          <Toaster richColors closeButton position="top-right" theme="system" />
+          <Toaster richColors closeButton position="top-right" />
         </ThemeProvider>
         <TanStackDevtools
           config={{

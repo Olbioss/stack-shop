@@ -13,44 +13,44 @@ import VennOutlineDashIcon from "@/components/ui/icons/venn-outline-dash";
 
 export const features = [
   {
-    title: "Passionate Craftsmanship",
+    title: "Independent Shops",
     description:
-      "Every garment at StyleLoom is crafted with passion, reflecting our commitment to quality and innovation.",
+      "Every storefront on Stack Shop is run by a real, independent seller — browse ten shops and counting under one roof.",
     icon: StarCircleIcon,
     outlineIcon: StarOutlineDashIcon,
   },
   {
-    title: "Fashion Forward",
+    title: "One Cart, One Checkout",
     description:
-      "We're more than a brand; we're trendsetters, curating styles that empower and inspire confidence.",
+      "Mix products from any number of shops and pay once. We handle the rest behind the scenes.",
     icon: VennIcon,
     outlineIcon: VennOutlineDashIcon,
   },
   {
-    title: "Customer-Centric Approach",
+    title: "Buyer Protection",
     description:
-      "At StyleLoom, our customers are at the heart of everything we do. Your satisfaction is our measure of success.",
+      "Secure Stripe payments, transparent order tracking, and a review system you can trust on every purchase.",
     icon: MaskCircleIcon,
     outlineIcon: MaskOutlineDashIcon,
   },
   {
-    title: "Global Inspiration",
+    title: "Curated Quality",
     description:
-      "Influenced by global trends, we bring you a diverse and dynamic collection, embodying the spirit of fashion from around the world.",
+      "Shops earn their place. Ratings and reviews keep the marketplace honest and the catalog sharp.",
     icon: TrophyCircleIcon,
     outlineIcon: TrophyOutlineDashIcon,
   },
   {
-    title: "Empowering Your Style",
+    title: "Everything in One Place",
     description:
-      "Beyond clothing, StyleLoom is a lifestyle. Join us on a journey of self-expression and empowerment through fashion.",
+      "Electronics, fashion, home, groceries, books, and more — stop hopping between stores to fill your list.",
     icon: MagicCircleIcon,
     outlineIcon: MagicOutlineDashIcon,
   },
   {
-    title: "Sustainable Practices",
+    title: "Fast, Tracked Delivery",
     description:
-      "StyleLoom is committed to sustainability, integrating eco-friendly practices into our production process.",
+      "Per-shop shipping options with live order tracking from checkout all the way to your door.",
     icon: DialCircleIcon,
     outlineIcon: DialOutlineDashIcon,
   },

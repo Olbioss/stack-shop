@@ -49,7 +49,7 @@ export default function ProductHeader({
         <div className="h-4 w-px bg-border" />
 
         <div className="flex items-center gap-1">
-          <div className="flex items-center text-yellow-400">
+          <div className="flex items-center text-star">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}

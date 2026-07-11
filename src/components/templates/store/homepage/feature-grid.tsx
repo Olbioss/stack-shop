@@ -4,8 +4,8 @@ import FeatureGridContainer from "#/components/containers/store/feature-grid-con
 export default function FeatureGrid() {
   return (
     <Section
-      title="Crafting Trends, Inspiring Confidence"
-      description="Explore a world of fashion at ShopStack, where trends meet affordability."
+      title="One Marketplace, Many Shops"
+      description="Ten independent shops, one seamless experience — here's what makes Stack Shop work."
     >
       <FeatureGridContainer />
     </Section>

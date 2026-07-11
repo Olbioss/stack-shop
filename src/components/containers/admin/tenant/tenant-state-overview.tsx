@@ -13,7 +13,7 @@ export default function TenantStateOverview({
           <CreditCard className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="font-bold text-2xl">{tenant.stats.revenue}</div>
+          <div className="font-bold font-mono text-2xl">{tenant.stats.revenue}</div>
         </CardContent>
       </Card>
       <Card>
@@ -22,7 +22,7 @@ export default function TenantStateOverview({
           <ShoppingBag className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="font-bold text-2xl">{tenant.stats.orders}</div>
+          <div className="font-bold font-mono text-2xl">{tenant.stats.orders}</div>
         </CardContent>
       </Card>
       <Card>
@@ -31,7 +31,7 @@ export default function TenantStateOverview({
           <Package className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="font-bold text-2xl">{tenant.stats.products}</div>
+          <div className="font-bold font-mono text-2xl">{tenant.stats.products}</div>
         </CardContent>
       </Card>
       <Card>
@@ -40,7 +40,7 @@ export default function TenantStateOverview({
           <Users className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="font-bold text-2xl">{tenant.stats.customers}</div>
+          <div className="font-bold font-mono text-2xl">{tenant.stats.customers}</div>
         </CardContent>
       </Card>
     </div>

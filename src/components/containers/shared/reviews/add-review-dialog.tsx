@@ -57,9 +57,9 @@ const StarRatingInput = ({
           <Star
             className={`size-6 ${
               star <= rating
-                ? "fill-yellow-400 text-yellow-400"
-                : "text-gray-300"
-            } transition-colors hover:fill-yellow-400 hover:text-yellow-400`}
+                ? "fill-star text-star"
+                : "text-muted-foreground/40"
+            } transition-colors hover:fill-star hover:text-star`}
           />
         </button>
       ))}

@@ -9,9 +9,9 @@ const homeMenu = [
 ];
 
 const productsMenu = [
-  { label: "Menswear", to: "/products?category=mens" },
-  { label: "Womenswear", to: "/products?category=womens" },
-  { label: "Kidswear", to: "/products?category=kids" },
+  { label: "All Products", to: "/product" },
+  { label: "Categories", to: "/category" },
+  { label: "Shops", to: "/store" },
 ];
 
 export default function FooterMiddle() {

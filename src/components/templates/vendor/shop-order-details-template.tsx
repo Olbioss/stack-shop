@@ -147,7 +147,7 @@ export default function ShopOrderDetailsTemplate({
             {resolvedBackLink.label ?? "Back to Orders"}
           </Link>
         </Button>
-        <h1 className="font-bold text-2xl tracking-tight">
+        <h1 className="font-bold font-mono text-2xl tracking-tight">
           Order #{order.orderNumber}
         </h1>
       </div>

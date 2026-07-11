@@ -75,7 +75,7 @@ export default function StaffTable({ staff }: StaffTableProps) {
         return (
           <Badge
             variant={status === "active" ? "default" : "secondary"}
-            className={status === "active" ? "bg-green-500" : ""}
+            className={status === "active" ? "bg-success" : ""}
           >
             {status}
           </Badge>

@@ -47,7 +47,7 @@ export default function ProductCardHorizontal({ product, className }: Props) {
         </h3>
 
         <div className="flex items-center gap-1">
-          <div className="flex text-yellow-400">
+          <div className="flex text-star">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}

@@ -212,7 +212,7 @@ export default function CartSummary() {
             {appliedCoupons.map((coupon) => (
               <div
                 key={coupon.code}
-                className="flex items-center justify-between rounded-md bg-green-50 p-2 text-green-700 dark:bg-green-950/30 dark:text-green-400"
+                className="flex items-center justify-between rounded-md bg-success/10 p-2 text-success"
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4" />
@@ -240,7 +240,7 @@ export default function CartSummary() {
         )}
 
         {totalDiscount > 0 && (
-          <div className="flex justify-between text-green-600">
+          <div className="flex justify-between text-success">
             <span className="text-muted-foreground">Discount</span>
             <span className="font-medium">-${totalDiscount.toFixed(2)}</span>
           </div>
@@ -250,7 +250,7 @@ export default function CartSummary() {
           <span className="text-muted-foreground">Delivery Fee</span>
           <span className="font-medium">
             {finalDeliveryFee === 0 ? (
-              <span className="text-green-600">Free</span>
+              <span className="text-success">Free</span>
             ) : (
               `$${finalDeliveryFee.toFixed(2)}`
             )}

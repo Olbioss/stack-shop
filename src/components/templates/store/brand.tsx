@@ -6,13 +6,15 @@ type Props = {
 };
 
 const brandsCategories = [
-  "TANK TOP",
-  "TSHIRT",
-  "LONG-SLEEVE TSHIRT",
-  "RAGLAN SLEEVE SHIRT",
-  "CROP TOP",
-  "V-NECK SHIRT",
-  "MUSCLE SHIRT",
+  "ELECTRONICS",
+  "FASHION",
+  "HOME & LIVING",
+  "GROCERIES",
+  "SPORTS & FITNESS",
+  "BOOKS",
+  "PET SUPPLIES",
+  "BEAUTY",
+  "TOYS",
 ];
 
 export default function Brand({ className }: Props) {

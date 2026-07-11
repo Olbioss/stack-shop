@@ -70,12 +70,12 @@ export default function QuickViewDialog({
             <ProductImageGallery images={product.images} />
             <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
               {product.price.discountPercentage > 0 && (
-                <Badge className="bg-red-500 hover:bg-red-600">
+                <Badge className="bg-sale text-sale-foreground">
                   -{product.price.discountPercentage}%
                 </Badge>
               )}
               {product.isNew && product.price.discountPercentage === 0 && (
-                <Badge className="bg-blue-500 hover:bg-blue-600">New</Badge>
+                <Badge className="bg-info text-info-foreground">New</Badge>
               )}
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function QuickViewDialog({
               <DialogTitle className="font-mono text-xl">
                 {product.name}
               </DialogTitle>
-              <div className="flex items-center gap-1 text-amber-500">
+              <div className="flex items-center gap-1 text-star">
                 <Star className="h-4 w-4 fill-current" />
                 <span className="font-medium text-sm">
                   {product.rating.average}
@@ -107,7 +107,7 @@ export default function QuickViewDialog({
                 size="lg"
               />
               {inStock ? (
-                <Badge variant="outline" className="text-green-600">
+                <Badge variant="outline" className="text-success">
                   In Stock
                 </Badge>
               ) : (

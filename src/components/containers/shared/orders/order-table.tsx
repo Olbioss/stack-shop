@@ -106,9 +106,7 @@ export default function OrderTable({
                   : "secondary"
             }
             className={
-              status === "paid"
-                ? "border-green-500 text-green-600"
-                : "capitalize"
+              status === "paid" ? "border-success text-success" : "capitalize"
             }
           >
             {status}

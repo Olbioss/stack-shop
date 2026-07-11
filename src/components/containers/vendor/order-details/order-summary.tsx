@@ -78,7 +78,7 @@ export default function OrderSummary({
               }
               className={
                 paymentStatus === "paid"
-                  ? "border-green-500 text-green-600"
+                  ? "border-success text-success"
                   : "capitalize"
               }
             >

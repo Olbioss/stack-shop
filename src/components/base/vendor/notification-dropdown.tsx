@@ -31,11 +31,11 @@ interface NotificationDropdownProps {
 }
 
 const notificationIcons: Record<string, React.ReactNode> = {
-  new_order: <ShoppingCart className="size-4 text-green-500" />,
-  order_status_update: <Package className="size-4 text-blue-500" />,
-  new_review: <Star className="size-4 text-yellow-500" />,
-  low_stock: <AlertTriangle className="size-4 text-orange-500" />,
-  payout: <CreditCard className="size-4 text-emerald-500" />,
+  new_order: <ShoppingCart className="size-4 text-success" />,
+  order_status_update: <Package className="size-4 text-info" />,
+  new_review: <Star className="size-4 text-star" />,
+  low_stock: <AlertTriangle className="size-4 text-warning" />,
+  payout: <CreditCard className="size-4 text-success" />,
   system: <Info className="size-4 text-muted-foreground" />,
 };
 
@@ -172,8 +172,7 @@ export function NotificationDropdown({ shopSlug }: NotificationDropdownProps) {
                     key={notification.id}
                     className={cn(
                       "group relative flex gap-4 border-b p-4 transition-colors hover:bg-muted/40",
-                      !notification.isRead &&
-                        "bg-primary/5 hover:bg-primary/10",
+                      !notification.isRead && "bg-primary/5 hover:bg-primary/10"
                     )}
                   >
                     {/* Unread Indicator */}
@@ -188,7 +187,7 @@ export function NotificationDropdown({ shopSlug }: NotificationDropdownProps) {
                     <div
                       className={cn(
                         "flex size-9 shrink-0 items-center justify-center rounded-full border bg-background shadow-sm",
-                        !notification.isRead && "border-primary/20",
+                        !notification.isRead && "border-primary/20"
                       )}
                     >
                       {notificationIcons[notification.type] || (
@@ -204,7 +203,7 @@ export function NotificationDropdown({ shopSlug }: NotificationDropdownProps) {
                             "text-sm leading-none",
                             !notification.isRead
                               ? "font-semibold text-foreground"
-                              : "font-medium text-muted-foreground",
+                              : "font-medium text-muted-foreground"
                           )}
                         >
                           {notification.title}
@@ -219,7 +218,7 @@ export function NotificationDropdown({ shopSlug }: NotificationDropdownProps) {
                             new Date(notification.createdAt),
                             {
                               addSuffix: true,
-                            },
+                            }
                           )}
                         </span>
                         {notification.data?.orderId && (

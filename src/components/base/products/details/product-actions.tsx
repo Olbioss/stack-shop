@@ -67,7 +67,7 @@ export default function ProductActions({
           className={cn(
             "flex-1 gap-2",
             isWishlisted &&
-              "border-red-200 bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600"
+              "border-destructive/30 bg-destructive/10 text-destructive hover:bg-destructive/15 hover:text-destructive"
           )}
           onClick={onToggleWishlist}
         >

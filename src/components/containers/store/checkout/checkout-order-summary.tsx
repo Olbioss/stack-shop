@@ -203,7 +203,7 @@ export default function CheckoutOrderSummary({
               <span className="font-medium">${shippingCost.toFixed(2)}</span>
             </div>
             {totalDiscount > 0 && (
-              <div className="flex justify-between text-green-600">
+              <div className="flex justify-between text-success">
                 <span>Discount</span>
                 <span className="font-medium">
                   -${totalDiscount.toFixed(2)}
