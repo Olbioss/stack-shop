@@ -18,7 +18,7 @@ A multi-vendor e-commerce platform built on TanStack Start. One deployment serve
 
 **Admin panel** (`/admin`)
 - Platform-wide management: tenants (vendors), users, products, orders, transactions, coupons, reviews, categories/brands/tags/attributes, taxes
-- Editable, DB-backed platform settings; staff management (UI only, not yet persisted)
+- Platform settings and staff management (both UI only, not yet persisted)
 
 **Platform**
 - Better Auth authentication: email/password plus Google and GitHub OAuth, two-factor auth, and role-based access (customer by default, vendor, admin) enforced by route middleware

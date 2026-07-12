@@ -63,7 +63,6 @@ import {
   reviewHelpfulVotes,
   reviewHelpfulVotesRelations,
 } from "./schema/review-schema";
-import { settings } from "./schema/settings-schema";
 import {
   shippingMethods,
   shippingMethodsRelations,
@@ -139,7 +138,6 @@ const schema = {
   productReviewsRelations,
   reviewHelpfulVotes,
   reviewHelpfulVotesRelations,
-  settings,
 };
 
 // Lazy initialization - only connect to DB when first accessed on server
