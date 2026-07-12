@@ -14,13 +14,15 @@ A multi-vendor e-commerce platform built on TanStack Start. One deployment serve
 - Vendor sign-up and onboarding; each vendor manages one or more shops
 - Products (with attributes, images via Uploadcare, tags, shipping methods), orders and per-order detail, transactions
 - Shop-level catalogs: categories, brands, tags, attributes, taxes, coupons, shipping
-- Staff management with granular per-resource permissions, notifications, reviews, shop settings
+- Notifications, reviews, shop settings, and staff management (staff UI is not yet persisted)
 
 **Admin panel** (`/admin`)
-- Platform-wide management: tenants (vendors), users, staff, products, orders, transactions, coupons, reviews, categories/brands/tags/attributes, taxes, settings
+- Platform-wide management: tenants (vendors), users, products, orders, transactions, coupons, reviews, categories/brands/tags/attributes, taxes
+- Editable, DB-backed platform settings; staff management (UI only, not yet persisted)
 
 **Platform**
 - Better Auth authentication: email/password plus Google and GitHub OAuth, two-factor auth, and role-based access (customer by default, vendor, admin) enforced by route middleware
+- Command palette (⌘K / Ctrl+K) in the vendor and admin dashboards: jump to any page, run quick actions (theme, sign out), and search orders, products, users, and shops — with "View all" rows that deep-link into filtered, URL-addressable lists
 - Stripe payments with a webhook endpoint (`/api/webhooks/stripe`); multi-vendor transfer design lives in `docs/plans/`
 - Transactional email with React Email templates sent through Brevo SMTP (Nodemailer)
 - Server-side rendering and server functions via TanStack Start + Nitro (deployable to Vercel)
@@ -31,7 +33,8 @@ A multi-vendor e-commerce platform built on TanStack Start. One deployment serve
 - **Database**: Neon Postgres + Drizzle ORM (schema per domain in `src/lib/db/schema/`)
 - **Auth**: Better Auth (admin + two-factor plugins, Google/GitHub social login)
 - **Payments**: Stripe (server SDK + React Stripe.js)
-- **UI**: Tailwind CSS 4, shadcn/ui (Radix), Recharts, sonner, Zustand
+- **UI**: Tailwind CSS 4 with an OKLCH design-token system (light/dark), shadcn/ui (Radix), cmdk command palette, Recharts, sonner, Zustand
+- **Type**: self-hosted Archivo (display/sans) + Space Mono (mono) via Fontsource; distinctive "editorial-wireframe" dashed aesthetic
 - **Files/Email**: Uploadcare (product images), React Email + Nodemailer (Brevo)
 - **Tooling**: Bun, Vite, Biome (lint/format), Vitest + Testing Library
 
