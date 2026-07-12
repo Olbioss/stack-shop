@@ -1,5 +1,7 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, ilike, inArray, or, type SQL } from "drizzle-orm";
 import { db } from "../db";
+import { user } from "../db/schema/auth-schema";
+import { orders } from "../db/schema/order-schema";
 import { shops } from "../db/schema/shop-schema";
 import { getVendorForUser, isUserAdmin } from "./vendor";
 
@@ -7,6 +9,28 @@ export function generateOrderNumber(): string {
   const timestamp = Date.now().toString(36).toUpperCase();
   const random = Math.random().toString(36).substring(2, 6).toUpperCase();
   return `ORD-${timestamp}${random}`;
+}
+
+/**
+ * Builds a case-insensitive search predicate for order lists, matching the
+ * order number, a guest email, or the customer's name/email. Returns undefined
+ * for a blank term so callers can skip it.
+ */
+export function buildOrderSearchCondition(search?: string): SQL | undefined {
+  const trimmed = search?.trim();
+  if (!trimmed) return undefined;
+  const term = `%${trimmed}%`;
+  return or(
+    ilike(orders.orderNumber, term),
+    ilike(orders.guestEmail, term),
+    inArray(
+      orders.userId,
+      db
+        .select({ id: user.id })
+        .from(user)
+        .where(or(ilike(user.name, term), ilike(user.email, term)))
+    )
+  );
 }
 
 export async function getShopIdsForOrderQuery(

@@ -1,16 +1,22 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import {
+  ArrowLeft,
+  ExternalLink,
   Home,
   Loader2,
+  LogOut,
+  type LucideIcon,
   Package,
   Search,
   ShoppingBag,
   Store,
+  SunMoon,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { useTheme } from "#/components/base/provider/theme-provider";
 import {
   Command,
   CommandEmpty,
@@ -27,6 +33,7 @@ import {
   DialogTitle,
 } from "#/components/ui/dialog";
 import { shopBySlugQueryOptions } from "#/hooks/vendor/use-shops";
+import { signOut } from "#/lib/auth-client";
 import { adminNavItems } from "#/lib/constants/admin.routes";
 import { getShopNavItems } from "#/lib/constants/vendors.routes";
 import { getAdminOrders } from "#/lib/functions/admin/order";
@@ -40,6 +47,13 @@ export type DashboardSearchContext =
   | { kind: "shop"; shopSlug: string }
   | { kind: "admin" }
   | { kind: "vendor" };
+
+type PaletteAction = {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+  onSelect: () => void;
+};
 
 const MIN_QUERY_LENGTH = 2;
 const RESULT_LIMIT = 5;
@@ -79,12 +93,15 @@ export default function DashboardCommandPalette({
   context: DashboardSearchContext;
 }) {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [isMac, setIsMac] = useState(true);
 
   const showEntitySearch = context.kind === "shop" || context.kind === "admin";
+  const isSearching = debouncedQuery.length >= MIN_QUERY_LENGTH;
+  const isRecent = debouncedQuery.length === 0;
 
   // Platform hint for the trigger shortcut chip.
   useEffect(() => {
@@ -119,6 +136,12 @@ export default function DashboardCommandPalette({
     }
   }, [open]);
 
+  const run = (fn: () => void) => {
+    setOpen(false);
+    fn();
+  };
+
+  // --- Pages ---------------------------------------------------------------
   const navItems = useMemo<VendorNavItem[]>(() => {
     if (context.kind === "shop") return getShopNavItems(context.shopSlug);
     if (context.kind === "admin") return adminNavItems;
@@ -131,9 +154,50 @@ export default function DashboardCommandPalette({
     return navItems.filter((item) => item.title.toLowerCase().includes(q));
   }, [navItems, debouncedQuery]);
 
-  const entitySearchEnabled =
-    open && showEntitySearch && debouncedQuery.length >= MIN_QUERY_LENGTH;
+  // --- Actions -------------------------------------------------------------
+  const actions = useMemo<PaletteAction[]>(() => {
+    const list: PaletteAction[] = [
+      {
+        id: "toggle-theme",
+        title:
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+        icon: SunMoon,
+        onSelect: () => setTheme(theme === "dark" ? "light" : "dark"),
+      },
+      {
+        id: "storefront",
+        title: "Go to storefront",
+        icon: ExternalLink,
+        onSelect: () => navigate({ to: "/" }),
+      },
+    ];
+    if (context.kind === "shop") {
+      list.push({
+        id: "back-to-shops",
+        title: "Back to shops",
+        icon: ArrowLeft,
+        onSelect: () => navigate({ to: "/my-shop" }),
+      });
+    }
+    list.push({
+      id: "sign-out",
+      title: "Sign out",
+      icon: LogOut,
+      onSelect: async () => {
+        await signOut();
+        navigate({ to: "/" });
+      },
+    });
+    return list;
+  }, [theme, setTheme, navigate, context]);
 
+  const filteredActions = useMemo(() => {
+    const q = debouncedQuery.toLowerCase();
+    if (!q) return actions;
+    return actions.filter((a) => a.title.toLowerCase().includes(q));
+  }, [actions, debouncedQuery]);
+
+  // --- Entity search (orders + products) -----------------------------------
   // Resolve shopId for vendor product search (cached by the products page).
   const shopSlug = context.kind === "shop" ? context.shopSlug : "";
   const { data: shopData } = useQuery({
@@ -142,6 +206,8 @@ export default function DashboardCommandPalette({
   });
   const shopId = shopData?.shop?.id ?? "";
 
+  // Orders run for both an empty query (recent) and an active search.
+  const ordersEnabled = open && showEntitySearch && (isRecent || isSearching);
   const ordersQuery = useQuery({
     queryKey: ["command-palette", "orders", context, debouncedQuery],
     queryFn: async () => {
@@ -161,9 +227,15 @@ export default function DashboardCommandPalette({
       });
       return res.orders ?? [];
     },
-    enabled: entitySearchEnabled,
+    enabled: ordersEnabled,
+    placeholderData: keepPreviousData,
   });
 
+  const productsEnabled =
+    open &&
+    showEntitySearch &&
+    isSearching &&
+    (context.kind === "admin" || Boolean(shopId));
   const productsQuery = useQuery({
     queryKey: ["command-palette", "products", context, debouncedQuery, shopId],
     queryFn: async () => {
@@ -183,19 +255,15 @@ export default function DashboardCommandPalette({
       });
       return res.data ?? [];
     },
-    enabled:
-      entitySearchEnabled && (context.kind === "admin" || Boolean(shopId)),
+    enabled: productsEnabled,
+    placeholderData: keepPreviousData,
   });
 
-  const orders = ordersQuery.data ?? [];
-  const products = productsQuery.data ?? [];
+  const orders = ordersEnabled ? (ordersQuery.data ?? []) : [];
+  const products = productsEnabled ? (productsQuery.data ?? []) : [];
   const isEntityLoading =
-    entitySearchEnabled && (ordersQuery.isLoading || productsQuery.isLoading);
-
-  const run = (fn: () => void) => {
-    setOpen(false);
-    fn();
-  };
+    (ordersEnabled && ordersQuery.isLoading) ||
+    (productsEnabled && productsQuery.isLoading);
 
   const goToOrder = (orderId: string) => {
     if (context.kind === "shop") {
@@ -220,9 +288,10 @@ export default function DashboardCommandPalette({
   };
 
   const showEmpty =
-    entitySearchEnabled &&
+    isSearching &&
     !isEntityLoading &&
     filteredNav.length === 0 &&
+    filteredActions.length === 0 &&
     orders.length === 0 &&
     products.length === 0;
 
@@ -282,7 +351,7 @@ export default function DashboardCommandPalette({
               {showEntitySearch && orders.length > 0 && (
                 <>
                   <CommandSeparator />
-                  <CommandGroup heading="Orders">
+                  <CommandGroup heading={isRecent ? "Recent orders" : "Orders"}>
                     {orders.map((order) => (
                       <CommandItem
                         key={order.id}
@@ -331,6 +400,27 @@ export default function DashboardCommandPalette({
                 </>
               )}
 
+              {filteredActions.length > 0 && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup heading="Actions">
+                    {filteredActions.map((action) => {
+                      const Icon = action.icon;
+                      return (
+                        <CommandItem
+                          key={action.id}
+                          value={`action:${action.id}`}
+                          onSelect={() => run(action.onSelect)}
+                        >
+                          <Icon />
+                          <span>{action.title}</span>
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+                </>
+              )}
+
               {isEntityLoading && (
                 <div className="flex items-center justify-center gap-2 py-6 text-muted-foreground text-sm">
                   <Loader2 className="size-4 animate-spin" />
@@ -339,7 +429,6 @@ export default function DashboardCommandPalette({
               )}
 
               {showEntitySearch &&
-                !isEntityLoading &&
                 debouncedQuery.length > 0 &&
                 debouncedQuery.length < MIN_QUERY_LENGTH && (
                   <p className="py-6 text-center text-muted-foreground text-sm">
@@ -347,6 +436,23 @@ export default function DashboardCommandPalette({
                   </p>
                 )}
             </CommandList>
+
+            <div className="flex items-center gap-3 border-t px-3 py-2 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <kbd className="rounded border bg-muted px-1 font-mono">↑↓</kbd>
+                Navigate
+              </span>
+              <span className="flex items-center gap-1">
+                <kbd className="rounded border bg-muted px-1 font-mono">↵</kbd>
+                Open
+              </span>
+              <span className="flex items-center gap-1">
+                <kbd className="rounded border bg-muted px-1 font-mono">
+                  esc
+                </kbd>
+                Close
+              </span>
+            </div>
           </Command>
         </DialogContent>
       </Dialog>

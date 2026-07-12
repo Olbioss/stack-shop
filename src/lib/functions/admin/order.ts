@@ -1,9 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
-import { and, desc, eq, ilike, sql } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import { db } from "#/lib/db";
 import { orders, payments } from "#/lib/db/schema/order-schema";
 import { products } from "#/lib/db/schema/products-schema";
 import { shops } from "#/lib/db/schema/shop-schema";
+import { buildOrderSearchCondition } from "#/lib/helper/order-helpers";
 import { adminMiddleware } from "#/lib/middleware/admin";
 import { createRefund } from "#/lib/stripe";
 import {
@@ -26,8 +27,8 @@ export const getAdminOrders = createServerFn({ method: "GET" })
 
     if (shopId) conditions.push(eq(orders.shopId, shopId));
     if (status) conditions.push(eq(orders.status, status));
-    if (search?.trim())
-      conditions.push(ilike(orders.orderNumber, `%${search.trim()}%`));
+    const searchCondition = buildOrderSearchCondition(search);
+    if (searchCondition) conditions.push(searchCondition);
 
     const adminOrders = await db.query.orders.findMany({
       where: conditions.length > 0 ? and(...conditions) : undefined,

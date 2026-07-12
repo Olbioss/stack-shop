@@ -7,11 +7,12 @@
  */
 
 import { createServerFn } from "@tanstack/react-start";
-import { and, desc, eq, ilike, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { orders } from "@/lib/db/schema/order-schema";
 import {
+  buildOrderSearchCondition,
   getShopIdsForOrderQuery,
   verifyShopAccess,
 } from "@/lib/helper/order-helpers";
@@ -41,8 +42,8 @@ export const getVendorOrders = createServerFn({ method: "GET" })
     conditions.push(inArray(orders.shopId, shopIds));
 
     if (status) conditions.push(eq(orders.status, status));
-    if (search?.trim())
-      conditions.push(ilike(orders.orderNumber, `%${search.trim()}%`));
+    const searchCondition = buildOrderSearchCondition(search);
+    if (searchCondition) conditions.push(searchCondition);
 
     // Get orders
     const vendorOrders = await db.query.orders.findMany({
