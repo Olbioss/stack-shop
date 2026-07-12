@@ -39,36 +39,37 @@ export default function Header() {
         </div>
 
         <div className="flex items-center justify-end gap-2">
-          <div className="@6xl:flex hidden items-center gap-2">
-            <Button
-              variant="outline"
-              size="icon-lg"
-              type="button"
-              aria-label="Open Cart"
-              onClick={() => setIsOpen(true)}
-              className="relative"
-            >
-              <ShoppingBag className="@7xl:size-6 size-5" />
-              {totalItems > 0 && (
-                <span className="-right-1 -top-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-primary font-medium text-[10px] text-primary-foreground">
-                  {totalItems}
-                </span>
-              )}
-            </Button>
-            <CartSheet />
-
-            <ModeToggle />
-            {user ? (
-              <UserMenu user={user} />
-            ) : (
-              <Link to="/sign-in">
-                <Button variant="outline" size="lg" type="button">
-                  Sign In
-                </Button>
-              </Link>
+          {/* Cart — desktop; on mobile it's reachable from the menu sheet */}
+          <Button
+            variant="outline"
+            size="icon-lg"
+            type="button"
+            aria-label="Open Cart"
+            onClick={() => setIsOpen(true)}
+            className="@6xl:flex relative hidden"
+          >
+            <ShoppingBag className="@7xl:size-6 size-5" />
+            {totalItems > 0 && (
+              <span className="-right-1 -top-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-primary font-medium text-[10px] text-primary-foreground">
+                {totalItems}
+              </span>
             )}
-          </div>
+          </Button>
+          <CartSheet />
 
+          {/* Theme toggle and account — visible on all sizes */}
+          <ModeToggle />
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Link to="/sign-in">
+              <Button variant="outline" size="lg" type="button">
+                Sign In
+              </Button>
+            </Link>
+          )}
+
+          {/* Navigation menu — mobile only */}
           <div className="flex @6xl:hidden">
             <MobileMenu
               navigationItems={navigationItems}

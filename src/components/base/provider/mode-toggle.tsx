@@ -1,37 +1,35 @@
-import { Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useTheme } from "./theme-provider";
 
+const ORDER = ["light", "dark", "system"] as const;
+
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  // Single click cycles light -> dark -> system so "system" (follow the OS)
+  // stays reachable without a dropdown.
+  const cycle = () => {
+    const index = ORDER.indexOf(theme as (typeof ORDER)[number]);
+    setTheme(ORDER[(index + 1) % ORDER.length]);
+  };
+
+  const Icon = theme === "dark" ? Moon : theme === "system" ? Monitor : Sun;
+  const label =
+    theme === "dark" ? "Dark" : theme === "system" ? "System" : "Light";
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="outline"
+      size="icon"
+      type="button"
+      onClick={cycle}
+      aria-label={`Theme: ${label}. Click to change.`}
+      title={`Theme: ${label}`}
+    >
+      <Icon className="size-[1.2rem]" />
+      <span className="sr-only">Toggle theme (current: {label})</span>
+    </Button>
   );
 }

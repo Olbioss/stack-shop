@@ -45,7 +45,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider defaultTheme="light" storageKey="theme">
+        <ThemeProvider defaultTheme="system" storageKey="theme">
           {children}
           <Toaster richColors closeButton position="top-right" />
         </ThemeProvider>
