@@ -7,7 +7,7 @@
  */
 
 import { createServerFn } from "@tanstack/react-start";
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, ilike, inArray, sql } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { orders } from "@/lib/db/schema/order-schema";
@@ -27,7 +27,7 @@ export const getVendorOrders = createServerFn({ method: "GET" })
   .inputValidator(getOrdersSchema)
   .handler(async ({ context, data }) => {
     const userId = context.session?.user?.id;
-    const { limit, offset, status, shopSlug } = data;
+    const { limit, offset, status, shopSlug, search } = data;
 
     if (!userId) throw new Error("Unauthorized");
 
@@ -41,6 +41,8 @@ export const getVendorOrders = createServerFn({ method: "GET" })
     conditions.push(inArray(orders.shopId, shopIds));
 
     if (status) conditions.push(eq(orders.status, status));
+    if (search?.trim())
+      conditions.push(ilike(orders.orderNumber, `%${search.trim()}%`));
 
     // Get orders
     const vendorOrders = await db.query.orders.findMany({

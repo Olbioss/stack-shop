@@ -28,6 +28,7 @@ export default function ShopDashboardLayout({
           title={headerTitle || `${shopName} Dashboard`}
           showSearch={showSearch}
           shopSlug={shopSlug}
+          searchContext={{ kind: "shop", shopSlug }}
         />
         <main
           className={cn(

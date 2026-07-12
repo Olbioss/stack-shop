@@ -95,6 +95,7 @@ export const getOrdersSchema = z.object({
     .optional(),
   shopId: z.string().optional(), // For vendor dashboard
   shopSlug: z.string().optional(), // For admin access to specific shop
+  search: z.string().optional(), // Filter by order number
 });
 
 export type GetOrdersInput = z.infer<typeof getOrdersSchema>;

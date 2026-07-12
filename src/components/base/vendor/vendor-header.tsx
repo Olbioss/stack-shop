@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Bell, Search, Settings } from "lucide-react";
+import { Bell, Settings } from "lucide-react";
 import { Button } from "#/components/ui/button";
-import { Input } from "#/components/ui/input";
 import { SidebarTrigger } from "#/components/ui/sidebar";
 import { cn } from "#/lib/utils";
 import { ModeToggle } from "../provider/mode-toggle";
+import DashboardCommandPalette, {
+  type DashboardSearchContext,
+} from "./dashboard-command-palette";
 import NotificationDropdown from "./notification-dropdown";
 
 type Props = {
@@ -12,6 +14,7 @@ type Props = {
   showSearch?: boolean;
   className?: string;
   shopSlug?: string;
+  searchContext?: DashboardSearchContext;
 };
 
 export default function VendorHeader({
@@ -19,6 +22,7 @@ export default function VendorHeader({
   showSearch = true,
   className,
   shopSlug,
+  searchContext,
 }: Props) {
   return (
     <header
@@ -36,10 +40,9 @@ export default function VendorHeader({
 
         {showSearch && (
           <div className="ml-auto flex w-full max-w-md items-center gap-2">
-            <div className="relative flex-1">
-              <Search className="-translate-y-1/2 absolute top-1/2 left-3 size-4 text-muted-foreground" />
-              <Input type="search" placeholder="Search..." className="pl-9" />
-            </div>
+            <DashboardCommandPalette
+              context={searchContext ?? { kind: "vendor" }}
+            />
           </div>
         )}
       </div>

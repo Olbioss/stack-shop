@@ -21,7 +21,11 @@ export default function VendorDashboardLayout({
     <SidebarProvider>
       <VendorDashboardSidebar />
       <SidebarInset>
-        <VendorHeader title={headerTitle} showSearch={showSearch} />
+        <VendorHeader
+          title={headerTitle}
+          showSearch={showSearch}
+          searchContext={{ kind: "vendor" }}
+        />
         <main
           className={cn(
             "@container m-4 flex flex-1 flex-col gap-4 rounded-2xl border-2 border-dashed p-4 md:m-6 md:gap-6 md:p-6",
