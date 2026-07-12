@@ -14,6 +14,7 @@ import {
   ShoppingBag,
   Store,
   SunMoon,
+  Users,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "#/components/base/provider/theme-provider";
@@ -38,6 +39,8 @@ import { adminNavItems } from "#/lib/constants/admin.routes";
 import { getShopNavItems } from "#/lib/constants/vendors.routes";
 import { getAdminOrders } from "#/lib/functions/admin/order";
 import { getAdminProducts } from "#/lib/functions/admin/product";
+import { getAdminShops } from "#/lib/functions/admin/shops";
+import { getUsers } from "#/lib/functions/users";
 import { getVendorOrders } from "#/lib/functions/vendor/order";
 import { getProducts } from "#/lib/functions/vendor/products";
 import { cn } from "#/lib/utils";
@@ -100,6 +103,7 @@ export default function DashboardCommandPalette({
   const [isMac, setIsMac] = useState(true);
 
   const showEntitySearch = context.kind === "shop" || context.kind === "admin";
+  const isAdmin = context.kind === "admin";
   const isSearching = debouncedQuery.length >= MIN_QUERY_LENGTH;
   const isRecent = debouncedQuery.length === 0;
 
@@ -259,11 +263,48 @@ export default function DashboardCommandPalette({
     placeholderData: keepPreviousData,
   });
 
+  // Admin-only: fetch the user list once per session, filter client-side
+  // (Better Auth's listUsers only searches one field at a time).
+  const usersQuery = useQuery({
+    queryKey: ["command-palette", "users"],
+    queryFn: async () => {
+      const res = await getUsers();
+      return res.users ?? [];
+    },
+    enabled: open && isAdmin,
+    staleTime: 60_000,
+  });
+
+  const shopsEnabled = open && isAdmin && isSearching;
+  const shopsQuery = useQuery({
+    queryKey: ["command-palette", "shops", debouncedQuery],
+    queryFn: async () => {
+      const res = await getAdminShops({
+        data: { search: debouncedQuery, limit: RESULT_LIMIT, offset: 0 },
+      });
+      return res.data ?? [];
+    },
+    enabled: shopsEnabled,
+    placeholderData: keepPreviousData,
+  });
+
   const orders = ordersEnabled ? (ordersQuery.data ?? []) : [];
   const products = productsEnabled ? (productsQuery.data ?? []) : [];
+  const users = useMemo(() => {
+    if (!isAdmin || !isSearching) return [];
+    const q = debouncedQuery.toLowerCase();
+    return (usersQuery.data ?? [])
+      .filter(
+        (u) =>
+          u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
+      )
+      .slice(0, RESULT_LIMIT);
+  }, [isAdmin, isSearching, usersQuery.data, debouncedQuery]);
+  const shops = shopsEnabled ? (shopsQuery.data ?? []) : [];
   const isEntityLoading =
     (ordersEnabled && ordersQuery.isLoading) ||
-    (productsEnabled && productsQuery.isLoading);
+    (productsEnabled && productsQuery.isLoading) ||
+    (shopsEnabled && shopsQuery.isLoading);
 
   const goToOrder = (orderId: string) => {
     if (context.kind === "shop") {
@@ -287,13 +328,19 @@ export default function DashboardCommandPalette({
     }
   };
 
+  // Admin "Tenants" detail is keyed by shop id.
+  const goToShop = (shopId: string) =>
+    navigate({ to: "/admin/tenants/$tenantId", params: { tenantId: shopId } });
+
   const showEmpty =
     isSearching &&
     !isEntityLoading &&
     filteredNav.length === 0 &&
     filteredActions.length === 0 &&
     orders.length === 0 &&
-    products.length === 0;
+    products.length === 0 &&
+    users.length === 0 &&
+    shops.length === 0;
 
   return (
     <>
@@ -393,6 +440,50 @@ export default function DashboardCommandPalette({
                         <span className="truncate">{product.name}</span>
                         <span className="ml-auto font-mono text-muted-foreground text-xs">
                           {formatPrice(product.sellingPrice)}
+                        </span>
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </>
+              )}
+
+              {isAdmin && users.length > 0 && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup heading="Users">
+                    {users.map((u) => (
+                      <CommandItem
+                        key={u.id}
+                        value={`user:${u.id}`}
+                        onSelect={() =>
+                          run(() => navigate({ to: "/admin/users" }))
+                        }
+                      >
+                        <Users />
+                        <span className="truncate">{u.name}</span>
+                        <span className="ml-auto truncate text-muted-foreground text-xs">
+                          {u.email}
+                        </span>
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </>
+              )}
+
+              {isAdmin && shops.length > 0 && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup heading="Shops">
+                    {shops.map((shop) => (
+                      <CommandItem
+                        key={shop.id}
+                        value={`shop:${shop.id}`}
+                        onSelect={() => run(() => goToShop(shop.id))}
+                      >
+                        <Store />
+                        <span className="truncate">{shop.name}</span>
+                        <span className="ml-auto truncate text-muted-foreground text-xs">
+                          /{shop.slug}
                         </span>
                       </CommandItem>
                     ))}
