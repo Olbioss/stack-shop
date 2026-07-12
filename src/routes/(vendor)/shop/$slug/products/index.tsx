@@ -15,9 +15,11 @@ import { shopBySlugQueryOptions } from "#/hooks/vendor/use-shops";
 import { tagsQueryOptions } from "#/hooks/vendor/use-tags";
 import { taxRatesQueryOptions } from "#/hooks/vendor/use-tax-rates";
 import { createVendorProductsFetcher } from "#/hooks/vendor/use-vendor-entity-fetcher";
+import { listSearchSchema } from "#/lib/validators/list-search";
 import type { ProductFormValues, ProductItem } from "#/types/products";
 
 export const Route = createFileRoute("/(vendor)/shop/$slug/products/")({
+  validateSearch: (search) => listSearchSchema.parse(search),
   component: RouteComponent,
   pendingComponent: PageSkeleton,
 });

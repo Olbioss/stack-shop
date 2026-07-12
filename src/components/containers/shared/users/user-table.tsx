@@ -18,6 +18,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useListSearch } from "@/hooks/common/use-list-search";
 import type { AdminUser, UserPermissions, UserRole } from "@/types/users";
 
 interface UserTableProps {
@@ -44,6 +45,7 @@ export default function UserTable({
   onUpdateRole,
   className,
 }: UserTableProps) {
+  const initialSearch = useListSearch();
   const columns: ColumnDef<AdminUser>[] = [
     {
       accessorKey: "id",
@@ -195,5 +197,13 @@ export default function UserTable({
     },
   ];
 
-  return <DataTable columns={columns} data={users} className={className} />;
+  return (
+    <DataTable
+      columns={columns}
+      data={users}
+      initialGlobalFilter={initialSearch}
+      globalFilterPlaceholder="Search users..."
+      className={className}
+    />
+  );
 }

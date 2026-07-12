@@ -53,6 +53,8 @@ export interface DataTableProps<TData, TValue> {
   server?: DataTableServer<TData>;
   data?: TData[];
   initialPageSize?: number;
+  /** Seeds the global search box on mount (e.g. from a URL `?search=` param). */
+  initialGlobalFilter?: string;
   context?: DataTableContext;
   /** Enable row selection with a checkbox column */
   enableRowSelection?: boolean;

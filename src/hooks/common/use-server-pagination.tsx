@@ -17,6 +17,7 @@ export type UseServerPaginationOptions<TData> = {
     params: DataTableFetchParams
   ) => Promise<DataTableFetchResult<TData>>;
   initialPageSize?: number;
+  initialGlobalFilter?: string;
   context?: DataTableContext;
   queryKey?: QueryKey;
 };
@@ -24,6 +25,7 @@ export type UseServerPaginationOptions<TData> = {
 export function useServerPagination<TData>({
   fetcher,
   initialPageSize = 10,
+  initialGlobalFilter = "",
   context,
   queryKey,
 }: UseServerPaginationOptions<TData>) {
@@ -31,7 +33,7 @@ export function useServerPagination<TData>({
   const [pageSize, setPageSize] = useState(initialPageSize);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter);
 
   const params: DataTableFetchParams = useMemo(
     () => ({
@@ -46,9 +48,7 @@ export function useServerPagination<TData>({
   );
 
   const query = useQuery<DataTableFetchResult<TData>>({
-    queryKey: queryKey
-      ? [...queryKey, params]
-      : ["datatable", context, params],
+    queryKey: queryKey ? [...queryKey, params] : ["datatable", context, params],
     queryFn: () => fetcher(params),
     // Preserve previous page data while fetching the next
     placeholderData: (prev) => prev,

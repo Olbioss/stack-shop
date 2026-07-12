@@ -8,6 +8,7 @@ export default function DataTable<TData, TValue>({
   server,
   data: clientData,
   initialPageSize = 10,
+  initialGlobalFilter,
   context,
   enableRowSelection,
   onRowSelectionChange,
@@ -42,6 +43,7 @@ export default function DataTable<TData, TValue>({
         total: clientData?.length ?? 0,
       })),
     initialPageSize,
+    initialGlobalFilter,
     context,
     queryKey: server?.queryKey,
   });

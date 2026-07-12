@@ -6,9 +6,11 @@ import { PageSkeleton } from "#/components/base/common/page-skeleton";
 import { AddUserDialog } from "#/components/containers/shared/users/add-user-dialog";
 import AdminUsersTemplate from "#/components/templates/admin/admin-users-template";
 import { useUsers } from "#/hooks/admin/use-users";
+import { listSearchSchema } from "#/lib/validators/list-search";
 import type { AdminUser, AdminUserFormValues, UserRole } from "#/types/users";
 
 export const Route = createFileRoute("/(admin)/admin/users")({
+  validateSearch: (search) => listSearchSchema.parse(search),
   component: RouteComponent,
 });
 

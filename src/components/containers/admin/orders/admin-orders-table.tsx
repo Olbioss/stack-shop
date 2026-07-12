@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import DataTable from "@/components/base/data-table/data-table";
 import type { DataTableServer } from "@/components/base/data-table/types";
+import { useListSearch } from "@/hooks/common/use-list-search";
 import type { VendorOrderResponse } from "@/types/orders";
 import {
   createAdminOrderColumns,
@@ -24,6 +25,7 @@ export function AdminOrdersTable({
   );
 
   const filterableColumns = useMemo(() => getSharedOrderFilters(), []);
+  const initialSearch = useListSearch();
 
   return (
     <DataTable
@@ -31,6 +33,7 @@ export function AdminOrdersTable({
       server={server}
       context="admin"
       initialPageSize={10}
+      initialGlobalFilter={initialSearch}
       filterableColumns={filterableColumns}
       globalFilterPlaceholder="Search orders..."
       className={className}

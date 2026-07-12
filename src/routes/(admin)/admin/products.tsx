@@ -7,9 +7,11 @@ import AdminProductsTemplate from "#/components/templates/admin/admin-products-t
 import { createAdminProductsFetcher } from "#/hooks/admin/use-admin-entity-fetchers";
 import { useAdminProducts } from "#/hooks/admin/use-admin-products";
 import { useEntityCRUD } from "#/hooks/common/use-entity-crud";
+import { listSearchSchema } from "#/lib/validators/list-search";
 import type { ProductItem } from "#/types/products";
 
 export const Route = createFileRoute("/(admin)/admin/products")({
+  validateSearch: (search) => listSearchSchema.parse(search),
   component: RouteComponent,
   pendingComponent: PageSkeleton,
 });

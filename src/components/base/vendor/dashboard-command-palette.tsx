@@ -4,6 +4,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import {
   ArrowLeft,
+  ArrowRight,
   ExternalLink,
   Home,
   Loader2,
@@ -317,16 +318,38 @@ export default function DashboardCommandPalette({
     }
   };
 
+  // "View all" targets deep-link into the list page with the query, which the
+  // route's validateSearch seeds into the table's global filter.
+  const listSearch = { search: debouncedQuery };
+
+  const goToOrdersList = () => {
+    if (context.kind === "shop") {
+      navigate({
+        to: "/shop/$slug/orders",
+        params: { slug: context.shopSlug },
+        search: listSearch,
+      });
+    } else {
+      navigate({ to: "/admin/orders", search: listSearch });
+    }
+  };
+
   const goToProductsList = () => {
     if (context.kind === "shop") {
       navigate({
         to: "/shop/$slug/products",
         params: { slug: context.shopSlug },
+        search: listSearch,
       });
     } else {
-      navigate({ to: "/admin/products" });
+      navigate({ to: "/admin/products", search: listSearch });
     }
   };
+
+  const goToUsersList = () =>
+    navigate({ to: "/admin/users", search: listSearch });
+  const goToShopsList = () =>
+    navigate({ to: "/admin/tenants", search: listSearch });
 
   // Admin "Tenants" detail is keyed by shop id.
   const goToShop = (shopId: string) =>
@@ -422,6 +445,16 @@ export default function DashboardCommandPalette({
                         </span>
                       </CommandItem>
                     ))}
+                    {isSearching && (
+                      <CommandItem
+                        value="view-all:orders"
+                        onSelect={() => run(goToOrdersList)}
+                        className="text-muted-foreground"
+                      >
+                        <ArrowRight />
+                        <span>View all orders</span>
+                      </CommandItem>
+                    )}
                   </CommandGroup>
                 </>
               )}
@@ -443,6 +476,14 @@ export default function DashboardCommandPalette({
                         </span>
                       </CommandItem>
                     ))}
+                    <CommandItem
+                      value="view-all:products"
+                      onSelect={() => run(goToProductsList)}
+                      className="text-muted-foreground"
+                    >
+                      <ArrowRight />
+                      <span>View all products</span>
+                    </CommandItem>
                   </CommandGroup>
                 </>
               )}
@@ -455,9 +496,7 @@ export default function DashboardCommandPalette({
                       <CommandItem
                         key={u.id}
                         value={`user:${u.id}`}
-                        onSelect={() =>
-                          run(() => navigate({ to: "/admin/users" }))
-                        }
+                        onSelect={() => run(goToUsersList)}
                       >
                         <Users />
                         <span className="truncate">{u.name}</span>
@@ -466,6 +505,14 @@ export default function DashboardCommandPalette({
                         </span>
                       </CommandItem>
                     ))}
+                    <CommandItem
+                      value="view-all:users"
+                      onSelect={() => run(goToUsersList)}
+                      className="text-muted-foreground"
+                    >
+                      <ArrowRight />
+                      <span>View all users</span>
+                    </CommandItem>
                   </CommandGroup>
                 </>
               )}
@@ -487,6 +534,14 @@ export default function DashboardCommandPalette({
                         </span>
                       </CommandItem>
                     ))}
+                    <CommandItem
+                      value="view-all:shops"
+                      onSelect={() => run(goToShopsList)}
+                      className="text-muted-foreground"
+                    >
+                      <ArrowRight />
+                      <span>View all shops</span>
+                    </CommandItem>
                   </CommandGroup>
                 </>
               )}

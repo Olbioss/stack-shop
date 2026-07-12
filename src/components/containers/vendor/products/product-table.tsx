@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import DataTable from "@/components/base/data-table/data-table";
 import type { DataTableServer } from "@/components/base/data-table/types";
+import { useListSearch } from "@/hooks/common/use-list-search";
 import type { ProductItem } from "@/types/products";
 import {
   createProductTableColumns,
@@ -43,6 +44,8 @@ export function ProductTable({
     });
   }, [mode, onDelete, onEdit, onToggleActive, mutationState, isMutating]);
 
+  const initialSearch = useListSearch();
+
   if (server) {
     return (
       <DataTable
@@ -50,6 +53,7 @@ export function ProductTable({
         server={server}
         context="shop"
         initialPageSize={10}
+        initialGlobalFilter={initialSearch}
         globalFilterPlaceholder="Search products..."
         className={className}
       />

@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAdminShops } from "@/hooks/admin/use-admin-shops";
+import { useListSearch } from "@/hooks/common/use-list-search";
 import type { AdminTenant } from "@/types/tenant";
 
 interface AdminTenantTableProps {
@@ -31,6 +32,7 @@ export default function AdminTenantTable({
 }: AdminTenantTableProps) {
   const { updateStatus, isUpdatingStatus } = useAdminShops();
   const [updatingTenantId, setUpdatingTenantId] = useState<string | null>(null);
+  const initialSearch = useListSearch();
 
   const handleUpdateStatus = useCallback(
     async (tenantId: string, status: AdminTenant["status"]) => {
@@ -220,6 +222,7 @@ export default function AdminTenantTable({
       server={server}
       context="admin"
       initialPageSize={10}
+      initialGlobalFilter={initialSearch}
       filterableColumns={filterableColumns}
       globalFilterPlaceholder="Search tenants..."
       className={className}

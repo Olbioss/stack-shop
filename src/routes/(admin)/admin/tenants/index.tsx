@@ -2,8 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageSkeleton } from "#/components/base/common/page-skeleton";
 import AdminTenantsTemplate from "#/components/templates/admin/tenants/admin-tenants-template";
 import { createAdminTenantsFetcher } from "#/hooks/admin/use-admin-entity-fetchers";
+import { listSearchSchema } from "#/lib/validators/list-search";
 
 export const Route = createFileRoute("/(admin)/admin/tenants/")({
+  validateSearch: (search) => listSearchSchema.parse(search),
   component: RouteComponent,
   pendingComponent: PageSkeleton,
 });
