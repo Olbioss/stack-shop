@@ -1,15 +1,16 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { PageSkeleton } from "#/components/base/common/page-skeleton";
 import AdminSettingsTemplate from "#/components/templates/admin/admin-settings-template";
-import { mockSettings } from "#/data/settings";
-import type { Setting } from "#/types/settings";
+import { settingsQueryOptions } from "#/hooks/admin/use-admin-settings";
 
 export const Route = createFileRoute("/(admin)/admin/settings")({
   component: RouteComponent,
+  pendingComponent: PageSkeleton,
 });
 
 function RouteComponent() {
-  const [settings] = useState<Setting[]>(mockSettings);
+  const { data } = useSuspenseQuery(settingsQueryOptions());
 
-  return <AdminSettingsTemplate settings={settings} />;
+  return <AdminSettingsTemplate settings={data.settings} />;
 }

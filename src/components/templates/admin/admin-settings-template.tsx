@@ -7,7 +7,7 @@ interface Setting {
   value: string;
   description: string;
   category: string;
-  updatedAt: Date;
+  updatedAt: string;
 }
 
 interface AdminSettingsTemplateProps {
