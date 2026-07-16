@@ -95,7 +95,12 @@ export default function AuthForm({ mode, includeSocial, redirectUrl }: Props) {
 
   // Show 2FA verification form if required
   if (requires2FA) {
-    return <TwoFactorForm onCancel={() => setRequires2FA(false)} />;
+    return (
+      <TwoFactorForm
+        onCancel={() => setRequires2FA(false)}
+        redirectUrl={redirectUrl}
+      />
+    );
   }
 
   return (

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, ShoppingBag } from "lucide-react";
 import CartSheet from "#/components/containers/store/cart/cart-sheet";
 import { Button } from "#/components/ui/button";
@@ -21,6 +21,12 @@ export default function Header() {
   const user = data?.user;
   const { totalItems } = useCart();
   const { setIsOpen } = useCartStore();
+  const location = useLocation();
+  // Send the user back to where they were after signing in (never back to
+  // an auth page itself).
+  const redirectTo = location.pathname.startsWith("/sign-")
+    ? "/"
+    : location.pathname + location.searchStr;
 
   return (
     <header className="@container sticky top-0 z-40 w-full border-b-2 border-dashed bg-background backdrop-blur supports-filter:bg-background/80">
@@ -62,7 +68,7 @@ export default function Header() {
           {user ? (
             <UserMenu user={user} />
           ) : (
-            <Link to="/sign-in">
+            <Link to="/sign-in" search={{ redirectTo }}>
               <Button variant="outline" size="lg" type="button">
                 Sign In
               </Button>

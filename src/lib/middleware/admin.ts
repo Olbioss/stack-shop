@@ -1,20 +1,7 @@
 import { redirect } from "@tanstack/react-router";
 import { createMiddleware } from "@tanstack/react-start";
+import { resolveSignInRedirect } from "@/lib/utils/auth-redirect";
 import { auth } from "../auth";
-
-const getRequestUrl = (request: Request) => {
-  try {
-    return new URL(request.url);
-  } catch {
-    const headers = request.headers;
-    const proto = headers.get("x-forwarded-proto") ?? "http";
-    const host =
-      headers.get("x-forwarded-host") ??
-      headers.get("host") ??
-      "localhost:3000";
-    return new URL(request.url, `${proto}://${host}`);
-  }
-};
 
 export const adminMiddleware = createMiddleware().server(
   async ({ next, request }) => {
@@ -23,11 +10,9 @@ export const adminMiddleware = createMiddleware().server(
     });
     // Redirect to sign-in if no valid session
     if (!session || !session.user) {
-      const url = getRequestUrl(request);
-      const redirectTo = url.pathname + url.search;
       throw redirect({
         to: "/sign-in",
-        search: { redirectTo: redirectTo },
+        search: { redirectTo: resolveSignInRedirect(request) },
       });
     }
     // Check if user is admin

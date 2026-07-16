@@ -2,9 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { fallback, zodSearchValidator } from "@tanstack/router-zod-adapter";
 import z from "zod";
 import AuthForm from "#/components/containers/auth/auth-form";
+import { sanitizeRedirectTo } from "#/lib/utils/auth-redirect";
 
 const signInSearchSchema = z.object({
-  redirectTo: fallback(z.string(), "/").default("/"),
+  redirectTo: fallback(z.string().transform(sanitizeRedirectTo), "/").default(
+    "/"
+  ),
 });
 
 export const Route = createFileRoute("/(auth)/sign-in")({
