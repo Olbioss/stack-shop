@@ -8,13 +8,25 @@
 
 const SERVER_FN_BASE = "/_serverFn/";
 
+const AUTH_PAGES = ["/sign-in", "/sign-up"];
+
 /**
  * Returns `path` if it is a safe internal page path, otherwise "/".
  * Rejects absolute/protocol-relative URLs and serverFn RPC endpoints.
+ *
+ * Auth pages are unwrapped rather than kept: a redirect target of
+ * "/sign-in?redirectTo=/checkout" (produced when a guarded call fires while
+ * the user is already on the sign-in page) collapses to "/checkout", so
+ * post-login navigation never lands back on the sign-in page.
  */
 export function sanitizeRedirectTo(path: string): string {
   if (!path.startsWith("/") || path.startsWith("//")) return "/";
   if (path.startsWith(SERVER_FN_BASE)) return "/";
+  const url = new URL(path, "http://internal");
+  if (AUTH_PAGES.includes(url.pathname)) {
+    const inner = url.searchParams.get("redirectTo");
+    return inner ? sanitizeRedirectTo(inner) : "/";
+  }
   return path;
 }
 
